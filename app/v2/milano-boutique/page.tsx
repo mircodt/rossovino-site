@@ -3,22 +3,21 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StickyMobileBar } from "@/components/StickyMobileBar";
 import { VersionSwitcher } from "@/components/VersionSwitcher";
-import { PropertyPageContent } from "@/components/PropertyPageContent";
+import { PropertyPageContentV2 } from "@/components/v2/PropertyPageContentV2";
 import { JsonLd } from "@/components/JsonLd";
 import { PROPERTIES, SITE } from "@/lib/config";
 import { CONTENT } from "@/lib/content";
-import {
-  breadcrumbSchema,
-  faqSchema,
-  hotelSchema,
-  propertyMetadata,
-} from "@/lib/seo";
+import { breadcrumbSchema, faqSchema, hotelSchema } from "@/lib/seo";
 
 const SLUG = "milano-boutique" as const;
 
-export const metadata: Metadata = propertyMetadata(SLUG);
+export const metadata: Metadata = {
+  title: CONTENT[SLUG].meta.title + " · v2",
+  description: CONTENT[SLUG].meta.description,
+  robots: { index: false, follow: false },
+};
 
-export default function BoutiquePage() {
+export default function BoutiqueV2() {
   const p = PROPERTIES[SLUG];
   const c = CONTENT[SLUG];
 
@@ -33,10 +32,10 @@ export default function BoutiquePage() {
         ])}
       />
 
-      <VersionSwitcher current="v1" otherPath="/v2/milano-boutique" />
+      <VersionSwitcher current="v2" otherPath={`/${SLUG}`} />
       <Header property={SLUG} />
       <main id="contenuto" className="flex-grow">
-        <PropertyPageContent slug={SLUG} />
+        <PropertyPageContentV2 slug={SLUG} />
       </main>
       <Footer />
       <StickyMobileBar property={SLUG} />

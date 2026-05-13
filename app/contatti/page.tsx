@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StickyMobileBar } from "@/components/StickyMobileBar";
+import { VersionSwitcher } from "@/components/VersionSwitcher";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { JsonLd } from "@/components/JsonLd";
@@ -32,6 +33,7 @@ export default function ContattiPage() {
         ])}
       />
 
+      <VersionSwitcher current="v1" otherPath="/v2" />
       <Header />
       <main id="contenuto" className="flex-grow">
         <section className="bg-[var(--color-bg)] py-16 md:py-24">
