@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { VersionSwitcher } from "@/components/VersionSwitcher";
 import { HomeHeroPanels } from "@/components/v2/HomeHeroPanels";
+import { BookingWidgetV2 } from "@/components/v2/BookingWidgetV2";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Container } from "@/components/Container";
 import { JsonLd } from "@/components/JsonLd";
@@ -34,11 +35,11 @@ export default function HomeV2() {
                 Gruppo Hotel RossoVino · Milano e Como
               </p>
               <h1 className="font-display mb-4 [text-wrap:balance]">
-                Scegli dove vuoi vivere il vino italiano
+                Tre indirizzi, una sola anima
               </h1>
               <p className="text-[var(--color-ink-soft)] text-lg leading-relaxed">
-                Tre strutture, tre città, tre identità. Tocca la card della
-                proprietà che ti interessa per esplorarla.
+                Boutique nel cuore di Milano · Hotel a Milano centro · Hotel a
+                Como, sul lago. Scegli la tua RossoVino.
               </p>
             </div>
           </Container>
@@ -46,6 +47,18 @@ export default function HomeV2() {
 
         {/* The hero IS the 3-panel selector */}
         <HomeHeroPanels />
+
+        {/* Booking widget — overlapping the panels bottom edge, like the
+            property-page heroes. Lets a visitor book without picking a
+            property first (destination dropdown is shown). */}
+        <section className="bg-[var(--color-bg)] pb-12 md:pb-16">
+          <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8">
+            <BookingWidgetV2 variant="hero" />
+            <p className="mt-4 text-center text-sm text-[var(--color-ink-soft)]">
+              Scegli la destinazione e verifica la disponibilità in tempo reale.
+            </p>
+          </div>
+        </section>
 
         {/* Brand essence */}
         <section className="bg-white py-16 md:py-24">
