@@ -110,6 +110,25 @@ export function PropertyPageContent({ slug }: { slug: PropertySlug }) {
         </Container>
       </section>
 
+      {/* Rooms photo gallery — focused on the actual rooms */}
+      <section
+        id="camere"
+        aria-label={`Le camere di ${p.fullName}`}
+        className="bg-white py-16 md:py-24"
+      >
+        <Container>
+          <SectionHeading eyebrow="Le nostre camere">
+            Sfoglia le camere
+          </SectionHeading>
+          <p className="mt-4 text-[var(--color-ink-soft)] text-lg max-w-2xl leading-relaxed">
+            Ogni stanza porta il nome di un vino italiano. Scorri per scoprire le diverse tipologie.
+          </p>
+          <div className="mt-8">
+            <PhotoGallery images={p.roomsGallery} propertyName={`${p.fullName} — camere`} />
+          </div>
+        </Container>
+      </section>
+
       {/* Position */}
       <section className="bg-white py-16 md:py-24">
         <Container>

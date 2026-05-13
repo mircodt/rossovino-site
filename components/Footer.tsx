@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import { PROPERTIES, PROPERTY_ORDER, SITE, telHref, whatsappHref } from "@/lib/config";
+import { assetSrc } from "@/lib/asset";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -9,7 +11,16 @@ export function Footer() {
       <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8 py-14">
         <div className="grid gap-10 md:grid-cols-4">
           <div>
-            <div className="font-display text-2xl mb-3">RossoVino</div>
+            {/* Brand logo — recolored, here rendered against the dark vinaccia
+                footer bg so we invert/whitened via CSS for legibility. */}
+            <Image
+              src={assetSrc("/images/brand/logo-rossovino.png")}
+              alt="Hotel RossoVino"
+              width={220}
+              height={33}
+              className="w-44 h-auto mb-4"
+              style={{ filter: "brightness(0) invert(1)" }}
+            />
             <p className="text-sm text-white/80 leading-relaxed max-w-xs">
               Gruppo Hotel RossoVino — tre proprietà a Milano e Como, ispirate al mondo del
               vino italiano.

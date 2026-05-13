@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PROPERTIES, type PropertySlug, SITE, telHref, whatsappHref } from "@/lib/config";
 import { PhoneIcon, WhatsappIcon } from "./icons";
 import { Button } from "./Button";
+import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 
 interface HeaderProps {
@@ -17,21 +18,8 @@ export function Header({ property }: HeaderProps) {
   return (
     <header className="sticky top-0 z-40 bg-[var(--color-bg)]/95 backdrop-blur-sm border-b border-[color:var(--color-border)]">
       <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-4 px-5 md:px-8 h-16 md:h-20">
-        {/* Brand */}
-        <Link
-          href="/"
-          aria-label="Hotel RossoVino — homepage"
-          className="flex items-center gap-2 font-display text-xl md:text-2xl text-vinaccia"
-        >
-          <span className="block h-2 w-2 rounded-full bg-vinaccia" aria-hidden />
-          <span className="font-semibold">RossoVino</span>
-          {p && (
-            <>
-              <span className="text-[var(--color-ink-soft)] mx-1" aria-hidden>·</span>
-              <span className="text-[var(--color-ink)] text-base md:text-lg">{p.shortName}</span>
-            </>
-          )}
-        </Link>
+        {/* Brand — official logo, recolored to palette vinaccia */}
+        <Logo property={property} size="md" />
 
         {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-6 text-sm">

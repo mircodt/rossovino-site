@@ -56,8 +56,10 @@ export interface PropertyConfig {
   heroImage: string;
   /** OpenGraph image — usually identical to heroImage. */
   ogImage: string;
-  /** Photo gallery — paths under /public, with leading slash. */
+  /** General photo gallery — paths under /public, with leading slash. */
   gallery: string[];
+  /** Separate gallery focused on rooms. */
+  roomsGallery: string[];
   /** Soft page background tint that reinforces property identity.
    *  Used inline to override --color-bg on the page wrapper. */
   pageBg: string;
@@ -101,6 +103,14 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       "/images/boutique/gallery/05.jpg",
       "/images/boutique/gallery/06.jpg",
     ],
+    roomsGallery: [
+      "/images/boutique/rooms/01.jpg",
+      "/images/boutique/rooms/02.jpg",
+      "/images/boutique/rooms/03.jpg",
+      "/images/boutique/rooms/04.jpg",
+      "/images/boutique/rooms/05.jpg",
+      "/images/boutique/rooms/06.jpg",
+    ],
     // Warm cream with a hint of wine — supports vinaccia accent
     pageBg: "#F4ECEE",
     verticalBooking: {
@@ -139,6 +149,14 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       "/images/milano/gallery/04.jpg",
       "/images/milano/gallery/05.jpg",
       "/images/milano/gallery/06.jpg",
+    ],
+    roomsGallery: [
+      "/images/milano/rooms/01.jpg",
+      "/images/milano/rooms/02.jpg",
+      "/images/milano/rooms/03.jpg",
+      "/images/milano/rooms/04.jpg",
+      "/images/milano/rooms/05.jpg",
+      "/images/milano/rooms/06.jpg",
     ],
     // Warmer sand than the default — clearly distinct from Boutique/Como
     pageBg: "#F0E6D0",
@@ -179,6 +197,15 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       "/images/como/gallery/05.jpg",
       "/images/como/gallery/06.jpg",
       "/images/como/gallery/07.jpg",
+    ],
+    roomsGallery: [
+      "/images/como/rooms/01.jpg",
+      "/images/como/rooms/02.jpg",
+      "/images/como/rooms/03.jpg",
+      "/images/como/rooms/04.jpg",
+      "/images/como/rooms/05.jpg",
+      "/images/como/rooms/06.jpg",
+      "/images/como/rooms/07.jpg",
     ],
     // Cool light blue-grey — clearly says "lake" / "Como"
     pageBg: "#E4ECF1",

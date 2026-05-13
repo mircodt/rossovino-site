@@ -12,6 +12,7 @@ import {
   type PropertySlug,
 } from "@/lib/config";
 import { Button } from "./Button";
+import { Logo } from "./Logo";
 import {
   MailIcon,
   MenuIcon,
@@ -92,13 +93,8 @@ export function MobileMenu({ property }: Props) {
         >
           {/* Drawer header */}
           <header className="flex items-center justify-between gap-4 px-5 h-16 border-b border-[color:var(--color-border)]">
-            <Link
-              href="/"
-              onClick={close}
-              className="flex items-center gap-2 font-display text-xl text-vinaccia"
-            >
-              <span className="block h-2 w-2 rounded-full bg-vinaccia" aria-hidden />
-              <span className="font-semibold">RossoVino</span>
+            <Link href="/" onClick={close} aria-label="Hotel RossoVino — homepage">
+              <Logo asLink={false} size="sm" />
             </Link>
             <button
               type="button"
