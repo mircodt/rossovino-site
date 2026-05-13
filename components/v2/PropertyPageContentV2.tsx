@@ -7,6 +7,7 @@ import { PropertyHeroV2 } from "./PropertyHeroV2";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Container } from "@/components/Container";
 import { FaqAccordion } from "@/components/FaqAccordion";
+import { PhotoGallery } from "@/components/PhotoGallery";
 import {
   BedIcon,
   CheckIcon,
@@ -86,24 +87,18 @@ export function PropertyPageContentV2({ slug }: { slug: PropertySlug }) {
         </Container>
       </section>
 
-      {/* Atmosphere grid */}
-      <section className="bg-[var(--color-bg)] py-14 md:py-20">
+      {/* Gallery — full photo grid for the property */}
+      <section
+        id="galleria"
+        aria-label={`Galleria fotografica ${p.fullName}`}
+        className="bg-[var(--color-bg)] py-14 md:py-20"
+      >
         <Container>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-            {[1, 2, 3].map((i, idx) => (
-              <div
-                key={i}
-                className={`relative aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-[2px] ${idx === 1 ? "md:translate-y-8" : ""} ${idx === 2 ? "col-span-2 md:col-span-1" : ""}`}
-              >
-                <Image
-                  src={assetSrc(`/images/${p.slug === "milano-boutique" ? "boutique" : p.slug}/atmosfera-${i}.jpg`)}
-                  alt={`${p.fullName} — spazi`}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                  className="object-cover hover:scale-105 transition-transform duration-700"
-                />
-              </div>
-            ))}
+          <SectionHeading eyebrow="Galleria">
+            La struttura in {p.gallery.length} scatti
+          </SectionHeading>
+          <div className="mt-8">
+            <PhotoGallery images={p.gallery} propertyName={p.fullName} />
           </div>
         </Container>
       </section>

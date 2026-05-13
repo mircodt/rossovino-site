@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { PROPERTIES, type PropertySlug } from "@/lib/config";
 import { assetSrc } from "@/lib/asset";
+import { accentBgClass } from "@/lib/accent";
 import { CONTENT } from "@/lib/content";
 import { PropertyHero } from "./PropertyHero";
 import { ValuePropsRow } from "./ValuePropsRow";
@@ -8,6 +9,7 @@ import { SectionHeading } from "./SectionHeading";
 import { Container } from "./Container";
 import { FaqAccordion } from "./FaqAccordion";
 import { ContactBlock } from "./ContactBlock";
+import { PhotoGallery } from "./PhotoGallery";
 import { CheckIcon } from "./icons";
 
 /**
@@ -20,6 +22,9 @@ export function PropertyPageContent({ slug }: { slug: PropertySlug }) {
 
   return (
     <>
+      {/* Thick accent band — first cue of which property the visitor is on */}
+      <div className={`h-2 ${accentBgClass[p.accent]}`} aria-hidden />
+
       <PropertyHero slug={slug} />
 
       <ValuePropsRow items={c.valueProps} accent={p.accent} />
@@ -49,43 +54,24 @@ export function PropertyPageContent({ slug }: { slug: PropertySlug }) {
         </Container>
       </section>
 
-      {/* Atmosfera — 3-photo grid showcasing common areas */}
-      <section aria-label={`Atmosfera ${p.fullName}`} className="bg-[var(--color-bg)] py-14 md:py-20">
+      {/* Gallery — full photo grid for the property */}
+      <section
+        id="galleria"
+        aria-label={`Galleria fotografica ${p.fullName}`}
+        className="bg-[var(--color-bg)] py-14 md:py-20"
+      >
         <Container>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-            <div className="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-[2px]">
-              <Image
-                src={assetSrc(`/images/${p.slug === "milano-boutique" ? "boutique" : p.slug}/atmosfera-1.jpg`)}
-                alt={`${p.fullName} — spazi comuni`}
-                fill
-                sizes="(max-width: 768px) 50vw, 33vw"
-                className="object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-            <div className="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-[2px] md:translate-y-8">
-              <Image
-                src={assetSrc(`/images/${p.slug === "milano-boutique" ? "boutique" : p.slug}/atmosfera-2.jpg`)}
-                alt={`${p.fullName} — dettagli e ambiente`}
-                fill
-                sizes="(max-width: 768px) 50vw, 33vw"
-                className="object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-            <div className="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-[2px] col-span-2 md:col-span-1">
-              <Image
-                src={assetSrc(`/images/${p.slug === "milano-boutique" ? "boutique" : p.slug}/atmosfera-3.jpg`)}
-                alt={`${p.fullName} — atmosfera`}
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </div>
+          <SectionHeading eyebrow="Galleria">
+            La struttura in {p.gallery.length} scatti
+          </SectionHeading>
+          <div className="mt-8">
+            <PhotoGallery images={p.gallery} propertyName={p.fullName} />
           </div>
         </Container>
       </section>
 
       {/* Rooms + Services */}
-      <section className="bg-sabbia-light py-16 md:py-24">
+      <section className="bg-[var(--color-bg)] py-16 md:py-24">
         <Container>
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
             <div>

@@ -33,12 +33,18 @@ export default function BoutiquePage() {
         ])}
       />
 
-      <VersionSwitcher current="v1" otherPath="/v2/milano-boutique" />
-      <Header property={SLUG} />
-      <main id="contenuto" className="flex-grow">
-        <PropertyPageContent slug={SLUG} />
-      </main>
-      <Footer />
+      <div
+        // Page-level identity tint — overrides --color-bg for everything inside
+        style={{ "--color-bg": p.pageBg } as React.CSSProperties}
+        className="bg-[var(--color-bg)] flex-grow flex flex-col"
+      >
+        <VersionSwitcher current="v1" otherPath="/v2/milano-boutique" />
+        <Header property={SLUG} />
+        <main id="contenuto" className="flex-grow">
+          <PropertyPageContent slug={SLUG} />
+        </main>
+        <Footer />
+      </div>
       <StickyMobileBar property={SLUG} />
     </>
   );

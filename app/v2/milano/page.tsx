@@ -32,12 +32,17 @@ export default function MilanoV2() {
         ])}
       />
 
-      <VersionSwitcher current="v2" otherPath={`/${SLUG}`} />
-      <Header property={SLUG} />
-      <main id="contenuto" className="flex-grow">
-        <PropertyPageContentV2 slug={SLUG} />
-      </main>
-      <Footer />
+      <div
+        style={{ "--color-bg": p.pageBg } as React.CSSProperties}
+        className="bg-[var(--color-bg)] flex-grow flex flex-col"
+      >
+        <VersionSwitcher current="v2" otherPath={`/${SLUG}`} />
+        <Header property={SLUG} />
+        <main id="contenuto" className="flex-grow">
+          <PropertyPageContentV2 slug={SLUG} />
+        </main>
+        <Footer />
+      </div>
       <StickyMobileBar property={SLUG} />
     </>
   );

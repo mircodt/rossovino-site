@@ -56,6 +56,11 @@ export interface PropertyConfig {
   heroImage: string;
   /** OpenGraph image — usually identical to heroImage. */
   ogImage: string;
+  /** Photo gallery — paths under /public, with leading slash. */
+  gallery: string[];
+  /** Soft page background tint that reinforces property identity.
+   *  Used inline to override --color-bg on the page wrapper. */
+  pageBg: string;
   /** Vertical Booking integration data (placeholder until embed arrives) */
   verticalBooking: {
     hotelId: string;
@@ -88,6 +93,16 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     checkOut: "__TODO_BOUTIQUE_CHECKOUT__",
     heroImage: "images/boutique/hero.jpg",
     ogImage: "images/boutique/og.jpg",
+    gallery: [
+      "/images/boutique/gallery/01.jpg",
+      "/images/boutique/gallery/02.jpg",
+      "/images/boutique/gallery/03.jpg",
+      "/images/boutique/gallery/04.jpg",
+      "/images/boutique/gallery/05.jpg",
+      "/images/boutique/gallery/06.jpg",
+    ],
+    // Warm cream with a hint of wine — supports vinaccia accent
+    pageBg: "#F4ECEE",
     verticalBooking: {
       hotelId: "__TODO_BOUTIQUE_VB_ID__",
       bookingUrl: "__TODO_BOUTIQUE_VB_URL__",
@@ -117,6 +132,16 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     checkOut: "__TODO_MILANO_CHECKOUT__",
     heroImage: "images/milano/hero.jpg",
     ogImage: "images/milano/og.jpg",
+    gallery: [
+      "/images/milano/gallery/01.jpg",
+      "/images/milano/gallery/02.jpg",
+      "/images/milano/gallery/03.jpg",
+      "/images/milano/gallery/04.jpg",
+      "/images/milano/gallery/05.jpg",
+      "/images/milano/gallery/06.jpg",
+    ],
+    // Warmer sand than the default — clearly distinct from Boutique/Como
+    pageBg: "#F0E6D0",
     verticalBooking: {
       hotelId: "__TODO_MILANO_VB_ID__",
       bookingUrl: "__TODO_MILANO_VB_URL__",
@@ -146,6 +171,17 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     checkOut: "__TODO_COMO_CHECKOUT__",
     heroImage: "images/como/hero.jpg",
     ogImage: "images/como/og.jpg",
+    gallery: [
+      "/images/como/gallery/01.jpg",
+      "/images/como/gallery/02.jpg",
+      "/images/como/gallery/03.jpg",
+      "/images/como/gallery/04.jpg",
+      "/images/como/gallery/05.jpg",
+      "/images/como/gallery/06.jpg",
+      "/images/como/gallery/07.jpg",
+    ],
+    // Cool light blue-grey — clearly says "lake" / "Como"
+    pageBg: "#E4ECF1",
     verticalBooking: {
       hotelId: "__TODO_COMO_VB_ID__",
       bookingUrl: "__TODO_COMO_VB_URL__",
