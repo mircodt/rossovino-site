@@ -10,6 +10,7 @@ import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
 import { JsonLd } from "@/components/JsonLd";
 import { PROPERTY_ORDER, PROPERTIES, SITE } from "@/lib/config";
+import { assetSrc } from "@/lib/asset";
 import { HOME_CONTENT } from "@/lib/content";
 import {
   breadcrumbSchema,
@@ -63,7 +64,7 @@ export default function HomePage() {
         <section className="relative">
           <div className="relative h-[70svh] min-h-[520px] max-h-[720px] overflow-hidden">
             <Image
-              src={`/${PROPERTIES["milano-boutique"].heroImage}`}
+              src={assetSrc(`/${PROPERTIES["milano-boutique"].heroImage}`)}
               alt="Hotel RossoVino — atmosfera del gruppo"
               fill
               priority

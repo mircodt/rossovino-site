@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { PropertySlug } from "@/lib/config";
 import { PROPERTIES } from "@/lib/config";
+import { assetSrc } from "@/lib/asset";
 import { CONTENT } from "@/lib/content";
 import { BookingWidget } from "./BookingWidget";
 import { Button } from "./Button";
@@ -14,7 +15,7 @@ export function PropertyHero({ slug }: { slug: PropertySlug }) {
     <section className="relative">
       <div className="relative h-[78svh] min-h-[560px] max-h-[820px] overflow-hidden">
         <Image
-          src={`/${p.heroImage}`}
+          src={assetSrc(`/${p.heroImage}`)}
           alt={`${p.fullName} — vista principale`}
           fill
           priority

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { PROPERTIES, type PropertySlug } from "@/lib/config";
+import { assetSrc } from "@/lib/asset";
 import { CONTENT } from "@/lib/content";
 import { PropertyHero } from "./PropertyHero";
 import { ValuePropsRow } from "./ValuePropsRow";
@@ -54,7 +55,7 @@ export function PropertyPageContent({ slug }: { slug: PropertySlug }) {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
             <div className="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-[2px]">
               <Image
-                src={`/images/${p.slug === "milano-boutique" ? "boutique" : p.slug}/atmosfera-1.jpg`}
+                src={assetSrc(`/images/${p.slug === "milano-boutique" ? "boutique" : p.slug}/atmosfera-1.jpg`)}
                 alt={`${p.fullName} — spazi comuni`}
                 fill
                 sizes="(max-width: 768px) 50vw, 33vw"
@@ -63,7 +64,7 @@ export function PropertyPageContent({ slug }: { slug: PropertySlug }) {
             </div>
             <div className="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-[2px] md:translate-y-8">
               <Image
-                src={`/images/${p.slug === "milano-boutique" ? "boutique" : p.slug}/atmosfera-2.jpg`}
+                src={assetSrc(`/images/${p.slug === "milano-boutique" ? "boutique" : p.slug}/atmosfera-2.jpg`)}
                 alt={`${p.fullName} — dettagli e ambiente`}
                 fill
                 sizes="(max-width: 768px) 50vw, 33vw"
@@ -72,7 +73,7 @@ export function PropertyPageContent({ slug }: { slug: PropertySlug }) {
             </div>
             <div className="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-[2px] col-span-2 md:col-span-1">
               <Image
-                src={`/images/${p.slug === "milano-boutique" ? "boutique" : p.slug}/atmosfera-3.jpg`}
+                src={assetSrc(`/images/${p.slug === "milano-boutique" ? "boutique" : p.slug}/atmosfera-3.jpg`)}
                 alt={`${p.fullName} — atmosfera`}
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
@@ -144,7 +145,7 @@ export function PropertyPageContent({ slug }: { slug: PropertySlug }) {
       {/* Wide atmospheric banner */}
       <section aria-hidden className="relative h-[40svh] min-h-[280px] max-h-[480px] overflow-hidden">
         <Image
-          src={`/images/${p.slug === "milano-boutique" ? "boutique" : p.slug}/banner.jpg`}
+          src={assetSrc(`/images/${p.slug === "milano-boutique" ? "boutique" : p.slug}/banner.jpg`)}
           alt=""
           fill
           sizes="100vw"

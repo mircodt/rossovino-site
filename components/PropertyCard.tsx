@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PROPERTIES, type PropertySlug } from "@/lib/config";
+import { assetSrc } from "@/lib/asset";
 import { CONTENT } from "@/lib/content";
 import { StarIcon } from "./icons";
 
@@ -22,7 +23,7 @@ export function PropertyCard({ slug }: { slug: PropertySlug }) {
         aria-label={`Scopri ${p.fullName}`}
       >
         <Image
-          src={`/${p.heroImage}`}
+          src={assetSrc(`/${p.heroImage}`)}
           alt={p.fullName}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"

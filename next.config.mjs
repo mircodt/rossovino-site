@@ -13,6 +13,12 @@ const repoName = "rossovino-site";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Exposed to client code (see lib/asset.ts) so we can prepend basePath to
+  // <Image> src — Next.js does NOT do this automatically when images are
+  // unoptimized (the GH Pages config).
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isGitHubPages ? `/${repoName}` : "",
+  },
   ...(isGitHubPages
     ? {
         output: "export",
