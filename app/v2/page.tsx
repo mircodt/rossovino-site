@@ -45,18 +45,16 @@ export default function HomeV2() {
           </Container>
         </section>
 
-        {/* The hero IS the 3-panel selector */}
+        {/* The 3-panel selector — compact cards with gaps */}
         <HomeHeroPanels />
 
-        {/* Booking widget — overlapping the panels bottom edge, like the
-            property-page heroes. Lets a visitor book without picking a
-            property first (destination dropdown is shown). */}
+        {/* Booking widget — in its own section BELOW the panels, no overlap. */}
         <section className="bg-[var(--color-bg)] pb-12 md:pb-16">
-          <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8">
-            <BookingWidgetV2 variant="hero" />
-            <p className="mt-4 text-center text-sm text-[var(--color-ink-soft)]">
-              Scegli la destinazione e verifica la disponibilità in tempo reale.
+          <div className="mx-auto w-full max-w-[1100px] px-5 md:px-8">
+            <p className="text-center text-sm font-mono uppercase tracking-[0.2em] text-vinaccia mb-4">
+              Prenota
             </p>
+            <BookingWidgetV2 variant="inline" />
           </div>
         </section>
 

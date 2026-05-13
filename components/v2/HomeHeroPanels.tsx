@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PROPERTIES, PROPERTY_ORDER } from "@/lib/config";
-import { CONTENT } from "@/lib/content";
 import { assetSrc } from "@/lib/asset";
 import { accentBgClass } from "@/lib/accent";
+import { Container } from "@/components/Container";
 import { StarIcon } from "@/components/icons";
 
-/** Distinct preview photo per property — chosen to differentiate them
- *  visually even when Milano** + Boutique share their source pool. */
+/** Distinct preview photo per property — so Milano** and Boutique don't
+ *  look identical when they share their source pool. */
 const previewImage: Record<string, string> = {
   "milano-boutique": "/images/boutique/preview.jpg",
   milano: "/images/milano/preview.jpg",
@@ -15,122 +15,104 @@ const previewImage: Record<string, string> = {
 };
 
 /**
- * V2 homepage hero: three full-height clickable panels, one per property.
- * Each panel has:
- *  - a distinct preview photo (so Milano** and Boutique don't look identical)
- *  - a heavy accent-color overlay (immediate identity cue)
- *  - a BIG clearly-styled white CTA button at the bottom (so the panels
- *    read unmistakably as interactive — not as decorative tiles)
+ * V2 homepage selector: three compact cards in a grid with breathing
+ * room between them. Each card shows only what's essential — photo,
+ * property name, city/stars, "Scopri →" button. Designed to read at a
+ * glance, not to overwhelm.
  */
 export function HomeHeroPanels() {
   return (
     <section
       aria-label="Le tre proprietà del gruppo RossoVino"
-      className="grid grid-cols-1 lg:grid-cols-3 min-h-[80svh]"
+      className="bg-[var(--color-bg)] py-8 md:py-12"
     >
-      {PROPERTY_ORDER.map((slug) => {
-        const p = PROPERTIES[slug];
-        const c = CONTENT[slug];
-        const bigLabel =
-          p.shortName === "Boutique" ? "Villa Biffi" : p.shortName;
+      <Container>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+          {PROPERTY_ORDER.map((slug) => {
+            const p = PROPERTIES[slug];
+            const shortLabel =
+              p.shortName === "Boutique" ? "Boutique" : p.shortName;
+            const ctaTextOnWhite =
+              p.accent === "vinaccia"
+                ? "text-vinaccia"
+                : p.accent === "blu"
+                ? "text-blu-dark"
+                : "text-[#2b2b2b]";
 
-        // Foreground color for the CTA button — depends on accent contrast.
-        const ctaTextOnWhite =
-          p.accent === "vinaccia"
-            ? "text-vinaccia"
-            : p.accent === "blu"
-            ? "text-blu-dark"
-            : "text-[#2b2b2b]";
+            return (
+              <Link
+                key={slug}
+                href={`/v2/${slug}`}
+                className="group relative isolate block aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-[2px]"
+              >
+                <Image
+                  src={assetSrc(previewImage[slug])}
+                  alt={p.fullName}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  priority
+                />
 
-        return (
-          <Link
-            key={slug}
-            href={`/v2/${slug}`}
-            className="group relative isolate block min-h-[40svh] lg:min-h-[80svh] overflow-hidden"
-          >
-            <Image
-              src={assetSrc(previewImage[slug])}
-              alt={`${p.fullName} — anteprima`}
-              fill
-              sizes="(max-width: 1024px) 100vw, 33vw"
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-              priority
-            />
+                {/* Accent overlay — identity cue, lighter so the photo reads */}
+                <div
+                  aria-hidden
+                  className={`absolute inset-0 ${accentBgClass[p.accent]} mix-blend-multiply opacity-40 group-hover:opacity-25 transition-opacity duration-300`}
+                />
+                {/* Bottom gradient for legibility of the label/button */}
+                <div
+                  aria-hidden
+                  className="absolute inset-x-0 bottom-0 h-1/2"
+                  style={{
+                    background:
+                      "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 100%)",
+                  }}
+                />
 
-            {/* Heavy accent overlay — dominant identity cue */}
-            <div
-              aria-hidden
-              className={`absolute inset-0 ${accentBgClass[p.accent]} mix-blend-multiply opacity-55 group-hover:opacity-40 transition-opacity duration-300`}
-            />
-            {/* Bottom gradient for text legibility */}
-            <div
-              aria-hidden
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,0.6) 100%)",
-              }}
-            />
-
-            {/* Content */}
-            <div
-              className="relative z-10 h-full flex flex-col justify-between p-7 md:p-8 lg:p-10 text-white"
-              style={{ textShadow: "0 2px 14px rgba(0,0,0,0.45)" }}
-            >
-              {/* TOP: identity chip */}
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[11px] uppercase tracking-[0.22em] bg-white/95 text-[var(--color-ink)] px-2.5 py-1.5 rounded-[2px]"
-                  style={{ textShadow: "none" }}
+                {/* Top: tiny eyebrow with city + stars */}
+                <span
+                  className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 bg-white/95 text-[var(--color-ink)] font-mono text-[10px] uppercase tracking-[0.18em] px-2 py-1 rounded-[2px]"
                 >
-                  <span
-                    aria-hidden
-                    className={`inline-block w-1.5 h-1.5 rounded-full mr-2 align-middle ${accentBgClass[p.accent]}`}
-                  />
                   {p.stars ? (
-                    <span className="inline-flex items-center gap-1 align-middle">
-                      {Array.from({ length: p.stars }).map((_, i) => (
-                        <StarIcon key={i} className="w-3 h-3" aria-hidden />
-                      ))}
-                      <span className="ml-1">{p.address.addressLocality}</span>
-                    </span>
+                    <>
+                      <span className="inline-flex items-center" aria-label={`${p.stars} stelle`}>
+                        {Array.from({ length: p.stars }).map((_, i) => (
+                          <StarIcon key={i} className="w-2.5 h-2.5" aria-hidden />
+                        ))}
+                      </span>
+                      <span>{p.address.addressLocality}</span>
+                    </>
                   ) : (
-                    `Boutique · ${p.address.addressLocality}`
+                    <span>Boutique · {p.address.addressLocality}</span>
                   )}
                 </span>
-              </div>
 
-              {/* BOTTOM: name + headline + BIG visible CTA button */}
-              <div>
-                <p className="font-mono text-[12px] uppercase tracking-[0.18em] opacity-90 mb-2">
-                  {p.shortName === "Boutique"
-                    ? "Boutique RossoVino · Milano"
-                    : `Hotel RossoVino · ${p.shortName}`}
-                </p>
-                <h2 className="font-display text-4xl md:text-5xl lg:text-[44px] xl:text-5xl leading-[1.05] [text-wrap:balance] mb-3">
-                  {bigLabel}
-                </h2>
-                <p className="text-sm md:text-base text-white/90 leading-relaxed max-w-md mb-6">
-                  {c.hero.subtitle.split(". ")[0]}.
-                </p>
-
-                {/* BIG CTA BUTTON — visually unmistakable as interactive */}
-                <span
-                  className={`inline-flex items-center justify-center gap-2 min-h-12 px-6 bg-white ${ctaTextOnWhite} font-medium uppercase tracking-wide text-sm rounded-[2px] shadow-lg group-hover:shadow-xl group-hover:translate-y-[-1px] transition-all`}
-                  style={{ textShadow: "none" }}
+                {/* Bottom: name + CTA */}
+                <div
+                  className="absolute inset-x-4 bottom-4 z-10 text-white"
+                  style={{ textShadow: "0 2px 12px rgba(0,0,0,0.45)" }}
                 >
-                  Scopri {bigLabel}
+                  <h2 className="font-display text-3xl md:text-4xl leading-[1.05] mb-3">
+                    {shortLabel}
+                  </h2>
                   <span
-                    aria-hidden
-                    className="transition-transform group-hover:translate-x-1"
+                    className={`inline-flex items-center justify-center gap-1.5 min-h-10 px-4 bg-white ${ctaTextOnWhite} font-medium uppercase tracking-wide text-xs rounded-[2px] shadow-md group-hover:shadow-lg transition-shadow`}
+                    style={{ textShadow: "none" }}
                   >
-                    →
+                    Scopri
+                    <span
+                      aria-hidden
+                      className="transition-transform group-hover:translate-x-0.5"
+                    >
+                      →
+                    </span>
                   </span>
-                </span>
-              </div>
-            </div>
-          </Link>
-        );
-      })}
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </Container>
     </section>
   );
 }
