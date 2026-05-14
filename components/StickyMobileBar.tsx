@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   PROPERTIES,
   SITE,
@@ -12,14 +16,25 @@ interface Props {
   property?: PropertySlug;
 }
 
-/** Bottom bar visible on mobile only — three big touch targets. */
+/**
+ * Bottom bar visible on mobile only — three big touch targets.
+ *
+ * Rendered via a React Portal directly into <body> so it isn't trapped by
+ * any ancestor with `transform`, `backdrop-filter`, or other properties
+ * that create a CSS containing block. Without the portal, the bar could
+ * scroll up with the page wrapper instead of staying pinned to the
+ * viewport bottom.
+ */
 export function StickyMobileBar({ property }: Props) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const p = property ? PROPERTIES[property] : null;
   const phone = p?.phone ?? SITE.groupPhone;
   const whatsapp = p?.whatsapp ?? SITE.groupWhatsapp;
   const bookingAnchor = p ? `/${p.slug}#prenota` : "/#prenota";
 
-  return (
+  const bar = (
     <div
       role="navigation"
       aria-label="Azioni rapide"
@@ -55,4 +70,8 @@ export function StickyMobileBar({ property }: Props) {
       </div>
     </div>
   );
+
+  // Render only after mount so we can use createPortal safely.
+  if (!mounted) return null;
+  return createPortal(bar, document.body);
 }

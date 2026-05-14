@@ -102,6 +102,10 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       "/images/boutique/gallery/04.jpg",
       "/images/boutique/gallery/05.jpg",
       "/images/boutique/gallery/06.jpg",
+      "/images/boutique/atmosfera-1.jpg",
+      "/images/boutique/atmosfera-2.jpg",
+      "/images/boutique/atmosfera-3.jpg",
+      "/images/boutique/banner.jpg",
     ],
     roomsGallery: [
       "/images/boutique/rooms/01.jpg",
@@ -149,6 +153,10 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       "/images/milano/gallery/04.jpg",
       "/images/milano/gallery/05.jpg",
       "/images/milano/gallery/06.jpg",
+      "/images/milano/atmosfera-1.jpg",
+      "/images/milano/atmosfera-2.jpg",
+      "/images/milano/atmosfera-3.jpg",
+      "/images/milano/banner.jpg",
     ],
     roomsGallery: [
       "/images/milano/rooms/01.jpg",
@@ -197,6 +205,10 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       "/images/como/gallery/05.jpg",
       "/images/como/gallery/06.jpg",
       "/images/como/gallery/07.jpg",
+      "/images/como/atmosfera-1.jpg",
+      "/images/como/atmosfera-2.jpg",
+      "/images/como/atmosfera-3.jpg",
+      "/images/como/banner.jpg",
     ],
     roomsGallery: [
       "/images/como/rooms/01.jpg",

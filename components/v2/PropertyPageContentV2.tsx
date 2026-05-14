@@ -95,7 +95,7 @@ export function PropertyPageContentV2({ slug }: { slug: PropertySlug }) {
       >
         <Container>
           <SectionHeading eyebrow="Galleria">
-            La struttura in {p.gallery.length} scatti
+            Sfoglia la struttura
           </SectionHeading>
           <div className="mt-8">
             <PhotoGallery images={p.gallery} propertyName={p.fullName} />
