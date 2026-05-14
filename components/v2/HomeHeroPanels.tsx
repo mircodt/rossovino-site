@@ -59,6 +59,11 @@ export function HomeHeroPanels() {
                   aria-hidden
                   className={`absolute inset-0 ${accentBgClass[p.accent]} mix-blend-multiply opacity-40 group-hover:opacity-25 transition-opacity duration-300`}
                 />
+                {/* Hover veil — darkens the panel so the big label pops */}
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300"
+                />
                 {/* Bottom gradient for legibility of the label/button */}
                 <div
                   aria-hidden
@@ -68,6 +73,30 @@ export function HomeHeroPanels() {
                       "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 100%)",
                   }}
                 />
+
+                {/* GIANT hover label — fades + scales in when the panel is hovered */}
+                <div
+                  aria-hidden
+                  className="
+                    absolute inset-0 z-20 flex items-center justify-center px-2
+                    opacity-0 scale-95
+                    group-hover:opacity-100 group-hover:scale-100
+                    transition-all duration-500 ease-out
+                    pointer-events-none
+                  "
+                >
+                  <span
+                    className="
+                      font-display font-bold uppercase text-white leading-[0.85] tracking-tight
+                      text-[clamp(56px,14vw,160px)] text-center
+                    "
+                    style={{ textShadow: "0 6px 28px rgba(0,0,0,0.55)" }}
+                  >
+                    {p.shortName === "Boutique"
+                      ? "Boutique"
+                      : p.shortName.toUpperCase()}
+                  </span>
+                </div>
 
                 {/* Top: tiny eyebrow with city + stars */}
                 <span
