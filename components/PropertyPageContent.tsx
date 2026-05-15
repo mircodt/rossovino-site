@@ -10,6 +10,7 @@ import { Container } from "./Container";
 import { FaqAccordion } from "./FaqAccordion";
 import { ContactBlock } from "./ContactBlock";
 import { PhotoGallery } from "./PhotoGallery";
+import { RoomExample } from "./RoomExample";
 import { CheckIcon } from "./icons";
 
 /**
@@ -125,6 +126,27 @@ export function PropertyPageContent({ slug }: { slug: PropertySlug }) {
           </p>
           <div className="mt-8">
             <PhotoGallery images={p.roomsGallery} propertyName={`${p.fullName} — camere`} />
+          </div>
+        </Container>
+      </section>
+
+      {/* Stanza completa — full photo set of one example room */}
+      <section
+        id="stanza-esempio"
+        aria-label={`Camera ${p.roomExample.name} — esempio completo`}
+        className="bg-[var(--color-bg)] py-16 md:py-24"
+      >
+        <Container>
+          <SectionHeading eyebrow="Una stanza nel dettaglio">
+            Camera {p.roomExample.name}
+          </SectionHeading>
+          {p.roomExample.description && (
+            <p className="mt-4 text-[var(--color-ink-soft)] text-lg max-w-2xl leading-relaxed">
+              {p.roomExample.description}
+            </p>
+          )}
+          <div className="mt-8">
+            <RoomExample room={p.roomExample} propertyName={p.fullName} />
           </div>
         </Container>
       </section>

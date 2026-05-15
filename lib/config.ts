@@ -58,8 +58,15 @@ export interface PropertyConfig {
   ogImage: string;
   /** General photo gallery — paths under /public, with leading slash. */
   gallery: string[];
-  /** Separate gallery focused on rooms. */
+  /** Separate gallery focused on rooms (one photo per room). */
   roomsGallery: string[];
+  /** Detailed room example: all photos of ONE specific room, so visitors
+   *  see what a full stay looks like. */
+  roomExample: {
+    name: string;
+    description?: string;
+    photos: string[];
+  };
   /** Soft page background tint that reinforces property identity.
    *  Used inline to override --color-bg on the page wrapper. */
   pageBg: string;
@@ -115,6 +122,20 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       "/images/boutique/rooms/05.jpg",
       "/images/boutique/rooms/06.jpg",
     ],
+    roomExample: {
+      name: "Cabernet Sauvignon",
+      description:
+        "Camera 309 — soffitto a travi a vista, parete d'accento vinaccia, lucernario sul tetto della villa.",
+      photos: [
+        "/images/boutique/room-example/1.jpg",
+        "/images/boutique/room-example/2.jpg",
+        "/images/boutique/room-example/3.jpg",
+        "/images/boutique/room-example/4.jpg",
+        "/images/boutique/room-example/5.jpg",
+        "/images/boutique/room-example/6.jpg",
+        "/images/boutique/room-example/7.jpg",
+      ],
+    },
     // Warm cream with a hint of wine — supports vinaccia accent
     pageBg: "#F4ECEE",
     verticalBooking: {
@@ -166,6 +187,21 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       "/images/milano/rooms/05.jpg",
       "/images/milano/rooms/06.jpg",
     ],
+    roomExample: {
+      // TODO: confirm the room name with the client — placeholder for now
+      name: "Nebbiolo",
+      description:
+        "Una camera tipo dell'Hotel RossoVino Milano — design contemporaneo, materiali curati, comfort essenziale per chi visita la città.",
+      photos: [
+        "/images/milano/room-example/1.jpg",
+        "/images/milano/room-example/2.jpg",
+        "/images/milano/room-example/3.jpg",
+        "/images/milano/room-example/4.jpg",
+        "/images/milano/room-example/5.jpg",
+        "/images/milano/room-example/6.jpg",
+        "/images/milano/room-example/7.jpg",
+      ],
+    },
     // Warmer sand than the default — clearly distinct from Boutique/Como
     pageBg: "#F0E6D0",
     verticalBooking: {
@@ -219,6 +255,21 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       "/images/como/rooms/06.jpg",
       "/images/como/rooms/07.jpg",
     ],
+    roomExample: {
+      // TODO: confirm the room name with the client — placeholder for now
+      name: "Chianti",
+      description:
+        "Camera doppia comfort — parete d'accento verde-acqua, intestata in vinaccia, vista sul giardino di Villa Giovio.",
+      photos: [
+        "/images/como/room-example/1.jpg",
+        "/images/como/room-example/2.jpg",
+        "/images/como/room-example/3.jpg",
+        "/images/como/room-example/4.jpg",
+        "/images/como/room-example/5.jpg",
+        "/images/como/room-example/6.jpg",
+        "/images/como/room-example/7.jpg",
+      ],
+    },
     // Cool light blue-grey — clearly says "lake" / "Como"
     pageBg: "#E4ECF1",
     verticalBooking: {

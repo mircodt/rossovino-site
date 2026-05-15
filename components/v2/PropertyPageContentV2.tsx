@@ -8,6 +8,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { Container } from "@/components/Container";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { PhotoGallery } from "@/components/PhotoGallery";
+import { RoomExample } from "@/components/RoomExample";
 import {
   BedIcon,
   CheckIcon,
@@ -152,6 +153,27 @@ export function PropertyPageContentV2({ slug }: { slug: PropertySlug }) {
           </p>
           <div className="mt-8">
             <PhotoGallery images={p.roomsGallery} propertyName={`${p.fullName} — camere`} />
+          </div>
+        </Container>
+      </section>
+
+      {/* Stanza completa — full photo set of one example room */}
+      <section
+        id="stanza-esempio"
+        aria-label={`Camera ${p.roomExample.name} — esempio completo`}
+        className="bg-[var(--color-bg)] py-16 md:py-24"
+      >
+        <Container>
+          <SectionHeading eyebrow="Una stanza nel dettaglio">
+            Camera {p.roomExample.name}
+          </SectionHeading>
+          {p.roomExample.description && (
+            <p className="mt-4 text-[var(--color-ink-soft)] text-lg max-w-2xl leading-relaxed">
+              {p.roomExample.description}
+            </p>
+          )}
+          <div className="mt-8">
+            <RoomExample room={p.roomExample} propertyName={p.fullName} />
           </div>
         </Container>
       </section>
