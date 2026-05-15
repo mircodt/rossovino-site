@@ -73,7 +73,7 @@ export function PhotoGallery({ images, propertyName }: Props) {
             aria-label={`Apri foto ${i + 1} di ${images.length}`}
             className="
               flex-none snap-start relative
-              w-[78%] sm:w-[58%] md:w-[42%] lg:w-[32%] xl:w-[28%]
+              w-[78%] sm:w-[68%] md:w-[60%] lg:w-[58%] xl:w-[55%]
               aspect-[4/3] overflow-hidden rounded-[2px]
               focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
               group
@@ -83,7 +83,7 @@ export function PhotoGallery({ images, propertyName }: Props) {
               src={assetSrc(src)}
               alt={`${propertyName} — foto ${i + 1}`}
               fill
-              sizes="(max-width: 768px) 78vw, (max-width: 1024px) 42vw, 32vw"
+              sizes="(max-width: 768px) 78vw, (max-width: 1024px) 60vw, 58vw"
               className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </button>
