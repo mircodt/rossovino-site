@@ -50,7 +50,7 @@ export default function HomeV2() {
 
         {/* Booking widget — in its own section BELOW the panels, no overlap. */}
         <section className="bg-[var(--color-bg)] pb-12 md:pb-16">
-          <div className="mx-auto w-full max-w-[1100px] px-5 md:px-8">
+          <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8">
             <p className="text-center text-sm font-mono uppercase tracking-[0.2em] text-vinaccia mb-4">
               Prenota
             </p>

@@ -38,7 +38,7 @@ export function BookingWidget({ property, variant = "inline" }: Props) {
   const targetUrl = PROPERTIES[destination].verticalBooking.bookingUrl;
 
   const wrapperBase =
-    "w-full max-w-[1100px] mx-auto bg-white/95 backdrop-blur-sm rounded-[2px] shadow-lg border border-sabbia";
+    "w-full max-w-[1200px] mx-auto bg-white/95 backdrop-blur-sm rounded-[2px] shadow-lg border border-sabbia";
   const wrapperVariant =
     variant === "hero"
       ? "p-5 md:p-6 -mt-12 md:-mt-16 relative z-10"
