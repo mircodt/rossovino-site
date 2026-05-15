@@ -1,10 +1,9 @@
-import Image from "next/image";
 import type { PropertySlug } from "@/lib/config";
 import { PROPERTIES } from "@/lib/config";
-import { assetSrc } from "@/lib/asset";
 import { CONTENT } from "@/lib/content";
 import { BookingWidget } from "./BookingWidget";
 import { Button } from "./Button";
+import { HeroSlideshow } from "./HeroSlideshow";
 import { StarIcon } from "./icons";
 
 export function PropertyHero({ slug }: { slug: PropertySlug }) {
@@ -14,13 +13,9 @@ export function PropertyHero({ slug }: { slug: PropertySlug }) {
   return (
     <section className="relative">
       <div className="relative h-[78svh] min-h-[560px] max-h-[820px] overflow-hidden">
-        <Image
-          src={assetSrc(`/${p.heroImage}`)}
+        <HeroSlideshow
+          slides={p.heroSlides}
           alt={`${p.fullName} — vista principale`}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
         />
         {/* Subtle global darkening — keeps the photo present but tames bright areas */}
         <div

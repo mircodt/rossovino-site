@@ -1,11 +1,10 @@
-import Image from "next/image";
 import type { PropertySlug } from "@/lib/config";
 import { PROPERTIES } from "@/lib/config";
 import { CONTENT } from "@/lib/content";
-import { assetSrc } from "@/lib/asset";
 import { accentBgClass } from "@/lib/accent";
 import { BookingWidgetV2 } from "./BookingWidgetV2";
 import { Button } from "@/components/Button";
+import { HeroSlideshow } from "@/components/HeroSlideshow";
 import { StarIcon } from "@/components/icons";
 
 /**
@@ -26,13 +25,9 @@ export function PropertyHeroV2({ slug }: { slug: PropertySlug }) {
       <div className={`h-1.5 ${accentBgClass[p.accent]}`} aria-hidden />
 
       <div className="relative h-[80svh] min-h-[560px] max-h-[800px] overflow-hidden">
-        <Image
-          src={assetSrc(`/${p.heroImage}`)}
+        <HeroSlideshow
+          slides={p.heroSlides}
           alt={`${p.fullName} — vista principale`}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
         />
 
         {/* HEAVY accent overlay — this is the dominant identity cue */}

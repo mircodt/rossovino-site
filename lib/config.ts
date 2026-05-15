@@ -52,8 +52,11 @@ export interface PropertyConfig {
   /** Check-in / check-out hours */
   checkIn: string;
   checkOut: string;
-  /** Hero image path under /public/images (NO leading slash). */
+  /** Hero image path under /public/images (NO leading slash). Used as
+   *  fallback / Open Graph card. The hero on the page now uses heroSlides. */
   heroImage: string;
+  /** Slideshow images for the hero (rotates every 3s). With leading slash. */
+  heroSlides: string[];
   /** OpenGraph image — usually identical to heroImage. */
   ogImage: string;
   /** General photo gallery — paths under /public, with leading slash. */
@@ -101,6 +104,12 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     checkIn: "__TODO_BOUTIQUE_CHECKIN__",
     checkOut: "__TODO_BOUTIQUE_CHECKOUT__",
     heroImage: "images/boutique/hero.jpg",
+    heroSlides: [
+      "/images/boutique/hero/1.jpg",
+      "/images/boutique/hero/2.jpg",
+      "/images/boutique/hero/3.jpg",
+      "/images/boutique/hero/4.jpg",
+    ],
     ogImage: "images/boutique/og.jpg",
     gallery: [
       "/images/boutique/gallery/01.jpg",
@@ -166,6 +175,12 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     checkIn: "__TODO_MILANO_CHECKIN__",
     checkOut: "__TODO_MILANO_CHECKOUT__",
     heroImage: "images/milano/hero.jpg",
+    heroSlides: [
+      "/images/milano/hero/1.jpg",
+      "/images/milano/hero/2.jpg",
+      "/images/milano/hero/3.jpg",
+      "/images/milano/hero/4.jpg",
+    ],
     ogImage: "images/milano/og.jpg",
     gallery: [
       "/images/milano/gallery/01.jpg",
@@ -232,6 +247,12 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     checkIn: "__TODO_COMO_CHECKIN__",
     checkOut: "__TODO_COMO_CHECKOUT__",
     heroImage: "images/como/hero.jpg",
+    heroSlides: [
+      "/images/como/hero/1.jpg",
+      "/images/como/hero/2.jpg",
+      "/images/como/hero/3.jpg",
+      "/images/como/hero/4.jpg",
+    ],
     ogImage: "images/como/og.jpg",
     gallery: [
       "/images/como/gallery/01.jpg",
