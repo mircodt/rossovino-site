@@ -74,11 +74,15 @@ export function HomeHeroPanels() {
                   }}
                 />
 
-                {/* GIANT hover label — fades + scales in when the panel is hovered */}
+                {/* GIANT hover label — fades + scales in when the panel is hovered.
+                    Sized to fit inside ONE panel, not the viewport, so the
+                    text never overflows. Each panel is ~33vw wide on desktop,
+                    so 5vw font keeps "BOUTIQUE" (8 chars) comfortably inside. */}
                 <div
                   aria-hidden
                   className="
-                    absolute inset-0 z-20 flex items-center justify-center px-2
+                    absolute inset-0 z-20 flex items-center justify-center
+                    px-3 overflow-hidden
                     opacity-0 scale-95
                     group-hover:opacity-100 group-hover:scale-100
                     transition-all duration-500 ease-out
@@ -88,13 +92,11 @@ export function HomeHeroPanels() {
                   <span
                     className="
                       font-display font-bold uppercase text-white leading-[0.85] tracking-tight
-                      text-[clamp(56px,14vw,160px)] text-center
+                      text-[clamp(38px,5vw,68px)] text-center whitespace-nowrap max-w-full
                     "
                     style={{ textShadow: "0 6px 28px rgba(0,0,0,0.55)" }}
                   >
-                    {p.shortName === "Boutique"
-                      ? "Boutique"
-                      : p.shortName.toUpperCase()}
+                    {p.shortName.toUpperCase()}
                   </span>
                 </div>
 
