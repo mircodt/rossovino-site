@@ -119,3 +119,66 @@ export function propertyMetadata(slug: keyof typeof PROPERTIES) {
     },
   };
 }
+
+/** Sub-page metadata builder. */
+export function subPageMetadata(
+  slug: keyof typeof PROPERTIES,
+  sub: "camere" | "servizi" | "contatti",
+) {
+  const p = PROPERTIES[slug];
+  const url = canonical(`/${slug}/${sub}`);
+  const labels = {
+    camere: {
+      title: `Camere & Suite — ${p.fullName}`,
+      description: `Le camere di ${p.fullName}, ognuna con il nome di un vino italiano. Comfort contemporaneo, materiali curati, design coerente con l'identità RossoVino.`,
+    },
+    servizi: {
+      title: `Servizi — ${p.fullName}`,
+      description: `I servizi di ${p.fullName} e i nostri consigli per i dintorni: come muoversi, cosa visitare, cosa fare in zona.`,
+    },
+    contatti: {
+      title: `Contatti — ${p.fullName}`,
+      description: `Indirizzo, telefono, email, WhatsApp e come arrivare a ${p.fullName}. Mappa e indicazioni per auto, treno e aereo.`,
+    },
+  } as const;
+  const m = labels[sub];
+  return {
+    title: m.title,
+    description: m.description,
+    alternates: { canonical: url },
+    openGraph: {
+      title: m.title,
+      description: m.description,
+      url,
+      siteName: SITE.name,
+      images: [{ url: `${SITE.url}/${p.ogImage}`, width: 1200, height: 630, alt: p.fullName }],
+      locale: "it_IT",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title: m.title,
+      description: m.description,
+      images: [`${SITE.url}/${p.ogImage}`],
+    },
+  };
+}
+
+/** schema.org Product items, one per room type (camera as a product). */
+export function roomProductsSchema(p: PropertyConfig, rooms: { name: string; photo: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: rooms.map((r, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "Product",
+        name: `Camera ${r.name}`,
+        description: `Camera ${r.name} presso ${p.fullName}`,
+        image: `${SITE.url}${r.photo.startsWith("/") ? r.photo : `/${r.photo}`}`,
+        brand: { "@type": "Brand", name: p.fullName },
+      },
+    })),
+  } as const;
+}

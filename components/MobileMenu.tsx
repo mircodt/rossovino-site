@@ -18,17 +18,18 @@ const accentBg: Record<string, string> = {
 };
 
 interface Props {
-  /** No longer used (drawer is contact-free); kept for API stability with Header. */
+  /** When set, the drawer shows the property's internal nav (Hotel,
+   *  Camere & Suite, Servizi, Contatti) above the property switcher. */
   property?: PropertySlug;
 }
 
 /**
- * Mobile drawer — intentionally minimal. The only purpose is to switch
- * between the three properties. Contact CTAs (phone, WhatsApp, email,
- * Prenota) intentionally live in the sticky bottom bar; duplicating them
- * here clutters the experience.
+ * Mobile drawer — context-aware. On a property page it surfaces that
+ * property's internal nav first, then offers a quick switch to the
+ * other two. On the group homepage it just shows the 3 property cards.
+ * Contact CTAs intentionally live in the sticky bottom bar.
  */
-export function MobileMenu({ property: _property }: Props) {
+export function MobileMenu({ property }: Props) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -91,9 +92,35 @@ export function MobileMenu({ property: _property }: Props) {
           </button>
         </header>
 
-        <nav aria-label="Le strutture" className="flex-1 overflow-y-auto px-5 py-5">
+        <nav aria-label="Navigazione" className="flex-1 overflow-y-auto px-5 py-5">
+          {property && (
+            <>
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-ink-soft)] mb-3">
+                {PROPERTIES[property].fullName}
+              </p>
+              <ul className="space-y-1 mb-7">
+                {[
+                  { href: `/${property}`, label: "Hotel" },
+                  { href: `/${property}/camere`, label: "Camere & Suite" },
+                  { href: `/${property}/servizi`, label: "Servizi" },
+                  { href: `/${property}/contatti`, label: "Contatti" },
+                ].map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      onClick={close}
+                      className="flex items-center min-h-11 px-3 hover:bg-sabbia-light hover:text-vinaccia rounded-[2px] transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-ink-soft)] mb-4">
-            Scegli la struttura
+            {property ? "Cambia struttura" : "Scegli la struttura"}
           </p>
           <ul className="space-y-3">
             {PROPERTY_ORDER.map((slug) => {

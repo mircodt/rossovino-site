@@ -13,40 +13,71 @@ import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 
 interface HeaderProps {
-  /** When set, header shows the property-specific contacts. */
+  /** When set, header shows the property-specific nav + contacts. */
   property?: PropertySlug;
+}
+
+/** Group-level nav links shown on the homepage and on /contatti. */
+const groupNav = [
+  { href: "/milano-boutique", label: "Boutique" },
+  { href: "/milano", label: "Milano" },
+  { href: "/como", label: "Como" },
+  { href: "/contatti", label: "Contatti" },
+];
+
+/** Property-level nav — used whenever the user is on a property page or
+ *  any of its sub-pages (/<slug>, /<slug>/camere, /<slug>/servizi, etc). */
+function propertyNav(slug: PropertySlug) {
+  return [
+    { href: `/${slug}`, label: "Hotel" },
+    { href: `/${slug}/camere`, label: "Camere & Suite" },
+    { href: `/${slug}/servizi`, label: "Servizi" },
+    { href: `/${slug}/contatti`, label: "Contatti" },
+  ];
 }
 
 export function Header({ property }: HeaderProps) {
   const p = property ? PROPERTIES[property] : null;
   const phone = p?.phone ?? SITE.groupPhone;
   const whatsapp = p?.whatsapp ?? SITE.groupWhatsapp;
+  const nav = p ? propertyNav(p.slug) : groupNav;
 
-  // CSS Grid layout — fixed columns so navigating between properties never
-  // shifts the menu position. Previously `justify-between` reacted to the
-  // varying phone-number text width per property.
   return (
     <header className="sticky top-0 z-40 bg-[var(--color-bg)]/95 backdrop-blur-sm border-b border-[color:var(--color-border)]">
+      {/* Tiny "back to group" strip when on a property page */}
+      {p && (
+        <div className="border-b border-[color:var(--color-border)]/60 bg-white/40">
+          <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8 py-1.5">
+            <Link
+              href="/"
+              className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--color-ink-soft)] hover:text-vinaccia transition-colors inline-flex items-center gap-1"
+            >
+              <span aria-hidden>←</span> Tutte le strutture
+            </Link>
+          </div>
+        </div>
+      )}
+
       <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8 h-16 md:h-20 grid grid-cols-[auto_1fr_auto] items-center gap-4 lg:gap-6">
-        {/* Col 1: Brand logo — width depends on variant but is fixed for
-            both city logos (Milano + Como share dimensions), so going
-            Boutique→Milano→Como the layout is stable. */}
+        {/* Logo — always links to group home */}
         <Logo property={property} size="md" />
 
-        {/* Col 2: Desktop nav (centered, fixed-width to keep things stable) */}
+        {/* Desktop nav — group or property depending on context */}
         <nav className="hidden lg:flex items-center justify-center gap-7 text-sm">
-          <Link href="/milano-boutique" className="hover:text-vinaccia transition-colors">Boutique</Link>
-          <Link href="/milano" className="hover:text-vinaccia transition-colors">Milano</Link>
-          <Link href="/como" className="hover:text-vinaccia transition-colors">Como</Link>
-          <Link href="/contatti" className="hover:text-vinaccia transition-colors">Contatti</Link>
+          {nav.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="hover:text-vinaccia transition-colors"
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
-        {/* Spacer for mobile — keeps the grid 3 columns and centers the
-            phantom middle when nav is hidden. */}
+        {/* Mobile spacer — keeps the 3-col grid stable when nav hides */}
         <span className="lg:hidden" aria-hidden />
 
-        {/* Col 3: Right-side actions. Phone and WhatsApp buttons are
-            rendered only when the contact looks real — guard against
-            placeholder values producing broken `tel:` / `wa.me/` links. */}
+        {/* Right-side actions, guarded against placeholder values */}
         <div className="hidden lg:flex items-center gap-2">
           {hasContact(phone) && (
             <a
@@ -74,7 +105,7 @@ export function Header({ property }: HeaderProps) {
           </Button>
         </div>
 
-        {/* Mobile/tablet hamburger — only switches between properties */}
+        {/* Mobile hamburger — opens the property switcher drawer */}
         <MobileMenu property={property} />
       </div>
     </header>
