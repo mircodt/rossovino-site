@@ -1,7 +1,12 @@
 "use client";
 
 import { useState, useId, useMemo } from "react";
-import { PROPERTIES, PROPERTY_ORDER, type PropertySlug } from "@/lib/config";
+import {
+  PROPERTIES,
+  PROPERTY_ORDER,
+  type PropertySlug,
+  hasBookingIntegration,
+} from "@/lib/config";
 import { BedIcon, CalendarIcon, MapPinIcon, UsersIcon } from "./icons";
 
 interface Props {
@@ -11,23 +16,21 @@ interface Props {
 }
 
 /**
- * Vertical Booking integration — PLACEHOLDER.
+ * Booking widget — collects destination/dates/guests and submits to the
+ * Vertical Booking endpoint when the property has been wired.
  *
- * When the client provides the embed code (iframe or script), replace
- * the inner form with the real widget. The interface (property + variant)
- * is the public API: keep it stable.
- *
- * Until then, the placeholder collects the four pieces of data Vertical
- * Booking expects (destination, dates, guests) and submits to the
- * property's `verticalBooking.bookingUrl` — also a placeholder.
- *
- * See: https://www.verticalbooking.com/
+ * When the integration is missing (empty `verticalBooking` fields), the
+ * form still renders for visual continuity but its submit is intercepted
+ * and shows a polite "Prenotazione diretta disponibile a breve" message
+ * instead of producing a broken redirect.
  */
 export function BookingWidget({ property, variant = "inline" }: Props) {
   const id = useId();
   const [destination, setDestination] = useState<PropertySlug>(
     property ?? "milano-boutique",
   );
+  const [pending, setPending] = useState(false);
+
   const today = useMemo(() => new Date().toISOString().slice(0, 10), []);
   const tomorrow = useMemo(() => {
     const d = new Date();
@@ -35,7 +38,9 @@ export function BookingWidget({ property, variant = "inline" }: Props) {
     return d.toISOString().slice(0, 10);
   }, []);
 
-  const targetUrl = PROPERTIES[destination].verticalBooking.bookingUrl;
+  const vb = PROPERTIES[destination].verticalBooking;
+  const wired = hasBookingIntegration(vb);
+  const targetUrl = wired ? vb.bookingUrl : undefined;
 
   const wrapperBase =
     "w-full max-w-[1200px] mx-auto bg-white/95 backdrop-blur-sm rounded-[2px] shadow-lg border border-sabbia";
@@ -48,12 +53,17 @@ export function BookingWidget({ property, variant = "inline" }: Props) {
     <form
       action={targetUrl}
       method="get"
+      onSubmit={(e) => {
+        if (!wired) {
+          e.preventDefault();
+          setPending(true);
+        }
+      }}
       className={`${wrapperBase} ${wrapperVariant}`}
       aria-label="Prenotazione camera"
       id="prenota"
     >
       <div className="grid gap-3 md:grid-cols-[1.4fr_1fr_1fr_1fr_auto] md:items-end">
-        {/* Destination picker (only when property not pre-set) */}
         {property ? (
           <input type="hidden" name="hotel" value={PROPERTIES[property].verticalBooking.hotelId} />
         ) : (
@@ -119,10 +129,16 @@ export function BookingWidget({ property, variant = "inline" }: Props) {
         </button>
       </div>
 
-      {/* Dev-only hint while the real embed is missing */}
-      <p className="mt-3 text-xs text-[var(--color-ink-soft)] italic">
-        Widget di prenotazione — verrà sostituito con l&apos;embed Vertical Booking.
-      </p>
+      {pending && !wired && (
+        <p
+          role="status"
+          className="mt-4 text-sm text-vinaccia bg-sabbia-light border border-vinaccia/20 rounded-[2px] px-4 py-3"
+        >
+          Prenotazione diretta disponibile a breve. Per il momento contattaci
+          telefonicamente, via WhatsApp o email — vedi i contatti in fondo alla
+          pagina.
+        </p>
+      )}
     </form>
   );
 }

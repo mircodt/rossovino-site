@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StickyMobileBar } from "@/components/StickyMobileBar";
-import { VersionSwitcher } from "@/components/VersionSwitcher";
 import { PropertyPageContent } from "@/components/PropertyPageContent";
 import { JsonLd } from "@/components/JsonLd";
 import { PROPERTIES, SITE } from "@/lib/config";
@@ -37,7 +36,6 @@ export default function ComoPage() {
         style={{ "--color-bg": p.pageBg } as React.CSSProperties}
         className="bg-[var(--color-bg)] flex-grow flex flex-col"
       >
-        <VersionSwitcher current="v1" otherPath="/v2/como" />
         <Header property={SLUG} />
         <main id="contenuto" className="flex-grow">
           <PropertyPageContent slug={SLUG} />

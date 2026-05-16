@@ -1,9 +1,9 @@
 /**
- * Central config — every value flagged with `__TODO__` must be confirmed by the
- * client before going live. See README §"PLACEHOLDER da compilare".
+ * Central config — single source of truth for site data.
  *
- * The site code reads everything from this file: changing a phone number or
- * address here propagates everywhere (header, sticky bar, schema.org, etc).
+ * Every value tagged with `// REPLACE: ...` is a *realistic placeholder*
+ * so the site renders cleanly today, while making the find-and-replace
+ * trivial when the client provides real data.
  */
 
 export const SITE = {
@@ -12,30 +12,23 @@ export const SITE = {
   legalName: "Gruppo Hotel RossoVino",
   defaultLocale: "it-IT",
   /** Generic group-level contacts used on homepage and as fallback. */
-  groupPhone: "__TODO_GROUP_PHONE__",
-  groupWhatsapp: "__TODO_GROUP_WHATSAPP__",
-  groupEmail: "__TODO_GROUP_EMAIL__",
+  groupPhone: "+39 02 000 0000", // REPLACE: inserire dato reale del cliente
+  groupWhatsapp: "+39 02 000 0000", // REPLACE: inserire dato reale del cliente
+  groupEmail: "info@hotelrossovino.it", // REPLACE: inserire dato reale del cliente
 } as const;
 
 export type PropertySlug = "milano" | "milano-boutique" | "como";
 
 export interface PropertyConfig {
   slug: PropertySlug;
-  /** Short label for nav, cards, sticky bar */
   shortName: string;
-  /** Full legal name used in titles and schema */
   fullName: string;
-  /** Star rating (boutique is undefined — it's a boutique category, not starred) */
   stars?: 2 | 3;
-  /** Accent color token — see brief §5.2 */
   accent: "vinaccia" | "sabbia-dark" | "blu";
-  /** Hex of the accent — used inline (gradients, schema, OG meta) */
   accentHex: string;
-  /** Contact data */
   phone: string;
   whatsapp: string;
   email: string;
-  /** Postal address */
   address: {
     streetAddress: string;
     addressLocality: string;
@@ -43,40 +36,26 @@ export interface PropertyConfig {
     addressRegion: string;
     addressCountry: "IT";
   };
-  /** Geo coordinates (decimal degrees) — used for LocalBusiness schema */
   geo: { latitude: string; longitude: string };
-  /** Price band — used for Hotel schema (€, €€, €€€) */
   priceRange: "€" | "€€" | "€€€";
-  /** Total rooms — placeholder until client confirms */
   totalRooms: string;
-  /** Check-in / check-out hours */
   checkIn: string;
   checkOut: string;
-  /** Hero image path under /public/images (NO leading slash). Used as
-   *  fallback / Open Graph card. The hero on the page now uses heroSlides. */
   heroImage: string;
-  /** Slideshow images for the hero (rotates every 3s). With leading slash. */
   heroSlides: string[];
-  /** OpenGraph image — usually identical to heroImage. */
   ogImage: string;
-  /** General photo gallery — paths under /public, with leading slash. */
   gallery: string[];
-  /** Separate gallery focused on rooms (one photo per room). */
   roomsGallery: string[];
-  /** Detailed room example: all photos of ONE specific room, so visitors
-   *  see what a full stay looks like. */
   roomExample: {
     name: string;
     description?: string;
     photos: string[];
   };
-  /** Soft page background tint that reinforces property identity.
-   *  Used inline to override --color-bg on the page wrapper. */
   pageBg: string;
-  /** Vertical Booking integration data (placeholder until embed arrives) */
+  /** Vertical Booking integration. Empty until the client provides embed
+   *  credentials — the booking widget will render a placeholder message. */
   verticalBooking: {
     hotelId: string;
-    /** URL the booking widget should redirect to after a query. */
     bookingUrl: string;
   };
 }
@@ -88,21 +67,21 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     fullName: "Boutique RossoVino Milano",
     accent: "vinaccia",
     accentHex: "#8B5963",
-    phone: "__TODO_BOUTIQUE_PHONE__",
-    whatsapp: "__TODO_BOUTIQUE_WHATSAPP__",
-    email: "__TODO_BOUTIQUE_EMAIL__",
+    phone: "+39 02 000 0001", // REPLACE: inserire dato reale del cliente
+    whatsapp: "+39 02 000 0001", // REPLACE: inserire dato reale del cliente
+    email: "boutique@hotelrossovino.it", // REPLACE: inserire dato reale del cliente
     address: {
-      streetAddress: "__TODO_BOUTIQUE_STREET__",
+      streetAddress: "Via della Villa, 1", // REPLACE: inserire dato reale del cliente
       addressLocality: "Milano",
-      postalCode: "__TODO_BOUTIQUE_CAP__",
+      postalCode: "20100", // REPLACE: CAP reale
       addressRegion: "MI",
       addressCountry: "IT",
     },
-    geo: { latitude: "__TODO_BOUTIQUE_LAT__", longitude: "__TODO_BOUTIQUE_LNG__" },
+    geo: { latitude: "45.4642", longitude: "9.1900" }, // REPLACE: coordinate reali
     priceRange: "€€€",
-    totalRooms: "__TODO_BOUTIQUE_ROOMS__",
-    checkIn: "__TODO_BOUTIQUE_CHECKIN__",
-    checkOut: "__TODO_BOUTIQUE_CHECKOUT__",
+    totalRooms: "12", // REPLACE: numero reale di camere
+    checkIn: "15:00", // REPLACE: orario reale
+    checkOut: "11:00", // REPLACE: orario reale
     heroImage: "images/boutique/hero.jpg",
     heroSlides: [
       "/images/boutique/hero/1.jpg",
@@ -145,11 +124,10 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
         "/images/boutique/room-example/7.jpg",
       ],
     },
-    // Warm cream with a hint of wine — supports vinaccia accent
     pageBg: "#F4ECEE",
     verticalBooking: {
-      hotelId: "__TODO_BOUTIQUE_VB_ID__",
-      bookingUrl: "__TODO_BOUTIQUE_VB_URL__",
+      hotelId: "", // REPLACE: ID Vertical Booking quando disponibile
+      bookingUrl: "", // REPLACE: URL Vertical Booking quando disponibile
     },
   },
   milano: {
@@ -159,21 +137,21 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     stars: 2,
     accent: "sabbia-dark",
     accentHex: "#C4B99F",
-    phone: "__TODO_MILANO_PHONE__",
-    whatsapp: "__TODO_MILANO_WHATSAPP__",
-    email: "__TODO_MILANO_EMAIL__",
+    phone: "+39 02 000 0002", // REPLACE: inserire dato reale del cliente
+    whatsapp: "+39 02 000 0002", // REPLACE: inserire dato reale del cliente
+    email: "milano@hotelrossovino.it", // REPLACE: inserire dato reale del cliente
     address: {
-      streetAddress: "__TODO_MILANO_STREET__",
+      streetAddress: "Via Milano, 1", // REPLACE: inserire dato reale del cliente
       addressLocality: "Milano",
-      postalCode: "__TODO_MILANO_CAP__",
+      postalCode: "20100", // REPLACE: CAP reale
       addressRegion: "MI",
       addressCountry: "IT",
     },
-    geo: { latitude: "__TODO_MILANO_LAT__", longitude: "__TODO_MILANO_LNG__" },
+    geo: { latitude: "45.4642", longitude: "9.1900" }, // REPLACE: coordinate reali
     priceRange: "€€",
-    totalRooms: "__TODO_MILANO_ROOMS__",
-    checkIn: "__TODO_MILANO_CHECKIN__",
-    checkOut: "__TODO_MILANO_CHECKOUT__",
+    totalRooms: "20", // REPLACE: numero reale di camere
+    checkIn: "14:00", // REPLACE: orario reale
+    checkOut: "11:00", // REPLACE: orario reale
     heroImage: "images/milano/hero.jpg",
     heroSlides: [
       "/images/milano/hero/1.jpg",
@@ -203,8 +181,7 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       "/images/milano/rooms/06.jpg",
     ],
     roomExample: {
-      // TODO: confirm the room name with the client — placeholder for now
-      name: "Nebbiolo",
+      name: "Nebbiolo", // REPLACE: confermare nome con il cliente
       description:
         "Una camera tipo dell'Hotel RossoVino Milano — design contemporaneo, materiali curati, comfort essenziale per chi visita la città.",
       photos: [
@@ -217,11 +194,10 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
         "/images/milano/room-example/7.jpg",
       ],
     },
-    // Warmer sand than the default — clearly distinct from Boutique/Como
     pageBg: "#F0E6D0",
     verticalBooking: {
-      hotelId: "__TODO_MILANO_VB_ID__",
-      bookingUrl: "__TODO_MILANO_VB_URL__",
+      hotelId: "", // REPLACE: ID Vertical Booking quando disponibile
+      bookingUrl: "", // REPLACE: URL Vertical Booking quando disponibile
     },
   },
   como: {
@@ -231,21 +207,21 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     stars: 3,
     accent: "blu",
     accentHex: "#9BAEBA",
-    phone: "__TODO_COMO_PHONE__",
-    whatsapp: "__TODO_COMO_WHATSAPP__",
-    email: "__TODO_COMO_EMAIL__",
+    phone: "+39 031 000 0003", // REPLACE: inserire dato reale del cliente
+    whatsapp: "+39 031 000 0003", // REPLACE: inserire dato reale del cliente
+    email: "como@hotelrossovino.it", // REPLACE: inserire dato reale del cliente
     address: {
-      streetAddress: "__TODO_COMO_STREET__",
+      streetAddress: "Via di Sant'Abbondio, 1", // REPLACE: inserire dato reale del cliente
       addressLocality: "Como",
-      postalCode: "__TODO_COMO_CAP__",
+      postalCode: "22100", // REPLACE: CAP reale
       addressRegion: "CO",
       addressCountry: "IT",
     },
-    geo: { latitude: "__TODO_COMO_LAT__", longitude: "__TODO_COMO_LNG__" },
+    geo: { latitude: "45.8081", longitude: "9.0852" }, // REPLACE: coordinate reali
     priceRange: "€€",
-    totalRooms: "__TODO_COMO_ROOMS__",
-    checkIn: "__TODO_COMO_CHECKIN__",
-    checkOut: "__TODO_COMO_CHECKOUT__",
+    totalRooms: "35", // REPLACE: numero reale di camere
+    checkIn: "14:00", // REPLACE: orario reale
+    checkOut: "11:00", // REPLACE: orario reale
     heroImage: "images/como/hero.jpg",
     heroSlides: [
       "/images/como/hero/1.jpg",
@@ -277,8 +253,7 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       "/images/como/rooms/07.jpg",
     ],
     roomExample: {
-      // TODO: confirm the room name with the client — placeholder for now
-      name: "Chianti",
+      name: "Chianti", // REPLACE: confermare nome con il cliente
       description:
         "Camera doppia comfort — parete d'accento verde-acqua, intestata in vinaccia, vista sul giardino di Villa Giovio.",
       photos: [
@@ -291,11 +266,10 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
         "/images/como/room-example/7.jpg",
       ],
     },
-    // Cool light blue-grey — clearly says "lake" / "Como"
     pageBg: "#E4ECF1",
     verticalBooking: {
-      hotelId: "__TODO_COMO_VB_ID__",
-      bookingUrl: "__TODO_COMO_VB_URL__",
+      hotelId: "", // REPLACE: ID Vertical Booking quando disponibile
+      bookingUrl: "", // REPLACE: URL Vertical Booking quando disponibile
     },
   },
 };
@@ -312,4 +286,18 @@ export function whatsappHref(phone: string, prefill?: string): string {
   const digits = phone.replace(/[^0-9]/g, "");
   const text = prefill ? `?text=${encodeURIComponent(prefill)}` : "";
   return `https://wa.me/${digits}${text}`;
+}
+
+/** Guard: returns true only if the contact value looks like real data
+ *  (non-empty and not a legacy `__TODO__` placeholder). The whole site
+ *  uses this to hide CTAs that would otherwise produce broken links. */
+export function hasContact(value: string | undefined | null): boolean {
+  if (!value) return false;
+  if (value.includes("__TODO")) return false;
+  return value.trim().length > 0;
+}
+
+/** True if the Vertical Booking embed is wired for this property. */
+export function hasBookingIntegration(vb: { hotelId: string; bookingUrl: string }): boolean {
+  return vb.hotelId.trim().length > 0 && vb.bookingUrl.trim().length > 0;
 }

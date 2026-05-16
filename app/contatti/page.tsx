@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StickyMobileBar } from "@/components/StickyMobileBar";
-import { VersionSwitcher } from "@/components/VersionSwitcher";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { JsonLd } from "@/components/JsonLd";
@@ -11,6 +10,7 @@ import {
   PROPERTIES,
   PROPERTY_ORDER,
   SITE,
+  hasContact,
   telHref,
   whatsappHref,
 } from "@/lib/config";
@@ -32,8 +32,6 @@ export default function ContattiPage() {
           { name: "Contatti", url: canonical("/contatti") },
         ])}
       />
-
-      <VersionSwitcher current="v1" otherPath="/v2" />
       <Header />
       <main id="contenuto" className="flex-grow">
         <section className="bg-[var(--color-bg)] py-16 md:py-24">
@@ -63,35 +61,41 @@ export default function ContattiPage() {
                     </p>
 
                     <ul className="space-y-4">
-                      <li className="flex items-start gap-3">
-                        <PhoneIcon className="w-5 h-5 text-vinaccia flex-shrink-0 mt-0.5" aria-hidden />
-                        <a
-                          href={telHref(p.phone)}
-                          className="font-mono tabular-nums hover:text-vinaccia transition-colors"
-                        >
-                          {p.phone}
-                        </a>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <WhatsappIcon className="w-5 h-5 text-verde-dark flex-shrink-0 mt-0.5" aria-hidden />
-                        <a
-                          href={whatsappHref(p.whatsapp)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="hover:text-vinaccia transition-colors"
-                        >
-                          Apri chat WhatsApp
-                        </a>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <MailIcon className="w-5 h-5 text-vinaccia flex-shrink-0 mt-0.5" aria-hidden />
-                        <a
-                          href={`mailto:${p.email}`}
-                          className="hover:text-vinaccia transition-colors break-all"
-                        >
-                          {p.email}
-                        </a>
-                      </li>
+                      {hasContact(p.phone) && (
+                        <li className="flex items-start gap-3">
+                          <PhoneIcon className="w-5 h-5 text-vinaccia flex-shrink-0 mt-0.5" aria-hidden />
+                          <a
+                            href={telHref(p.phone)}
+                            className="font-mono tabular-nums hover:text-vinaccia transition-colors"
+                          >
+                            {p.phone}
+                          </a>
+                        </li>
+                      )}
+                      {hasContact(p.whatsapp) && (
+                        <li className="flex items-start gap-3">
+                          <WhatsappIcon className="w-5 h-5 text-verde-dark flex-shrink-0 mt-0.5" aria-hidden />
+                          <a
+                            href={whatsappHref(p.whatsapp)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-vinaccia transition-colors"
+                          >
+                            Apri chat WhatsApp
+                          </a>
+                        </li>
+                      )}
+                      {hasContact(p.email) && (
+                        <li className="flex items-start gap-3">
+                          <MailIcon className="w-5 h-5 text-vinaccia flex-shrink-0 mt-0.5" aria-hidden />
+                          <a
+                            href={`mailto:${p.email}`}
+                            className="hover:text-vinaccia transition-colors break-all"
+                          >
+                            {p.email}
+                          </a>
+                        </li>
+                      )}
                       <li className="flex items-start gap-3">
                         <MapPinIcon className="w-5 h-5 text-vinaccia flex-shrink-0 mt-0.5" aria-hidden />
                         <span className="text-[var(--color-ink-soft)]">
@@ -104,12 +108,6 @@ export default function ContattiPage() {
                 );
               })}
             </div>
-
-            <p className="mt-10 text-sm text-[var(--color-ink-soft)] italic">
-              I dati di contatto qui sopra contengono dei placeholder
-              (<code className="font-mono">__TODO_…__</code>) — vanno sostituiti in{" "}
-              <code className="font-mono">lib/config.ts</code> prima del go-live.
-            </p>
           </Container>
         </section>
       </main>

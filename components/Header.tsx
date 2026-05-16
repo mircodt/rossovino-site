@@ -1,5 +1,12 @@
 import Link from "next/link";
-import { PROPERTIES, type PropertySlug, SITE, telHref, whatsappHref } from "@/lib/config";
+import {
+  PROPERTIES,
+  type PropertySlug,
+  SITE,
+  hasContact,
+  telHref,
+  whatsappHref,
+} from "@/lib/config";
 import { PhoneIcon, WhatsappIcon } from "./icons";
 import { Button } from "./Button";
 import { Logo } from "./Logo";
@@ -37,27 +44,31 @@ export function Header({ property }: HeaderProps) {
             phantom middle when nav is hidden. */}
         <span className="lg:hidden" aria-hidden />
 
-        {/* Col 3: Right-side actions
-            On desktop we now show icon-only contact buttons (no phone
-            number text) so the column width is constant across pages. */}
+        {/* Col 3: Right-side actions. Phone and WhatsApp buttons are
+            rendered only when the contact looks real — guard against
+            placeholder values producing broken `tel:` / `wa.me/` links. */}
         <div className="hidden lg:flex items-center gap-2">
-          <a
-            href={telHref(phone)}
-            className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-sabbia hover:bg-sabbia-dark text-vinaccia transition-colors"
-            aria-label={`Chiama ${p ? p.shortName : "RossoVino"}`}
-            title={phone}
-          >
-            <PhoneIcon className="w-4 h-4" aria-hidden />
-          </a>
-          <a
-            href={whatsappHref(whatsapp)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-verde-dark hover:bg-verde-hover text-white transition-colors"
-            aria-label="Apri WhatsApp"
-          >
-            <WhatsappIcon className="w-5 h-5" aria-hidden />
-          </a>
+          {hasContact(phone) && (
+            <a
+              href={telHref(phone)}
+              className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-sabbia hover:bg-sabbia-dark text-vinaccia transition-colors"
+              aria-label={`Chiama ${p ? p.shortName : "RossoVino"}`}
+              title={phone}
+            >
+              <PhoneIcon className="w-4 h-4" aria-hidden />
+            </a>
+          )}
+          {hasContact(whatsapp) && (
+            <a
+              href={whatsappHref(whatsapp)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-verde-dark hover:bg-verde-hover text-white transition-colors"
+              aria-label="Apri WhatsApp"
+            >
+              <WhatsappIcon className="w-5 h-5" aria-hidden />
+            </a>
+          )}
           <Button href={p ? `/${p.slug}#prenota` : "/#prenota"} variant="primary">
             Prenota
           </Button>

@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StickyMobileBar } from "@/components/StickyMobileBar";
-import { VersionSwitcher } from "@/components/VersionSwitcher";
 import { BookingWidget } from "@/components/BookingWidget";
 import { PropertyCard } from "@/components/PropertyCard";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -57,8 +56,6 @@ export default function HomePage() {
           { name: "Home", url: SITE.url },
         ])}
       />
-
-      <VersionSwitcher current="v1" otherPath="/v2" />
       <Header />
 
       <main id="contenuto" className="flex-grow">

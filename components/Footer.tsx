@@ -1,6 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { PROPERTIES, PROPERTY_ORDER, SITE, telHref, whatsappHref } from "@/lib/config";
+import {
+  PROPERTIES,
+  PROPERTY_ORDER,
+  SITE,
+  hasContact,
+  telHref,
+  whatsappHref,
+} from "@/lib/config";
 import { assetSrc } from "@/lib/asset";
 
 export function Footer() {
@@ -33,32 +40,38 @@ export function Footer() {
               <div key={slug}>
                 <div className="font-display text-lg mb-3">{p.fullName}</div>
                 <ul className="space-y-2 text-sm text-white/85">
-                  <li>
-                    <a
-                      href={telHref(p.phone)}
-                      className="hover:text-sabbia transition-colors font-mono tabular-nums"
-                    >
-                      {p.phone}
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href={whatsappHref(p.whatsapp)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-sabbia transition-colors"
-                    >
-                      WhatsApp
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href={`mailto:${p.email}`}
-                      className="hover:text-sabbia transition-colors break-all"
-                    >
-                      {p.email}
-                    </a>
-                  </li>
+                  {hasContact(p.phone) && (
+                    <li>
+                      <a
+                        href={telHref(p.phone)}
+                        className="hover:text-sabbia transition-colors font-mono tabular-nums"
+                      >
+                        {p.phone}
+                      </a>
+                    </li>
+                  )}
+                  {hasContact(p.whatsapp) && (
+                    <li>
+                      <a
+                        href={whatsappHref(p.whatsapp)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-sabbia transition-colors"
+                      >
+                        WhatsApp
+                      </a>
+                    </li>
+                  )}
+                  {hasContact(p.email) && (
+                    <li>
+                      <a
+                        href={`mailto:${p.email}`}
+                        className="hover:text-sabbia transition-colors break-all"
+                      >
+                        {p.email}
+                      </a>
+                    </li>
+                  )}
                   <li>
                     <Link
                       href={`/${slug}`}
