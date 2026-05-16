@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StickyMobileBar } from "@/components/StickyMobileBar";
+import { StickyBookingBar } from "@/components/StickyBookingBar";
 import { SubPageHero } from "@/components/SubPageHero";
 import { PropertyContactsPageContent } from "@/components/PropertyContactsPageContent";
 import { JsonLd } from "@/components/JsonLd";
@@ -41,6 +42,7 @@ export default function Page() {
         <Footer />
       </div>
       <StickyMobileBar property={SLUG} />
+      <StickyBookingBar property={SLUG} />
     </>
   );
 }

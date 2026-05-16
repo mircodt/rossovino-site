@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StickyMobileBar } from "@/components/StickyMobileBar";
+import { StickyBookingBar } from "@/components/StickyBookingBar";
 import { BookingWidget } from "@/components/BookingWidget";
 import { DestinationPicker } from "@/components/DestinationPicker";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -165,6 +166,7 @@ export default function HomePage() {
 
       <Footer />
       <StickyMobileBar />
+      <StickyBookingBar />
     </>
   );
 }

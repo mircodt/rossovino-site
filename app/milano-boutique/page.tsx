@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StickyMobileBar } from "@/components/StickyMobileBar";
+import { StickyBookingBar } from "@/components/StickyBookingBar";
 import { PropertyPageContent } from "@/components/PropertyPageContent";
 import { JsonLd } from "@/components/JsonLd";
 import { PROPERTIES, SITE } from "@/lib/config";
@@ -44,6 +45,7 @@ export default function BoutiquePage() {
         <Footer />
       </div>
       <StickyMobileBar property={SLUG} />
+      <StickyBookingBar property={SLUG} />
     </>
   );
 }

@@ -12,7 +12,10 @@ import { BedIcon, CalendarIcon, MapPinIcon, UsersIcon } from "./icons";
 interface Props {
   /** Pre-selected property. If undefined, shows destination picker. */
   property?: PropertySlug;
-  variant?: "hero" | "inline";
+  variant?: "hero" | "inline" | "compact";
+  /** Default `"prenota"`. Override when rendering more than one widget
+   *  on the same page so we never produce duplicate DOM ids. */
+  formId?: string;
 }
 
 /**
@@ -24,7 +27,11 @@ interface Props {
  * and shows a polite "Prenotazione diretta disponibile a breve" message
  * instead of producing a broken redirect.
  */
-export function BookingWidget({ property, variant = "inline" }: Props) {
+export function BookingWidget({
+  property,
+  variant = "inline",
+  formId = "prenota",
+}: Props) {
   const id = useId();
   const [destination, setDestination] = useState<PropertySlug>(
     property ?? "milano-boutique",
@@ -43,11 +50,13 @@ export function BookingWidget({ property, variant = "inline" }: Props) {
   const targetUrl = wired ? vb.bookingUrl : undefined;
 
   const wrapperBase =
-    "w-full max-w-[1200px] mx-auto bg-white/95 backdrop-blur-sm rounded-[2px] shadow-lg border border-sabbia";
+    "w-full max-w-[1200px] mx-auto bg-white/95 backdrop-blur-sm rounded-[2px] border border-sabbia";
   const wrapperVariant =
     variant === "hero"
-      ? "p-5 md:p-6 -mt-12 md:-mt-16 relative z-10"
-      : "p-5 md:p-6";
+      ? "shadow-lg p-5 md:p-6 -mt-12 md:-mt-16 relative z-10"
+      : variant === "compact"
+      ? "shadow-none border-none p-0"
+      : "shadow-lg p-5 md:p-6";
 
   return (
     <form
@@ -61,7 +70,7 @@ export function BookingWidget({ property, variant = "inline" }: Props) {
       }}
       className={`${wrapperBase} ${wrapperVariant}`}
       aria-label="Prenotazione camera"
-      id="prenota"
+      id={formId}
     >
       <div className="grid gap-3 md:grid-cols-[1.4fr_1fr_1fr_1fr_auto] md:items-end">
         {property ? (

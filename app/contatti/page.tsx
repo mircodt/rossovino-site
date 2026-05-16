@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StickyMobileBar } from "@/components/StickyMobileBar";
+import { StickyBookingBar } from "@/components/StickyBookingBar";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { JsonLd } from "@/components/JsonLd";
@@ -113,6 +114,7 @@ export default function ContattiPage() {
       </main>
       <Footer />
       <StickyMobileBar />
+      <StickyBookingBar />
     </>
   );
 }
