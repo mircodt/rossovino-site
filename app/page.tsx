@@ -4,7 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StickyMobileBar } from "@/components/StickyMobileBar";
 import { BookingWidget } from "@/components/BookingWidget";
-import { PropertyCard } from "@/components/PropertyCard";
+import { DestinationPicker } from "@/components/DestinationPicker";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
@@ -14,7 +14,6 @@ import { assetSrc } from "@/lib/asset";
 import { HOME_CONTENT } from "@/lib/content";
 import {
   breadcrumbSchema,
-  canonical,
   organizationSchema,
   websiteSchema,
 } from "@/lib/seo";
@@ -56,10 +55,11 @@ export default function HomePage() {
           { name: "Home", url: SITE.url },
         ])}
       />
+
       <Header />
 
       <main id="contenuto" className="flex-grow">
-        {/* Hero */}
+        {/* 1. Hero — emotional opener, full-bleed photo + dark text panel */}
         <section className="relative">
           <div className="relative h-[70svh] min-h-[520px] max-h-[720px] overflow-hidden">
             <Image
@@ -70,12 +70,12 @@ export default function HomePage() {
               sizes="100vw"
               className="object-cover"
             />
-            <div
-              aria-hidden
-              className="absolute inset-0 bg-black/25"
-            />
+            <div aria-hidden className="absolute inset-0 bg-black/55" />
             <div className="relative z-10 h-full mx-auto w-full max-w-[1200px] px-5 md:px-8 flex flex-col justify-end pb-24 md:pb-28">
-              <div className="max-w-2xl bg-[rgba(20,15,18,0.78)] backdrop-blur-md text-white p-6 md:p-10 rounded-[2px] border-l-2 border-vinaccia">
+              <div
+                className="max-w-2xl bg-[rgba(20,15,18,0.78)] backdrop-blur-md text-white p-6 md:p-10 rounded-[2px] border-l-2 border-vinaccia"
+                style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}
+              >
                 <p className="font-mono text-xs uppercase tracking-[0.2em] text-sabbia mb-3">
                   Gruppo Hotel RossoVino · Milano · Como
                 </p>
@@ -89,32 +89,17 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Group-level booking widget with destination picker */}
+          {/* 2. Booking widget — overlaps the hero bottom */}
           <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8">
             <BookingWidget variant="hero" />
           </div>
         </section>
 
-        {/* Three properties */}
-        <section className="bg-[var(--color-bg)] py-16 md:py-24">
-          <Container>
-            <SectionHeading eyebrow="Le strutture">
-              {HOME_CONTENT.propertiesSectionTitle}
-            </SectionHeading>
-            <p className="mt-4 text-[var(--color-ink-soft)] text-lg max-w-2xl leading-relaxed">
-              Tre identità diverse, un solo modo di intendere l&apos;ospitalità — autentico,
-              caldo, ispirato al vino italiano.
-            </p>
+        {/* 3. Destination picker — the FIRST thing after the booking widget,
+              so a visitor can choose where to stay without scrolling further. */}
+        <DestinationPicker />
 
-            <div className="mt-10 grid gap-6 md:gap-8 md:grid-cols-3">
-              {PROPERTY_ORDER.map((slug) => (
-                <PropertyCard key={slug} slug={slug} />
-              ))}
-            </div>
-          </Container>
-        </section>
-
-        {/* Experience */}
+        {/* 4. Experience — the brand pillars */}
         <section className="bg-white py-16 md:py-24">
           <Container>
             <SectionHeading eyebrow="L&apos;identità del gruppo">
@@ -126,10 +111,7 @@ export default function HomePage() {
 
             <div className="mt-12 grid gap-8 md:grid-cols-3">
               {HOME_CONTENT.experience.pillars.map((pillar) => (
-                <article
-                  key={pillar.title}
-                  className="border-t-2 border-vinaccia pt-6"
-                >
+                <article key={pillar.title} className="border-t-2 border-vinaccia pt-6">
                   <h3 className="font-display text-xl mb-3 text-[var(--color-ink)]">
                     {pillar.title}
                   </h3>
@@ -142,7 +124,7 @@ export default function HomePage() {
           </Container>
         </section>
 
-        {/* Sustainability */}
+        {/* 5. Sustainability — brief block */}
         <section className="bg-verde-light/40 py-16 md:py-24">
           <Container>
             <div className="max-w-3xl">
@@ -156,7 +138,7 @@ export default function HomePage() {
           </Container>
         </section>
 
-        {/* Final CTA */}
+        {/* 6. Final CTA */}
         <section className="bg-vinaccia text-white py-16 md:py-24">
           <Container className="text-center">
             <h2 className="font-display text-white mb-3 [text-wrap:balance]">
