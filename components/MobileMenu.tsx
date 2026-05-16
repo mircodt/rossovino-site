@@ -8,6 +8,7 @@ import {
   PROPERTY_ORDER,
   type PropertySlug,
 } from "@/lib/config";
+import { LangSwitcher } from "./LangSwitcher";
 import { Logo } from "./Logo";
 import { MenuIcon, StarIcon, XIcon } from "./icons";
 
@@ -161,6 +162,16 @@ export function MobileMenu({ property }: Props) {
             })}
           </ul>
         </nav>
+
+        {/* Footer of the drawer — language switcher */}
+        <footer className="border-t border-[color:var(--color-border)] px-5 py-4 bg-sabbia-light/50">
+          <div className="flex items-center justify-between">
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">
+              Lingua
+            </p>
+            <LangSwitcher variant="drawer" />
+          </div>
+        </footer>
       </aside>
     </div>
   );

@@ -1,20 +1,25 @@
 import Link from "next/link";
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
 
-type Variant = "primary" | "secondary" | "ghost";
+type Variant = "primary" | "secondary" | "ghost" | "outline-on-dark";
 
 const base =
   "inline-flex items-center justify-center gap-2 min-h-11 px-5 font-medium text-[15px] " +
   "tracking-wide uppercase transition-colors rounded-[2px] " +
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vinaccia focus-visible:ring-offset-2";
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
 
 const variantClass: Record<Variant, string> = {
   primary:
-    "bg-vinaccia text-white hover:bg-vinaccia-hover active:bg-vinaccia-dark",
+    "bg-vinaccia text-white hover:bg-vinaccia-hover active:bg-vinaccia-dark focus-visible:ring-vinaccia",
   secondary:
-    "bg-transparent text-vinaccia border border-vinaccia hover:bg-vinaccia hover:text-white",
+    "bg-transparent text-vinaccia border border-vinaccia hover:bg-vinaccia hover:text-white focus-visible:ring-vinaccia",
   ghost:
-    "bg-transparent text-[var(--color-ink)] hover:bg-sabbia",
+    "bg-transparent text-[var(--color-ink)] hover:bg-sabbia focus-visible:ring-vinaccia",
+  // For use on the vinaccia / dark CTA blocks — solid white outline that
+  // inverts on hover. No !important needed because the variant carries
+  // the same specificity as the others.
+  "outline-on-dark":
+    "bg-transparent text-white border border-white/70 hover:bg-white hover:text-vinaccia focus-visible:ring-white",
 };
 
 type CommonProps = {

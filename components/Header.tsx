@@ -9,6 +9,7 @@ import {
 } from "@/lib/config";
 import { PhoneIcon, WhatsappIcon } from "./icons";
 import { Button } from "./Button";
+import { LangSwitcher } from "./LangSwitcher";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 
@@ -78,7 +79,9 @@ export function Header({ property }: HeaderProps) {
         <span className="lg:hidden" aria-hidden />
 
         {/* Right-side actions, guarded against placeholder values */}
-        <div className="hidden lg:flex items-center gap-2">
+        <div className="hidden lg:flex items-center gap-3">
+          <LangSwitcher />
+          <span className="h-5 w-px bg-[color:var(--color-border)]" aria-hidden />
           {hasContact(phone) && (
             <a
               href={telHref(phone)}

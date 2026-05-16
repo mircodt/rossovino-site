@@ -87,6 +87,49 @@ export function CheckIcon({ className = "", ...rest }: IconProps) {
   );
 }
 
+export function BulbIcon({ className = "", ...rest }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6}
+      strokeLinecap="round" strokeLinejoin="round" className={className} {...rest}>
+      <path d="M9 18h6" />
+      <path d="M10 21h4" />
+      <path d="M12 3a6 6 0 0 1 4 10.5c-.7.7-1 1.6-1 2.5v.5H9v-.5c0-.9-.3-1.8-1-2.5A6 6 0 0 1 12 3Z" />
+    </svg>
+  );
+}
+
+export function BottleIcon({ className = "", ...rest }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6}
+      strokeLinecap="round" strokeLinejoin="round" className={className} {...rest}>
+      <path d="M10 2h4v3" />
+      <path d="M9 5h6" />
+      <path d="M9 5c0 1.5-1.5 2-1.5 4.5V20a2 2 0 0 0 2 2h5a2 2 0 0 0 2-2V9.5C16.5 7 15 6.5 15 5" />
+      <path d="M8 13h8" />
+    </svg>
+  );
+}
+
+export function ThermometerIcon({ className = "", ...rest }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6}
+      strokeLinecap="round" strokeLinejoin="round" className={className} {...rest}>
+      <path d="M14 14V5a2 2 0 1 0-4 0v9a4 4 0 1 0 4 0Z" />
+      <circle cx="12" cy="17" r="1.5" fill="currentColor" />
+    </svg>
+  );
+}
+
+export function SunIcon({ className = "", ...rest }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6}
+      strokeLinecap="round" strokeLinejoin="round" className={className} {...rest}>
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+    </svg>
+  );
+}
+
 export function MenuIcon({ className = "", ...rest }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}

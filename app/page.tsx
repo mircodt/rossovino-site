@@ -6,7 +6,14 @@ import { StickyMobileBar } from "@/components/StickyMobileBar";
 import { StickyBookingBar } from "@/components/StickyBookingBar";
 import { BookingWidget } from "@/components/BookingWidget";
 import { DestinationPicker } from "@/components/DestinationPicker";
+import { Testimonials } from "@/components/Testimonials";
 import { SectionHeading } from "@/components/SectionHeading";
+import {
+  BulbIcon,
+  BottleIcon,
+  ThermometerIcon,
+  SunIcon,
+} from "@/components/icons";
 import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
 import { JsonLd } from "@/components/JsonLd";
@@ -125,7 +132,10 @@ export default function HomePage() {
           </Container>
         </section>
 
-        {/* 5. Sustainability — brief block */}
+        {/* 4b. Social proof — guest testimonials, between identity and sustainability */}
+        <Testimonials />
+
+        {/* 5. Sustainability — 4-column grid with inline SVG icons */}
         <section className="bg-verde-light/40 py-16 md:py-24">
           <Container>
             <div className="max-w-3xl">
@@ -136,6 +146,41 @@ export default function HomePage() {
                 {HOME_CONTENT.sustainability.body}
               </p>
             </div>
+
+            <ul className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  Icon: BulbIcon,
+                  title: "Illuminazione LED",
+                  body: "Illuminazione a basso consumo in tutti gli ambienti.",
+                },
+                {
+                  Icon: BottleIcon,
+                  title: "Zero plastica monouso",
+                  body: "Dispenser ricaricabili per shampoo, bagnoschiuma e sapone.",
+                },
+                {
+                  Icon: ThermometerIcon,
+                  title: "Clima intelligente",
+                  body: "Climatizzazione con sensori di presenza e finestre aperte.",
+                },
+                {
+                  Icon: SunIcon,
+                  title: "Energia solare",
+                  body: "Pannelli solari per l'acqua calda nella struttura di Como.",
+                },
+              ].map(({ Icon, title, body }) => (
+                <li key={title} className="bg-white/70 backdrop-blur-sm border-t-2 border-verde-dark p-6 md:p-7 rounded-[2px]">
+                  <Icon className="w-9 h-9 text-verde-dark mb-4" aria-hidden />
+                  <h3 className="font-display text-xl mb-2 text-[var(--color-ink)]">
+                    {title}
+                  </h3>
+                  <p className="text-[var(--color-ink-soft)] leading-relaxed">
+                    {body}
+                  </p>
+                </li>
+              ))}
+            </ul>
           </Container>
         </section>
 
@@ -150,12 +195,7 @@ export default function HomePage() {
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               {PROPERTY_ORDER.map((slug) => (
-                <Button
-                  key={slug}
-                  href={`/${slug}`}
-                  variant="secondary"
-                  className="!text-white !border-white/70 hover:!bg-white hover:!text-vinaccia"
-                >
+                <Button key={slug} href={`/${slug}`} variant="outline-on-dark">
                   {PROPERTIES[slug].shortName}
                 </Button>
               ))}

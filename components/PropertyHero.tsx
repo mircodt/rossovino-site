@@ -55,11 +55,7 @@ export function PropertyHero({ slug }: { slug: PropertySlug }) {
 
             <div className="mt-7 flex flex-wrap gap-3">
               <Button href="#prenota" variant="primary">Verifica disponibilità</Button>
-              <Button
-                href="#presentazione"
-                variant="secondary"
-                className="!text-white !border-white/70 hover:!bg-white hover:!text-vinaccia"
-              >
+              <Button href="#presentazione" variant="outline-on-dark">
                 Scopri la struttura
               </Button>
             </div>
