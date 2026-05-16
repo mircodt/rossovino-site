@@ -22,7 +22,11 @@ export function SectionHeading({
           {eyebrow}
         </p>
       )}
-      <Tag className="font-display [text-wrap:balance] max-w-3xl">{children}</Tag>
+      {/* Heavier visual weight than body copy: bold + vinaccia accent +
+          slightly bumped size via tighter line-height. */}
+      <Tag className="font-display font-bold text-vinaccia text-[clamp(1.75rem,3vw+0.5rem,2.75rem)] leading-[1.1] [text-wrap:balance] max-w-3xl">
+        {children}
+      </Tag>
     </header>
   );
 }

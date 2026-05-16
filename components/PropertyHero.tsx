@@ -17,19 +17,20 @@ export function PropertyHero({ slug }: { slug: PropertySlug }) {
           slides={p.heroSlides}
           alt={`${p.fullName} — vista principale`}
         />
-        {/* Subtle global darkening — keeps the photo present but tames bright areas */}
-        <div
-          className="absolute inset-0 bg-black/25"
-          aria-hidden
-        />
+        {/* WCAG AA-grade overlay — ensures any body copy reaches at least
+            4.5:1 contrast against the photo. Combined with the dark text
+            panel below it, the contrast budget is generous. */}
+        <div className="absolute inset-0 bg-black/55" aria-hidden />
 
         {/* Hero content — text lives inside a solid-tone panel so legibility is
             guaranteed on any image. The panel is the visual focus, the photo
-            is the atmospheric backdrop. */}
+            is the atmospheric backdrop. Adds a subtle text-shadow as a
+            secondary fallback. */}
         <div className="relative z-10 h-full mx-auto w-full max-w-[1200px] px-5 md:px-8 flex flex-col justify-end pb-24 md:pb-28">
           <div
+            style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}
             className="
-              max-w-2xl bg-[rgba(20,15,18,0.78)] backdrop-blur-md
+              max-w-2xl bg-[rgba(20,15,18,0.82)] backdrop-blur-md
               text-white p-6 md:p-10 rounded-[2px]
               border-l-2 border-vinaccia
             "
