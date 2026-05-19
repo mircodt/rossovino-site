@@ -67,12 +67,12 @@ export default function HomePage() {
       <Header />
 
       <main id="contenuto" className="flex-grow">
-        {/* 1. Hero — full-bleed photo + dark overlay; the destination cards
-              live INSIDE the hero (replacing the old "Tre hotel, una sola
-              anima" dark panel) so the visitor can pick where to go in the
-              first viewport. SR-only h1 keeps an accessible heading. */}
+        {/* 1. Hero — compact: photo as background, 3 destination cards
+              appear immediately under the header. No fixed height so the
+              section sizes to its content; the photo fills exactly that
+              space. SR-only h1 keeps a semantic heading. */}
         <section className="relative">
-          <div className="relative h-[70svh] min-h-[520px] max-h-[720px] overflow-hidden">
+          <div className="relative overflow-hidden">
             <Image
               src={assetSrc(`/${PROPERTIES["milano-boutique"].heroImage}`)}
               alt="Hotel RossoVino — atmosfera del gruppo"
@@ -82,7 +82,7 @@ export default function HomePage() {
               className="object-cover"
             />
             <div aria-hidden className="absolute inset-0 bg-black/55" />
-            <div className="relative z-10 h-full mx-auto w-full max-w-[1200px] px-5 md:px-8 flex flex-col justify-end pb-10 md:pb-16">
+            <div className="relative z-10 mx-auto w-full max-w-[1200px] px-5 md:px-8 py-5 md:py-10">
               <h1 className="sr-only">{HOME_CONTENT.hero.h1}</h1>
               <HeroDestinationButtons />
             </div>
