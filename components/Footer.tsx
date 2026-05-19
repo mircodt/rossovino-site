@@ -4,19 +4,35 @@ import {
   PROPERTIES,
   PROPERTY_ORDER,
   SITE,
+  type PropertySlug,
   hasContact,
   telHref,
   whatsappHref,
 } from "@/lib/config";
 import { assetSrc } from "@/lib/asset";
 
-export function Footer() {
+interface Props {
+  /** When set, the footer shows ONLY this property's contacts (instead of
+   *  all three). Used on property landing pages and their sub-pages so a
+   *  visitor on /como sees Como's contacts, not Milano's or Boutique's. */
+  property?: PropertySlug;
+}
+
+export function Footer({ property }: Props) {
   const year = new Date().getFullYear();
+  // Property pages → single property in the contacts column. Group pages
+  // (homepage, /contatti) → all three.
+  const slugsToShow: PropertySlug[] = property ? [property] : PROPERTY_ORDER;
 
   return (
     <footer className="bg-vinaccia-dark text-white mt-24 pb-24 lg:pb-12">
       <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8 py-14">
-        <div className="grid gap-10 md:grid-cols-4">
+        <div
+          className={`grid gap-10 ${
+            // 4 col when 3 properties shown, 2 col when only 1
+            property ? "md:grid-cols-2" : "md:grid-cols-4"
+          }`}
+        >
           <div>
             {/* Brand logo — recolored, here rendered against the dark vinaccia
                 footer bg so we invert/whitened via CSS for legibility. */}
@@ -29,12 +45,21 @@ export function Footer() {
               style={{ filter: "brightness(0) invert(1)" }}
             />
             <p className="text-sm text-white/80 leading-relaxed max-w-xs">
-              Gruppo Hotel RossoVino — tre proprietà a Milano e Como, ispirate al mondo del
-              vino italiano.
+              {property
+                ? `Una delle tre proprietà del Gruppo RossoVino.`
+                : "Gruppo Hotel RossoVino — tre proprietà a Milano e Como, ispirate al mondo del vino italiano."}
             </p>
+            {property && (
+              <Link
+                href="/"
+                className="mt-4 inline-flex items-center gap-1 text-sm text-white/80 hover:text-sabbia transition-colors"
+              >
+                <span aria-hidden>←</span> Tutte le strutture
+              </Link>
+            )}
           </div>
 
-          {PROPERTY_ORDER.map((slug) => {
+          {slugsToShow.map((slug) => {
             const p = PROPERTIES[slug];
             return (
               <div key={slug}>
@@ -72,14 +97,21 @@ export function Footer() {
                       </a>
                     </li>
                   )}
-                  <li>
-                    <Link
-                      href={`/${slug}`}
-                      className="hover:text-sabbia transition-colors underline-offset-2 hover:underline"
-                    >
-                      Scopri la struttura →
-                    </Link>
+                  <li className="text-white/80">
+                    {p.address.streetAddress}
+                    <br />
+                    {p.address.postalCode} {p.address.addressLocality} ({p.address.addressRegion})
                   </li>
+                  {!property && (
+                    <li>
+                      <Link
+                        href={`/${slug}`}
+                        className="hover:text-sabbia transition-colors underline-offset-2 hover:underline"
+                      >
+                        Scopri la struttura →
+                      </Link>
+                    </li>
+                  )}
                 </ul>
               </div>
             );

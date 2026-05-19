@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { BookingWidget } from "@/components/BookingWidget";
 import { BookingPerks } from "@/components/BookingPerks";
+import { ExperiencePillars } from "@/components/ExperiencePillars";
 import { HeroDestinationButtons } from "@/components/HeroDestinationButtons";
 import { Testimonials } from "@/components/Testimonials";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -96,35 +97,14 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 4. Experience — the brand pillars */}
-        <section className="bg-white py-16 md:py-24">
-          <Container>
-            <SectionHeading eyebrow="L&apos;identità del gruppo">
-              {HOME_CONTENT.experience.h2}
-            </SectionHeading>
-            <p className="mt-4 text-[var(--color-ink-soft)] text-lg max-w-2xl leading-relaxed">
-              {HOME_CONTENT.experience.intro}
-            </p>
-
-            <div className="mt-12 grid gap-8 md:grid-cols-3">
-              {HOME_CONTENT.experience.pillars.map((pillar) => (
-                <article key={pillar.title} className="border-t-2 border-vinaccia pt-6">
-                  <h3 className="font-display text-xl mb-3 text-[var(--color-ink)]">
-                    {pillar.title}
-                  </h3>
-                  <p className="text-[var(--color-ink-soft)] leading-relaxed">
-                    {pillar.body}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </Container>
-        </section>
-
-        {/* 4b. Booking perks — pushes direct bookings, primary business goal */}
+        {/* 4. Booking perks — primary conversion lever, placed FIRST so the
+              direct-booking benefits are seen before anything else. */}
         <BookingPerks />
 
-        {/* 4c. Social proof — guest testimonials */}
+        {/* 5. Experience — the brand pillars (with photos under 2 of them) */}
+        <ExperiencePillars />
+
+        {/* 5b. Social proof — guest testimonials */}
         <Testimonials />
 
         {/* 5. Sustainability — 4-column grid with inline SVG icons */}

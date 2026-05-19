@@ -37,7 +37,7 @@ export default function Page() {
           />
           <RoomsPageContent slug={SLUG} />
         </main>
-        <Footer />
+        <Footer property={SLUG} />
       </div>
     </>
   );

@@ -40,7 +40,7 @@ export default function BoutiquePage() {
         <main id="contenuto" className="flex-grow">
           <PropertyPageContent slug={SLUG} />
         </main>
-        <Footer />
+        <Footer property={SLUG} />
       </div>
     </>
   );

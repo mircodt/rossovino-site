@@ -39,7 +39,7 @@ export default function ComoPage() {
         <main id="contenuto" className="flex-grow">
           <PropertyPageContent slug={SLUG} />
         </main>
-        <Footer />
+        <Footer property={SLUG} />
       </div>
     </>
   );

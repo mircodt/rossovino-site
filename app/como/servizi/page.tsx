@@ -37,7 +37,7 @@ export default function Page() {
           />
           <ServicesPageContent slug={SLUG} />
         </main>
-        <Footer />
+        <Footer property={SLUG} />
       </div>
     </>
   );
