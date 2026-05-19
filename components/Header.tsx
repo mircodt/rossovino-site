@@ -61,11 +61,7 @@ export function Header({ property }: HeaderProps) {
 
       <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8 h-16 md:h-20 grid grid-cols-[auto_1fr_auto] items-center gap-4 lg:gap-6">
         {/* Logo — always links to group home */}
-        <Logo
-          property={property}
-          size={p ? "lg" : "md"}
-          eyebrow={p?.slug === "milano-boutique" ? "Boutique" : undefined}
-        />
+        <Logo property={property} size="md" />
 
         {/* Desktop nav — group or property depending on context */}
         <nav className="hidden lg:flex items-center justify-center gap-7 text-sm">
