@@ -66,7 +66,10 @@ export default function HomePage() {
       <Header />
 
       <main id="contenuto" className="flex-grow">
-        {/* 1. Hero — emotional opener, full-bleed photo + dark text panel */}
+        {/* 1. Hero — full-bleed photo + dark overlay; the destination cards
+              live INSIDE the hero (replacing the old "Tre hotel, una sola
+              anima" dark panel) so the visitor can pick where to go in the
+              first viewport. SR-only h1 keeps an accessible heading. */}
         <section className="relative">
           <div className="relative h-[70svh] min-h-[520px] max-h-[720px] overflow-hidden">
             <Image
@@ -78,30 +81,12 @@ export default function HomePage() {
               className="object-cover"
             />
             <div aria-hidden className="absolute inset-0 bg-black/55" />
-            <div className="relative z-10 h-full mx-auto w-full max-w-[1200px] px-5 md:px-8 flex flex-col justify-end pb-24 md:pb-28">
-              <div
-                className="max-w-2xl bg-[rgba(20,15,18,0.78)] backdrop-blur-md text-white p-6 md:p-10 rounded-[2px] border-l-2 border-vinaccia"
-                style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}
-              >
-                <p className="font-mono text-xs uppercase tracking-[0.2em] text-sabbia mb-3">
-                  Gruppo Hotel RossoVino · Milano · Como
-                </p>
-                <h1 className="font-display text-white [text-wrap:balance] mb-4">
-                  {HOME_CONTENT.hero.h1}
-                </h1>
-                <p className="text-base md:text-lg text-white/95 leading-relaxed">
-                  {HOME_CONTENT.hero.subtitle}
-                </p>
-              </div>
+            <div className="relative z-10 h-full mx-auto w-full max-w-[1200px] px-5 md:px-8 flex flex-col justify-end pb-10 md:pb-16">
+              <h1 className="sr-only">{HOME_CONTENT.hero.h1}</h1>
+              <HeroDestinationButtons />
             </div>
           </div>
-
         </section>
-
-        {/* 2. 3 destination buttons — visible already in the first mobile
-              viewport, between hero and booking widget. Same card pattern as
-              the mobile drawer (accent stripe + name + city/stars + arrow). */}
-        <HeroDestinationButtons />
 
         {/* 3. Booking widget — destination dropdown defaults to a placeholder
               "Scegli la tua destinazione" until the visitor picks one. */}

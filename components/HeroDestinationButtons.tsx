@@ -9,64 +9,66 @@ const accentBg: Record<string, string> = {
 };
 
 /**
- * 3 destination cards rendered immediately under the hero (above the booking
- * widget). Same look as the cards in the mobile drawer — vertical accent
- * stripe + property name + city/stars row + arrow.
+ * "Scegli la tua destinazione" — small eyebrow + 3 destination cards.
  *
- * Visible already in the first mobile viewport so the visitor can pick a
- * destination without scrolling. On desktop they line up in 3 columns.
+ * Renders only the inner content (no section wrapper / no background), so
+ * the same block can sit:
+ *   - inside the homepage hero, overlaid on the photo, replacing the old
+ *     "Tre hotel, una sola anima" dark text panel.
+ *   - standalone on a neutral page if needed in the future.
+ *
+ * Card visual = same as the mobile-drawer property cards: vertical accent
+ * stripe + property name + city/stars row + arrow.
  */
 export function HeroDestinationButtons() {
   return (
-    <section aria-label="Scegli la tua destinazione" className="bg-[var(--color-bg)] pt-6 pb-2 md:pt-8 md:pb-4">
-      <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8">
-        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-vinaccia mb-3 text-center md:text-left">
-          Scegli la tua destinazione
-        </p>
-        <ul className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
-          {PROPERTY_ORDER.map((slug) => {
-            const p = PROPERTIES[slug];
-            return (
-              <li key={slug}>
-                <Link
-                  href={`/${slug}`}
-                  className="group flex items-stretch gap-3 p-3.5 bg-white border border-sabbia hover:border-vinaccia hover:shadow-md transition-all rounded-[2px]"
+    <div className="w-full">
+      <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white mb-3 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
+        Scegli la tua destinazione
+      </p>
+      <ul className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+        {PROPERTY_ORDER.map((slug) => {
+          const p = PROPERTIES[slug];
+          return (
+            <li key={slug}>
+              <Link
+                href={`/${slug}`}
+                className="group flex items-stretch gap-3 p-3.5 bg-white/95 backdrop-blur-sm border border-white/70 hover:bg-white hover:border-vinaccia hover:shadow-xl transition-all rounded-[2px]"
+              >
+                <span
+                  aria-hidden
+                  className={`flex-shrink-0 w-1.5 ${accentBg[p.accent]}`}
+                />
+                <span className="flex-1 min-w-0 flex flex-col justify-center">
+                  <span className="block font-display text-lg leading-tight text-[var(--color-ink)] group-hover:text-vinaccia transition-colors">
+                    {p.fullName}
+                  </span>
+                  <span className="mt-1 flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[var(--color-ink-soft)]">
+                    {p.stars ? (
+                      <span className="inline-flex items-center gap-0.5">
+                        {Array.from({ length: p.stars }).map((_, i) => (
+                          <StarIcon key={i} className="w-3 h-3 text-sabbia-dark" aria-hidden />
+                        ))}
+                        <span className="ml-1">{p.stars} stelle</span>
+                      </span>
+                    ) : (
+                      <span>Boutique</span>
+                    )}
+                    <span aria-hidden>·</span>
+                    <span>{p.address.addressLocality}</span>
+                  </span>
+                </span>
+                <span
+                  aria-hidden
+                  className="self-center text-vinaccia text-xl transition-transform group-hover:translate-x-0.5"
                 >
-                  <span
-                    aria-hidden
-                    className={`flex-shrink-0 w-1.5 ${accentBg[p.accent]}`}
-                  />
-                  <span className="flex-1 min-w-0 flex flex-col justify-center">
-                    <span className="block font-display text-lg leading-tight text-[var(--color-ink)] group-hover:text-vinaccia transition-colors">
-                      {p.fullName}
-                    </span>
-                    <span className="mt-1 flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[var(--color-ink-soft)]">
-                      {p.stars ? (
-                        <span className="inline-flex items-center gap-0.5">
-                          {Array.from({ length: p.stars }).map((_, i) => (
-                            <StarIcon key={i} className="w-3 h-3 text-sabbia-dark" aria-hidden />
-                          ))}
-                          <span className="ml-1">{p.stars} stelle</span>
-                        </span>
-                      ) : (
-                        <span>Boutique</span>
-                      )}
-                      <span aria-hidden>·</span>
-                      <span>{p.address.addressLocality}</span>
-                    </span>
-                  </span>
-                  <span
-                    aria-hidden
-                    className="self-center text-vinaccia text-xl transition-transform group-hover:translate-x-0.5"
-                  >
-                    →
-                  </span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </section>
+                  →
+                </span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
