@@ -33,10 +33,13 @@ export function BookingWidget({
   formId = "prenota",
 }: Props) {
   const id = useId();
-  const [destination, setDestination] = useState<PropertySlug>(
-    property ?? "milano-boutique",
+  // Empty string = no destination chosen yet (homepage placeholder).
+  // When `property` prop is set, that destination is locked in.
+  const [destination, setDestination] = useState<PropertySlug | "">(
+    property ?? "",
   );
   const [pending, setPending] = useState(false);
+  const [missingDest, setMissingDest] = useState(false);
 
   const today = useMemo(() => new Date().toISOString().slice(0, 10), []);
   const tomorrow = useMemo(() => {
@@ -45,9 +48,10 @@ export function BookingWidget({
     return d.toISOString().slice(0, 10);
   }, []);
 
-  const vb = PROPERTIES[destination].verticalBooking;
-  const wired = hasBookingIntegration(vb);
-  const targetUrl = wired ? vb.bookingUrl : undefined;
+  // vb / wired only make sense once a destination is selected.
+  const vb = destination ? PROPERTIES[destination].verticalBooking : null;
+  const wired = vb ? hasBookingIntegration(vb) : false;
+  const targetUrl = wired && vb ? vb.bookingUrl : undefined;
 
   const wrapperBase =
     "w-full max-w-[1200px] mx-auto bg-white/95 backdrop-blur-sm rounded-[2px] border border-sabbia";
@@ -63,6 +67,12 @@ export function BookingWidget({
       action={targetUrl}
       method="get"
       onSubmit={(e) => {
+        if (!destination) {
+          e.preventDefault();
+          setMissingDest(true);
+          return;
+        }
+        setMissingDest(false);
         if (!wired) {
           e.preventDefault();
           setPending(true);
@@ -80,10 +90,19 @@ export function BookingWidget({
             <select
               id={`${id}-dest`}
               name="hotel"
+              required
               value={destination}
-              onChange={(e) => setDestination(e.target.value as PropertySlug)}
-              className="w-full bg-transparent text-base font-medium outline-none border-none pr-2 cursor-pointer min-h-11"
+              onChange={(e) => {
+                setDestination(e.target.value as PropertySlug | "");
+                if (e.target.value) setMissingDest(false);
+              }}
+              className={`w-full bg-transparent text-base font-medium outline-none border-none pr-2 cursor-pointer min-h-11 ${
+                destination ? "" : "text-[var(--color-ink-soft)]"
+              }`}
             >
+              <option value="" disabled>
+                Scegli la tua destinazione
+              </option>
               {PROPERTY_ORDER.map((slug) => (
                 <option key={slug} value={slug}>
                   {PROPERTIES[slug].fullName}
@@ -138,6 +157,15 @@ export function BookingWidget({
         </button>
       </div>
 
+      {missingDest && (
+        <p
+          role="alert"
+          className="mt-4 text-sm text-vinaccia bg-sabbia-light border border-vinaccia/30 rounded-[2px] px-4 py-3"
+        >
+          Seleziona prima la destinazione (Boutique, Milano o Como) per
+          verificare la disponibilità.
+        </p>
+      )}
       {pending && !wired && (
         <p
           role="status"

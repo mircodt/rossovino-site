@@ -17,6 +17,11 @@ interface Props {
   /** When set, uses property-specific phone/whatsapp and pre-fills the
    *  modal booking form with that destination. Falls back to group. */
   property?: PropertySlug;
+  /** "full" (default) = 3 cells (Chiama, WhatsApp, Prenota), used on
+   *  property pages. "single" = one full-width "Verifica disponibilità"
+   *  cell that scrolls to #prenota — used on the homepage where the
+   *  visitor has to pick a destination first. */
+  mode?: "full" | "single";
 }
 
 /**
@@ -29,7 +34,7 @@ interface Props {
  * even if an ancestor introduces a containing block. Modal also lives
  * in the portal so it sits above the rest of the UI.
  */
-export function StickyMobileBar({ property }: Props) {
+export function StickyMobileBar({ property, mode = "full" }: Props) {
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -63,7 +68,18 @@ export function StickyMobileBar({ property }: Props) {
       aria-label="Azioni rapide"
       className="lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white shadow-[0_-2px_12px_rgba(0,0,0,0.08)] safe-bottom border-t border-[color:var(--color-border)]"
     >
-      {(() => {
+      {mode === "single" ? (
+        // Single-button bar (homepage). Clicking scrolls to the booking
+        // widget so the visitor can pick a destination first.
+        <a
+          href="#prenota"
+          className="flex items-center justify-center gap-2 py-3 min-h-14 bg-vinaccia text-white font-medium text-sm uppercase tracking-wide hover:bg-vinaccia-hover transition-colors"
+          aria-label="Verifica disponibilità"
+        >
+          <BedIcon className="w-5 h-5" aria-hidden />
+          Verifica disponibilità
+        </a>
+      ) : (() => {
         const cells: React.ReactNode[] = [];
         if (hasContact(phone)) {
           cells.push(
@@ -119,6 +135,10 @@ export function StickyMobileBar({ property }: Props) {
     </div>
   );
 
+  // Note: the booking modal below is unused in mode="single" (homepage uses
+  // an in-page scroll target), but keeping the conditional rendering simple
+  // by always defining it.
+
   const modal = (
     <div
       role="dialog"
@@ -169,7 +189,7 @@ export function StickyMobileBar({ property }: Props) {
   return createPortal(
     <>
       {bar}
-      {modal}
+      {mode === "full" && modal}
     </>,
     document.body,
   );

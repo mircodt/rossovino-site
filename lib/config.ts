@@ -51,6 +51,19 @@ export interface PropertyConfig {
     description?: string;
     photos: string[];
   };
+  /** Room types offered by this property. Wine names are illustrative —
+   *  client will provide the real assignment of wine names to typologies. */
+  roomTypes: {
+    type: "matrimoniale" | "matrimoniale-superior" | "twin" | "tripla" | "suite";
+    wineName: string;
+    capacity: number;
+    /** Square meters (number — render as `${size} m²`). */
+    size: number;
+    /** 3-4 amenity short labels to render with check icons. */
+    amenities: string[];
+    /** First photo is used in card thumbnail. */
+    photos: string[];
+  }[];
   pageBg: string;
   /** Vertical Booking integration. Empty until the client provides embed
    *  credentials — the booking widget will render a placeholder message. */
@@ -124,6 +137,34 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
         "/images/boutique/room-example/7.jpg",
       ],
     },
+    // REPLACE: i nomi-vino e i metri quadri sono placeholder, il cliente
+    // fornirà la lista definitiva (3 tipologie per Boutique).
+    roomTypes: [
+      {
+        type: "matrimoniale",
+        wineName: "Cabernet Sauvignon",
+        capacity: 2,
+        size: 20,
+        amenities: ["Letto matrimoniale", "Bagno privato", "Wi-Fi gratuito", "Smart TV"],
+        photos: ["/images/boutique/room-example/1.jpg"],
+      },
+      {
+        type: "twin",
+        wineName: "Nebbiolo",
+        capacity: 2,
+        size: 18,
+        amenities: ["Due letti singoli", "Bagno privato", "Wi-Fi gratuito", "Frigobar"],
+        photos: ["/images/boutique/rooms/02.jpg"],
+      },
+      {
+        type: "tripla",
+        wineName: "Barolo",
+        capacity: 3,
+        size: 24,
+        amenities: ["Letto matrimoniale + singolo", "Bagno privato", "Wi-Fi gratuito", "Smart TV"],
+        photos: ["/images/boutique/rooms/03.jpg"],
+      },
+    ],
     pageBg: "#F4ECEE",
     verticalBooking: {
       hotelId: "", // REPLACE: ID Vertical Booking quando disponibile
@@ -194,6 +235,33 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
         "/images/milano/room-example/7.jpg",
       ],
     },
+    // REPLACE: nomi-vino e mq da confermare con il cliente (3 tipologie)
+    roomTypes: [
+      {
+        type: "matrimoniale",
+        wineName: "Nebbiolo",
+        capacity: 2,
+        size: 16,
+        amenities: ["Letto matrimoniale", "Bagno privato", "Wi-Fi gratuito", "Smart TV"],
+        photos: ["/images/milano/room-example/1.jpg"],
+      },
+      {
+        type: "twin",
+        wineName: "Chianti",
+        capacity: 2,
+        size: 16,
+        amenities: ["Due letti singoli", "Bagno privato", "Wi-Fi gratuito", "Frigobar"],
+        photos: ["/images/milano/rooms/02.jpg"],
+      },
+      {
+        type: "tripla",
+        wineName: "Sangiovese",
+        capacity: 3,
+        size: 22,
+        amenities: ["Letto matrimoniale + singolo", "Bagno privato", "Wi-Fi gratuito", "Smart TV"],
+        photos: ["/images/milano/rooms/03.jpg"],
+      },
+    ],
     pageBg: "#F0E6D0",
     verticalBooking: {
       hotelId: "", // REPLACE: ID Vertical Booking quando disponibile
@@ -266,6 +334,41 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
         "/images/como/room-example/7.jpg",
       ],
     },
+    // REPLACE: 4 tipologie da confermare con il cliente
+    roomTypes: [
+      {
+        type: "matrimoniale-superior",
+        wineName: "Chianti",
+        capacity: 2,
+        size: 22,
+        amenities: ["Letto matrimoniale", "Vista giardino", "Wi-Fi gratuito", "Smart TV"],
+        photos: ["/images/como/room-example/1.jpg"],
+      },
+      {
+        type: "twin",
+        wineName: "Brunello",
+        capacity: 2,
+        size: 18,
+        amenities: ["Due letti singoli", "Bagno privato", "Wi-Fi gratuito", "Frigobar"],
+        photos: ["/images/como/rooms/02.jpg"],
+      },
+      {
+        type: "tripla",
+        wineName: "Amarone",
+        capacity: 3,
+        size: 26,
+        amenities: ["Letto matrimoniale + singolo", "Bagno privato", "Wi-Fi gratuito", "Smart TV"],
+        photos: ["/images/como/rooms/03.jpg"],
+      },
+      {
+        type: "suite",
+        wineName: "Barolo Riserva",
+        capacity: 4,
+        size: 36,
+        amenities: ["Letto matrimoniale + sofà letto", "Salotto privato", "Wi-Fi gratuito", "Vista giardino"],
+        photos: ["/images/como/rooms/05.jpg"],
+      },
+    ],
     pageBg: "#E4ECF1",
     verticalBooking: {
       hotelId: "", // REPLACE: ID Vertical Booking quando disponibile

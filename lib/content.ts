@@ -56,7 +56,7 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
     meta: {
       title: "Boutique Hotel Milano · RossoVino — Villa Storica, Anima del Vino",
       description:
-        "Boutique hotel a Milano in una villa di fine '800 della famiglia Biffi. Camere ispirate ai vini italiani, accoglienza autentica, parcheggio gratuito.",
+        "Boutique hotel a Milano in una villa di fine '800 della famiglia Biffi. Camere ispirate ai vini italiani, accoglienza autentica, parcheggio prenotabile.",
     },
     hero: {
       h1: "Boutique Hotel a Milano, ispirato al mondo del vino italiano",
@@ -73,7 +73,7 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
         body: "Ogni camera porta il nome di un vino italiano d'autore",
       },
       {
-        title: "Parcheggio privato gratuito",
+        title: "Parcheggio privato prenotabile",
         body: "Un valore raro nel centro di Milano, incluso per i nostri ospiti",
       },
     ],
@@ -117,7 +117,7 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
       ],
     },
     services: [
-      "Parcheggio privato gratuito (raro nel centro di Milano)",
+      "Parcheggio privato prenotabile (raro nel centro di Milano)",
       "Wi-Fi gratuito in tutta la struttura",
       "Terrazze esterne e spazi relax",
       "Bar con drink italiani e selezione di vini in vendita",
@@ -175,7 +175,7 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
       },
       {
         q: "C'è il parcheggio?",
-        a: "Sì, parcheggio privato gratuito per i nostri ospiti. È un servizio raro nel centro di Milano e per noi rappresenta un valore aggiunto importante.",
+        a: "Sì, parcheggio privato prenotabile per i nostri ospiti. È un servizio raro nel centro di Milano e per noi rappresenta un valore aggiunto importante.",
       },
       {
         q: "Accettate animali domestici?",
@@ -204,7 +204,7 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
     meta: {
       title: "Hotel a Milano Centro · RossoVino — Posizione Strategica nel Cuore della Città",
       description:
-        "Hotel a Milano nel cuore della città, con un'ospitalità italiana ispirata al mondo del vino. Posizione strategica, parcheggio gratuito, camere con il nome dei grandi vini italiani.",
+        "Hotel a Milano nel cuore della città, con un'ospitalità italiana ispirata al mondo del vino. Posizione strategica, parcheggio prenotabile, camere con il nome dei grandi vini italiani.",
     },
     hero: {
       h1: "Hotel a Milano nel cuore della città, con l'anima del vino italiano",
@@ -221,7 +221,7 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
         body: "Ogni camera porta il nome di un vino italiano d'autore",
       },
       {
-        title: "Parcheggio privato gratuito",
+        title: "Parcheggio privato prenotabile",
         body: "Un valore raro nel centro di Milano, incluso per i nostri ospiti",
       },
     ],
@@ -264,7 +264,7 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
       ],
     },
     services: [
-      "Parcheggio privato gratuito (raro nel centro di Milano)",
+      "Parcheggio privato prenotabile (raro nel centro di Milano)",
       "Wi-Fi gratuito in tutta la struttura",
       "Spazi relax e aree comuni curate",
       "Bar con drink italiani e vini in vendita",
@@ -327,7 +327,7 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
       },
       {
         q: "C'è il parcheggio in hotel?",
-        a: "Sì, parcheggio privato gratuito per i nostri ospiti — un servizio raro nel centro di Milano e per noi un valore aggiunto importante.",
+        a: "Sì, parcheggio privato prenotabile per i nostri ospiti — un servizio raro nel centro di Milano e per noi un valore aggiunto importante.",
       },
       {
         q: "Accettate animali domestici?",
@@ -356,7 +356,7 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
     meta: {
       title: "Hotel a Como nel Verde · RossoVino — Sul Lago, vicino al Centro",
       description:
-        "Hotel a Como immerso in un'area verde, vicino alla Basilica di Sant'Abbondio. Camere ispirate ai grandi vini italiani, parcheggio gratuito e bus per il centro davanti all'hotel.",
+        "Hotel a Como immerso in un'area verde, vicino alla Basilica di Sant'Abbondio. Camere ispirate ai grandi vini italiani, parcheggio prenotabile e bus per il centro davanti all'hotel.",
     },
     hero: {
       h1: "Hotel sul Lago di Como, tra vino, natura e ospitalità autentica",
@@ -420,7 +420,7 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
       ],
     },
     services: [
-      "Parcheggio privato gratuito",
+      "Parcheggio privato prenotabile",
       "Colazione servita sulle terrazze esterne, immerse nel verde",
       "Giardino relax con vista sulle montagne comasche",
       "Terrazze attrezzate con ombrelloni",
@@ -494,7 +494,7 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
       },
       {
         q: "C'è il parcheggio?",
-        a: "Sì, parcheggio privato gratuito per i nostri ospiti. La fermata del bus per il centro è proprio davanti all'hotel: molti ospiti scelgono di lasciare l'auto e muoversi in bus per evitare il traffico del centro turistico.",
+        a: "Sì, parcheggio privato prenotabile per i nostri ospiti. La fermata del bus per il centro è proprio davanti all'hotel: molti ospiti scelgono di lasciare l'auto e muoversi in bus per evitare il traffico del centro turistico.",
       },
       {
         q: "Avete camere per famiglie?",

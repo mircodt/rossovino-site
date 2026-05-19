@@ -19,7 +19,7 @@ export function ContactBlock({ slug }: { slug: PropertySlug }) {
   const c = CONTENT[slug];
 
   const cells: React.ReactNode[] = [
-    <a key="book" href="#prenota" className={`${ctaClass} bg-white text-vinaccia border-transparent`}>
+    <a key="book" href="#prenota" className={ctaClass}>
       <BedIcon className="w-5 h-5" aria-hidden />
       Verifica disponibilità
     </a>,

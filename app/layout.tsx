@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Outfit, JetBrains_Mono } from "next/font/google";
 import { SITE } from "@/lib/config";
+import { StickyBarSlot } from "@/components/StickyBarSlot";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -57,6 +58,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Vai al contenuto principale
         </a>
         {children}
+        {/* Persistent sticky bars — survive route transitions. */}
+        <StickyBarSlot />
       </body>
     </html>
   );

@@ -2,10 +2,9 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { StickyMobileBar } from "@/components/StickyMobileBar";
-import { StickyBookingBar } from "@/components/StickyBookingBar";
 import { BookingWidget } from "@/components/BookingWidget";
-import { DestinationPicker } from "@/components/DestinationPicker";
+import { BookingPerks } from "@/components/BookingPerks";
+import { HeroDestinationButtons } from "@/components/HeroDestinationButtons";
 import { Testimonials } from "@/components/Testimonials";
 import { SectionHeading } from "@/components/SectionHeading";
 import {
@@ -97,15 +96,20 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* 2. Booking widget — overlaps the hero bottom */}
-          <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8">
-            <BookingWidget variant="hero" />
-          </div>
         </section>
 
-        {/* 3. Destination picker — the FIRST thing after the booking widget,
-              so a visitor can choose where to stay without scrolling further. */}
-        <DestinationPicker />
+        {/* 2. 3 destination buttons — visible already in the first mobile
+              viewport, between hero and booking widget. Same card pattern as
+              the mobile drawer (accent stripe + name + city/stars + arrow). */}
+        <HeroDestinationButtons />
+
+        {/* 3. Booking widget — destination dropdown defaults to a placeholder
+              "Scegli la tua destinazione" until the visitor picks one. */}
+        <section className="bg-[var(--color-bg)] pb-12 md:pb-16">
+          <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8">
+            <BookingWidget variant="inline" />
+          </div>
+        </section>
 
         {/* 4. Experience — the brand pillars */}
         <section className="bg-white py-16 md:py-24">
@@ -132,7 +136,10 @@ export default function HomePage() {
           </Container>
         </section>
 
-        {/* 4b. Social proof — guest testimonials, between identity and sustainability */}
+        {/* 4b. Booking perks — pushes direct bookings, primary business goal */}
+        <BookingPerks />
+
+        {/* 4c. Social proof — guest testimonials */}
         <Testimonials />
 
         {/* 5. Sustainability — 4-column grid with inline SVG icons */}
@@ -205,8 +212,6 @@ export default function HomePage() {
       </main>
 
       <Footer />
-      <StickyMobileBar />
-      <StickyBookingBar />
     </>
   );
 }

@@ -14,39 +14,15 @@ export function RoomsPageContent({ slug }: { slug: PropertySlug }) {
   const p = PROPERTIES[slug];
   const c = CONTENT[slug];
 
-  // Placeholder room types — sourced from the existing roomsGallery
-  // photos. Names use Italian wine cultivars as per brief. Confirm names
-  // with the client before go-live.
-  const roomTypes = [
-    {
-      name: p.roomExample.name,
-      capacity: "2 ospiti",
-      size: "20 m²", // REPLACE: dimensioni reali
-      photo: p.roomExample.photos[0],
-    },
-    {
-      name: "Nebbiolo", // REPLACE: nome reale
-      capacity: "2 ospiti",
-      size: "18 m²", // REPLACE
-      photo: p.roomsGallery[0] ?? p.heroImage,
-    },
-    {
-      name: "Barolo", // REPLACE
-      capacity: "3 ospiti",
-      size: "22 m²", // REPLACE
-      photo: p.roomsGallery[1] ?? p.heroImage,
-    },
-    ...(p.slug === "como"
-      ? [
-          {
-            name: "Sangiovese",
-            capacity: "Familiare · 4 ospiti",
-            size: "32 m²", // REPLACE
-            photo: p.roomsGallery[2] ?? p.heroImage,
-          },
-        ]
-      : []),
-  ];
+  // roomTypes lives in PROPERTIES[slug].roomTypes — single source of truth.
+  // Map the internal type key to a human label for the badge.
+  const TYPE_LABEL: Record<string, string> = {
+    matrimoniale: "Matrimoniale",
+    "matrimoniale-superior": "Matrimoniale Superior",
+    twin: "Twin",
+    tripla: "Tripla",
+    suite: "Suite",
+  };
 
   return (
     <>
@@ -82,34 +58,44 @@ export function RoomsPageContent({ slug }: { slug: PropertySlug }) {
           </p>
 
           <ul className="mt-8 grid gap-5 md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {roomTypes.map((room) => (
-              <li
-                key={room.name}
-                className="bg-white border border-sabbia rounded-[2px] overflow-hidden"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image
-                    src={assetSrc(room.photo.startsWith("/") ? room.photo : `/${room.photo}`)}
-                    alt={`Camera ${room.name}`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-5 md:p-6">
-                  <h3 className="font-display text-xl text-[var(--color-ink)] mb-2">
-                    Camera {room.name}
-                  </h3>
-                  <p className="text-sm text-[var(--color-ink-soft)] mb-3 font-mono uppercase tracking-wider">
-                    {room.capacity} · {room.size}
-                  </p>
-                  <p className="text-[var(--color-ink-soft)] leading-relaxed text-sm">
-                    Comfort essenziale, materiali curati e l&apos;identità RossoVino in ogni
-                    dettaglio.
-                  </p>
-                </div>
-              </li>
-            ))}
+            {p.roomTypes.map((room) => {
+              const photo = room.photos[0] ?? p.heroImage;
+              return (
+                <li
+                  key={room.wineName}
+                  className="bg-white border border-sabbia rounded-[2px] overflow-hidden flex flex-col"
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image
+                      src={assetSrc(photo.startsWith("/") ? photo : `/${photo}`)}
+                      alt={`Camera ${room.wineName}`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                    <span className="absolute top-3 left-3 bg-white/95 text-[var(--color-ink)] font-mono text-[10px] uppercase tracking-wider px-2 py-1 rounded-[2px]">
+                      {TYPE_LABEL[room.type] ?? room.type}
+                    </span>
+                  </div>
+                  <div className="p-5 md:p-6 flex-1 flex flex-col">
+                    <h3 className="font-display text-xl text-[var(--color-ink)] mb-2">
+                      Camera {room.wineName}
+                    </h3>
+                    <p className="text-sm text-[var(--color-ink-soft)] mb-4 font-mono uppercase tracking-wider">
+                      {room.capacity} {room.capacity === 1 ? "ospite" : "ospiti"} · {room.size} m²
+                    </p>
+                    <ul className="space-y-2 text-sm text-[var(--color-ink-soft)] flex-1">
+                      {room.amenities.map((a) => (
+                        <li key={a} className="flex items-start gap-2">
+                          <CheckIcon className="w-4 h-4 text-vinaccia flex-shrink-0 mt-0.5" aria-hidden />
+                          <span>{a}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </Container>
       </section>

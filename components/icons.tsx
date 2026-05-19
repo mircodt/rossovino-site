@@ -87,6 +87,47 @@ export function CheckIcon({ className = "", ...rest }: IconProps) {
   );
 }
 
+export function PriceTagIcon({ className = "", ...rest }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6}
+      strokeLinecap="round" strokeLinejoin="round" className={className} {...rest}>
+      <path d="M20.5 12.5 12.5 20.5a2 2 0 0 1-2.83 0L3 13.83V3.5h10.33l7.17 7.17a2 2 0 0 1 0 2.83Z" />
+      <circle cx="8" cy="8.5" r="1.5" fill="currentColor" />
+    </svg>
+  );
+}
+
+export function ParkingIcon({ className = "", ...rest }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6}
+      strokeLinecap="round" strokeLinejoin="round" className={className} {...rest}>
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <path d="M9 17V7h4a3 3 0 0 1 0 6H9" />
+    </svg>
+  );
+}
+
+export function WineGlassIcon({ className = "", ...rest }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6}
+      strokeLinecap="round" strokeLinejoin="round" className={className} {...rest}>
+      <path d="M7 3h10l-1 8a4 4 0 1 1-8 0l-1-8Z" />
+      <path d="M12 15v6" />
+      <path d="M8 21h8" />
+    </svg>
+  );
+}
+
+export function ShieldCheckIcon({ className = "", ...rest }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6}
+      strokeLinecap="round" strokeLinejoin="round" className={className} {...rest}>
+      <path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
+  );
+}
+
 export function BulbIcon({ className = "", ...rest }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6}

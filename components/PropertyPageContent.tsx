@@ -10,6 +10,7 @@ import { Container } from "./Container";
 import { FaqAccordion } from "./FaqAccordion";
 import { ContactBlock } from "./ContactBlock";
 import { PhotoGallery } from "./PhotoGallery";
+import { BookingPerks } from "./BookingPerks";
 import { RoomExample } from "./RoomExample";
 import { CheckIcon } from "./icons";
 
@@ -150,6 +151,9 @@ export function PropertyPageContent({ slug }: { slug: PropertySlug }) {
           </div>
         </Container>
       </section>
+
+      {/* Direct-booking perks — boost conversion */}
+      <BookingPerks />
 
       {/* Position */}
       <section className="bg-white py-16 md:py-24">
