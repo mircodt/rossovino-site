@@ -59,16 +59,17 @@ export function Header({ property }: HeaderProps) {
         </div>
       )}
 
-      <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8 h-16 md:h-20 lg:h-24 grid grid-cols-[auto_1fr_auto] items-center gap-4 lg:gap-6">
-        {/* Logo — always links to group home */}
+      {/* Flex (not grid) so children that are display:none on mobile —
+          desktop nav, desktop contacts cluster — don't leave gaps that
+          push the hamburger toward the center. Logo on the left,
+          optional centered nav, then the right cluster (which always
+          ends with the mobile hamburger). */}
+      <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8 h-16 md:h-20 lg:h-24 flex items-center justify-between gap-4 lg:gap-6">
         <Logo property={property} size="md" />
 
-        {/* Desktop nav — rendered ONLY on property pages so the user can
-            jump between Hotel / Camere & Suite / Servizi / Contatti.
-            On the homepage we keep the header pure (logo + lang +
-            contacts) — the destination choice is the hero job. */}
-        {p ? (
-          <nav className="hidden lg:flex items-center justify-center gap-7 text-sm">
+        {/* Desktop nav — only when on a property page */}
+        {p && (
+          <nav className="hidden lg:flex flex-1 items-center justify-center gap-7 text-sm">
             {nav.map((item) => (
               <Link
                 key={item.href}
@@ -79,44 +80,42 @@ export function Header({ property }: HeaderProps) {
               </Link>
             ))}
           </nav>
-        ) : (
-          <span aria-hidden />
         )}
-        {/* Mobile spacer kept commented for clarity — the 1fr column above
-            already absorbs the empty slot on mobile. */}
 
-        {/* Right-side actions, guarded against placeholder values */}
-        <div className="hidden lg:flex items-center gap-3">
-          <LangSwitcher />
-          <span className="h-5 w-px bg-[color:var(--color-border)]" aria-hidden />
-          {hasContact(phone) && (
-            <a
-              href={telHref(phone)}
-              className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-sabbia hover:bg-sabbia-dark text-vinaccia transition-colors"
-              aria-label={`Chiama ${p ? p.shortName : "RossoVino"}`}
-              title={phone}
-            >
-              <PhoneIcon className="w-4 h-4" aria-hidden />
-            </a>
-          )}
-          {hasContact(whatsapp) && (
-            <a
-              href={whatsappHref(whatsapp)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-verde-dark hover:bg-verde-hover text-white transition-colors"
-              aria-label="Apri WhatsApp"
-            >
-              <WhatsappIcon className="w-5 h-5" aria-hidden />
-            </a>
-          )}
-          <Button href={p ? `/${p.slug}#prenota` : "/#prenota"} variant="primary">
-            Prenota
-          </Button>
+        {/* Right cluster: desktop contacts (lg+) + mobile hamburger
+            (lg:hidden). The cluster is always rendered, always sits on
+            the right thanks to justify-between on the parent. */}
+        <div className="flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3">
+            <LangSwitcher />
+            <span className="h-5 w-px bg-[color:var(--color-border)]" aria-hidden />
+            {hasContact(phone) && (
+              <a
+                href={telHref(phone)}
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-sabbia hover:bg-sabbia-dark text-vinaccia transition-colors"
+                aria-label={`Chiama ${p ? p.shortName : "RossoVino"}`}
+                title={phone}
+              >
+                <PhoneIcon className="w-4 h-4" aria-hidden />
+              </a>
+            )}
+            {hasContact(whatsapp) && (
+              <a
+                href={whatsappHref(whatsapp)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-verde-dark hover:bg-verde-hover text-white transition-colors"
+                aria-label="Apri WhatsApp"
+              >
+                <WhatsappIcon className="w-5 h-5" aria-hidden />
+              </a>
+            )}
+            <Button href={p ? `/${p.slug}#prenota` : "/#prenota"} variant="primary">
+              Prenota
+            </Button>
+          </div>
+          <MobileMenu property={property} />
         </div>
-
-        {/* Mobile hamburger — opens the property switcher drawer */}
-        <MobileMenu property={property} />
       </div>
     </header>
   );
