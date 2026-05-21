@@ -9,7 +9,7 @@ interface Props {
 
 const accentClass: Record<PropertyConfig["accent"], string> = {
   vinaccia: "bg-vinaccia",
-  "sabbia-dark": "bg-sabbia-dark",
+  verde: "bg-verde",
   blu: "bg-blu",
 };
 

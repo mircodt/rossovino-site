@@ -24,7 +24,7 @@ export interface PropertyConfig {
   shortName: string;
   fullName: string;
   stars?: 2 | 3;
-  accent: "vinaccia" | "sabbia-dark" | "blu";
+  accent: "vinaccia" | "blu" | "verde";
   accentHex: string;
   phone: string;
   whatsapp: string;
@@ -176,8 +176,8 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     shortName: "Milano",
     fullName: "Hotel RossoVino Milano",
     stars: 2,
-    accent: "sabbia-dark",
-    accentHex: "#C4B99F",
+    accent: "blu",
+    accentHex: "#9BAEBA",
     phone: "+39 02 000 0002", // REPLACE: inserire dato reale del cliente
     whatsapp: "+39 02 000 0002", // REPLACE: inserire dato reale del cliente
     email: "milano@hotelrossovino.it", // REPLACE: inserire dato reale del cliente
@@ -273,8 +273,8 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     shortName: "Como",
     fullName: "Hotel RossoVino Como",
     stars: 3,
-    accent: "blu",
-    accentHex: "#9BAEBA",
+    accent: "verde",
+    accentHex: "#A4B59B",
     phone: "+39 031 000 0003", // REPLACE: inserire dato reale del cliente
     whatsapp: "+39 031 000 0003", // REPLACE: inserire dato reale del cliente
     email: "como@hotelrossovino.it", // REPLACE: inserire dato reale del cliente
@@ -377,7 +377,7 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
   },
 };
 
-export const PROPERTY_ORDER: PropertySlug[] = ["milano-boutique", "milano", "como"];
+export const PROPERTY_ORDER: PropertySlug[] = ["como", "milano-boutique", "milano"];
 
 /** Helper: turn a phone string into a `tel:` href, stripping spaces/parens. */
 export function telHref(phone: string): string {

@@ -7,7 +7,7 @@ import { StarIcon } from "./icons";
 
 const accentBg: Record<string, string> = {
   vinaccia: "bg-vinaccia",
-  "sabbia-dark": "bg-sabbia-dark",
+  verde: "bg-verde",
   blu: "bg-blu",
 };
 

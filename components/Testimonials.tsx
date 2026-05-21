@@ -16,7 +16,17 @@ interface PropertyReview {
 }
 
 // REPLACE: dati Google My Business reali (rating + count + recensioni vere)
+// Ordine fissato Como → Boutique → Milano per coerenza con il resto del sito.
 const REVIEWS: PropertyReview[] = [
+  {
+    slug: "como",
+    rating: 4.6,
+    reviewCount: 247,
+    quote:
+      "Posizione perfetta per visitare il lago. L'hotel è curato e il giardino è una sorpresa.",
+    author: "Sophie R.",
+    origin: "Lione",
+  },
   {
     slug: "milano-boutique",
     rating: 4.7,
@@ -35,20 +45,11 @@ const REVIEWS: PropertyReview[] = [
     author: "Thomas K.",
     origin: "Monaco",
   },
-  {
-    slug: "como",
-    rating: 4.6,
-    reviewCount: 247,
-    quote:
-      "Posizione perfetta per visitare il lago. L'hotel è curato e il giardino è una sorpresa.",
-    author: "Sophie R.",
-    origin: "Lione",
-  },
 ];
 
 const accentBg: Record<string, string> = {
   vinaccia: "bg-vinaccia",
-  "sabbia-dark": "bg-sabbia-dark",
+  verde: "bg-verde",
   blu: "bg-blu",
 };
 
@@ -75,7 +76,7 @@ export function Testimonials() {
                 {/* Property + Google rating header */}
                 <div className="flex items-start justify-between gap-3 mb-4">
                   <span
-                    className={`inline-flex items-center gap-2 ${accentBg[p.accent]} ${p.accent === "sabbia-dark" ? "text-[#2b2b2b]" : "text-white"} text-[11px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-[2px]`}
+                    className={`inline-flex items-center gap-2 ${accentBg[p.accent]} text-white text-[11px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-[2px]`}
                   >
                     {p.shortName}
                   </span>

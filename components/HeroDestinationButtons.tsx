@@ -10,7 +10,7 @@ import { StarIcon } from "./icons";
 
 const accentBg: Record<string, string> = {
   vinaccia: "bg-vinaccia",
-  "sabbia-dark": "bg-sabbia-dark",
+  verde: "bg-verde",
   blu: "bg-blu",
 };
 
@@ -97,7 +97,7 @@ export function HeroDestinationButtons() {
               ? "text-vinaccia"
               : p.accent === "blu"
               ? "text-blu-dark"
-              : "text-[#2b2b2b]";
+              : "text-verde-dark";
           return (
             <li key={slug}>
               <Link
