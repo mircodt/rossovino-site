@@ -354,12 +354,12 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
 
   como: {
     meta: {
-      title: "Hotel a Como nel Verde · RossoVino — Sul Lago, vicino al Centro",
+      title: "Hotel a Como nel Verde · RossoVino — 10 min dal centro",
       description:
-        "Hotel a Como immerso in un'area verde, vicino alla Basilica di Sant'Abbondio. Camere ispirate ai grandi vini italiani, parcheggio prenotabile e bus per il centro davanti all'hotel.",
+        "Hotel a Como immerso in un'area verde, a circa 10 minuti in auto o autobus dal centro. Camere ispirate ai grandi vini italiani, parcheggio prenotabile e bus per il centro davanti all'hotel.",
     },
     hero: {
-      h1: "Hotel sul Lago di Como, tra vino, natura e ospitalità autentica",
+      h1: "Hotel a Como, tra vino, natura e ospitalità autentica",
       subtitle:
         "Un hotel immerso nel verde, ispirato al mondo del vino italiano. Per chi cerca un modo più autentico e contemporaneo di vivere Como, lontano dal turismo standard.",
     },
@@ -374,7 +374,7 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
       },
       {
         title: "Colazione sulle terrazze",
-        body: "Servita all'aperto, tra natura e vista sulle montagne comasche",
+        body: "Self-service, consumabile sulle terrazze tra natura e vista sulle montagne",
       },
     ],
     presentation: {
@@ -421,9 +421,8 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
     },
     services: [
       "Parcheggio privato prenotabile",
-      "Colazione servita sulle terrazze esterne, immerse nel verde",
+      "Colazione self-service, consumabile sulle nostre terrazze esterne",
       "Giardino relax con vista sulle montagne comasche",
-      "Terrazze attrezzate con ombrelloni",
       "Camere familiari",
       "Deposito bagagli gratuito",
       "Bar con drink italiani e selezione di vini in vendita",
@@ -434,10 +433,10 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
       "Personale formato regolarmente su sicurezza e accoglienza",
     ],
     position: {
-      h2: "Vicino al Lago, ma immersi nella natura",
+      h2: "A Como, immersi nella natura",
       paragraphs: [
-        "L'hotel si trova in una posizione che combina due qualità rare per Como: l'immersione nel verde e la comodità di accesso al centro.",
-        "Confiniamo con il parco di Villa Giovio e siamo vicini alla Basilica di Sant'Abbondio, in un'area classificata verde dal Comune. La fermata del bus per il centro è proprio davanti all'hotel: una corsa breve e si è in centro, sul lago, tra le vie storiche o all'imbarcadero per i battelli.",
+        "L'hotel si trova a Como, in una zona verde fuori dal centro storico: combina due qualità rare — l'immersione nella natura e la comodità di accesso al centro città.",
+        "Confiniamo con il parco di Villa Giovio e siamo vicini alla Basilica di Sant'Abbondio, in un'area classificata verde dal Comune. La fermata del bus per il centro è proprio davanti all'hotel: a circa 10 minuti in auto o autobus si raggiungono il centro storico, il lungolago, le vie storiche e l'imbarcadero per i battelli.",
       ],
     },
     sustainability: {
@@ -490,7 +489,7 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
       },
       {
         q: "L'hotel è vicino al Lago di Como?",
-        a: "Sì, siamo a Como città, in un'area verde della città vicina al lago e ben collegata al centro. (Distanza esatta da inserire.)",
+        a: "Ci troviamo a Como, in una zona verde fuori dal centro città — a circa 10 minuti in auto o autobus dal centro storico e dal lago. La fermata del bus è proprio davanti all'hotel: molti ospiti lasciano l'auto nel nostro parcheggio privato e raggiungono il centro o il lungolago senza pensieri.",
       },
       {
         q: "C'è il parcheggio?",
@@ -505,8 +504,8 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
         a: "Sì, siamo pet friendly. I tuoi animali sono benvenuti.",
       },
       {
-        q: "Si può fare colazione all'aperto?",
-        a: "Sì, la colazione viene servita sulle terrazze esterne immerse nel verde, con vista sulle montagne comasche. Privilegiamo prodotti locali del territorio.",
+        q: "Come funziona la colazione?",
+        a: "La colazione è in formato self-service e può essere consumata sulle nostre terrazze esterne, immerse nel verde e con vista sulle montagne comasche. Privilegiamo prodotti locali del territorio.",
       },
       {
         q: "Posso acquistare vini in hotel?",

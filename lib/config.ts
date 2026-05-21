@@ -278,17 +278,17 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     stars: 3,
     accent: "verde",
     accentHex: "#A4B59B",
-    phone: "+39 031 000 0003", // REPLACE: inserire dato reale del cliente
-    whatsapp: "+39 031 000 0003", // REPLACE: inserire dato reale del cliente
-    email: "como@hotelrossovino.it", // REPLACE: inserire dato reale del cliente
+    phone: "+39 031 4143949",
+    whatsapp: "+39 031 4143949", // REPLACE se serve numero WhatsApp dedicato
+    email: "como@hotelrossovino.it", // REPLACE: confermare email reale col cliente
     address: {
-      streetAddress: "Via di Sant'Abbondio, 1", // REPLACE: inserire dato reale del cliente
+      streetAddress: "Viale Risorgimento 18/A",
       addressLocality: "Como",
-      postalCode: "22100", // REPLACE: CAP reale
+      postalCode: "22100",
       addressRegion: "CO",
       addressCountry: "IT",
     },
-    geo: { latitude: "45.8081", longitude: "9.0852" }, // REPLACE: coordinate reali
+    geo: { latitude: "45.8081", longitude: "9.0852" }, // REPLACE: coordinate esatte di Viale Risorgimento 18/A
     priceRange: "€€",
     totalRooms: "35", // REPLACE: numero reale di camere
     checkIn: "14:00", // REPLACE: orario reale

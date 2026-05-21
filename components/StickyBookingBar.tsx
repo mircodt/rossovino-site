@@ -51,9 +51,16 @@ export function StickyBookingBar({ property }: Props) {
 
   if (!mounted) return null;
 
+  // Header height on lg = 96px (h-24).
+  // On property pages a thin "← Tutte le strutture" strip adds ~32px
+  // above the header, so the sticky bar must sit below at 128px,
+  // otherwise it gets covered by the strip+header and looks like it
+  // "doesn't appear" while scrolling.
+  const topClass = property ? "top-[128px]" : "top-[96px]";
+
   const bar = (
     <div
-      className={`hidden lg:block fixed top-[96px] inset-x-0 z-30 transition-transform duration-300 ease-out ${
+      className={`hidden lg:block fixed ${topClass} inset-x-0 z-30 transition-transform duration-300 ease-out ${
         show ? "translate-y-0" : "-translate-y-[calc(100%+2px)] pointer-events-none"
       }`}
       aria-hidden={!show}
