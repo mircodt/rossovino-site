@@ -378,9 +378,9 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
       },
     ],
     presentation: {
-      h2: "Un altro modo di vivere il Lago di Como",
+      h2: "Un altro modo di vivere Como",
       intro: [
-        "Hotel RossoVino Como nasce dall'idea di creare un luogo accogliente e autentico, diverso dal classico hotel sul Lago di Como. Un posto pensato per chi cerca pace, natura e un'ospitalità con un carattere riconoscibile, lontano dal turismo di massa che spesso accompagna la zona.",
+        "Hotel RossoVino Como nasce dall'idea di creare un luogo accogliente e autentico, diverso dal classico turismo del Lago di Como. Un posto pensato per chi cerca pace, natura e un'ospitalità con un carattere riconoscibile, lontano dal turismo di massa che spesso accompagna la zona.",
         "L'hotel è immerso in una delle aree più verdi della città, tra natura, tranquillità e scorci che uniscono il lago alle montagne comasche. L'atmosfera è rilassata, curata, contemporanea — il calore dell'ospitalità italiana incontra il mondo del vino.",
       ],
       sections: [
@@ -485,7 +485,7 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
     faq: [
       {
         q: "Hotel RossoVino Como è un hotel di che categoria?",
-        a: "È un hotel 3 stelle a Como, immerso in un'area verde della città. Una struttura con un'identità precisa ispirata al mondo del vino italiano, pensata per chi cerca un'esperienza più autentica rispetto al classico hotel sul lago.",
+        a: "È un hotel 3 stelle a Como, in un'area verde fuori dal centro città. Una struttura con un'identità precisa ispirata al mondo del vino italiano, pensata per chi cerca un'esperienza più autentica rispetto al classico turismo del Lago di Como.",
       },
       {
         q: "L'hotel è vicino al Lago di Como?",
@@ -512,7 +512,7 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
         a: "Sì, abbiamo una selezione di vini italiani disponibili in struttura, da gustare sul posto o portare a casa.",
       },
       {
-        q: "Cosa rende speciale Hotel RossoVino Como rispetto agli altri hotel sul Lago?",
+        q: "Cosa rende speciale Hotel RossoVino Como rispetto agli altri hotel di Como?",
         a: "La combinazione di tre cose: la posizione in un'area verde della città (vicino a Villa Giovio e Basilica di Sant'Abbondio), l'identità RossoVino con camere ispirate ai grandi vini italiani e calice di benvenuto, e uno staff locale che condivide la sua Como reale, fuori dai percorsi turistici più battuti.",
       },
     ],
