@@ -262,8 +262,10 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
         photos: ["/images/milano/rooms/03.jpg"],
       },
     ],
-    // Soft blu tint — coordinates with the blu accent for Milano**
-    pageBg: "#E4ECF1",
+    // Blu coordinated with the property accent. Saturated enough to read
+    // visibly as blue (not "neutral / sand") while staying light enough
+    // for body text legibility.
+    pageBg: "#D2DCE3",
     verticalBooking: {
       hotelId: "", // REPLACE: ID Vertical Booking quando disponibile
       bookingUrl: "", // REPLACE: URL Vertical Booking quando disponibile
@@ -370,8 +372,9 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
         photos: ["/images/como/rooms/05.jpg"],
       },
     ],
-    // Soft verde tint — coordinates with the verde accent for Como
-    pageBg: "#EBF0E6",
+    // Verde coordinated with the property accent. Same saturation logic as
+    // Milano's blu — clearly green but readable as a page background.
+    pageBg: "#D9E3CF",
     verticalBooking: {
       hotelId: "", // REPLACE: ID Vertical Booking quando disponibile
       bookingUrl: "", // REPLACE: URL Vertical Booking quando disponibile
