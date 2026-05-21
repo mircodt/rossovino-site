@@ -62,24 +62,67 @@ export function StickyMobileBar({ property, mode = "full" }: Props) {
 
   if (!mounted) return null;
 
+  /** Smooth-scroll the booking widget into view, making sure neither the
+   *  sticky bar nor the sticky header end up covering it. If the widget
+   *  fits in the available viewport, it's vertically centred; otherwise
+   *  it's pinned to the top edge under the header. */
+  const scrollToBooking = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const target = document.getElementById("prenota");
+    if (!target) return;
+    const STICKY_BAR = 60; // includes safe-area padding buffer
+    const HEADER = 64; // mobile header height
+    const rect = target.getBoundingClientRect();
+    const viewportH = window.innerHeight;
+    const availableH = viewportH - HEADER - STICKY_BAR;
+    let y: number;
+    if (rect.height <= availableH) {
+      // Widget fits — centre it in the visible area between header and bar
+      const offset = (availableH - rect.height) / 2;
+      y = window.scrollY + rect.top - HEADER - offset;
+    } else {
+      // Widget taller than available — top-pin it just under the header
+      y = window.scrollY + rect.top - HEADER - 8;
+    }
+    window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+  };
+
+  // Single-button bar (homepage). The button IS the bar — no white
+  // wrapper around it, so the glassmorphism reads over the page below.
+  if (mode === "single") {
+    const singleBar = (
+      <div className="lg:hidden fixed bottom-0 inset-x-0 z-50 safe-bottom">
+        <button
+          type="button"
+          onClick={scrollToBooking}
+          className="
+            w-full h-[52px] flex items-center justify-center gap-2
+            bg-vinaccia/85 backdrop-blur-md backdrop-saturate-150
+            text-white font-medium text-sm uppercase tracking-wide
+            shadow-[0_-6px_24px_rgba(139,89,99,0.28)]
+            border-t border-white/20
+            hover:bg-vinaccia/95 active:bg-vinaccia transition-colors
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70
+          "
+          aria-label="Verifica disponibilità"
+        >
+          <BedIcon className="w-5 h-5" aria-hidden />
+          Verifica disponibilità
+        </button>
+      </div>
+    );
+    return createPortal(singleBar, document.body);
+  }
+
+  // Property pages (mode="full"): keep the existing 3-cell bar wrapped
+  // in the original white container.
   const bar = (
     <div
       role="navigation"
       aria-label="Azioni rapide"
       className="lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white shadow-[0_-2px_12px_rgba(0,0,0,0.08)] safe-bottom border-t border-[color:var(--color-border)]"
     >
-      {mode === "single" ? (
-        // Single-button bar (homepage). Clicking scrolls to the booking
-        // widget so the visitor can pick a destination first.
-        <a
-          href="#prenota"
-          className="flex items-center justify-center gap-2 py-3 min-h-14 bg-vinaccia text-white font-medium text-sm uppercase tracking-wide hover:bg-vinaccia-hover transition-colors"
-          aria-label="Verifica disponibilità"
-        >
-          <BedIcon className="w-5 h-5" aria-hidden />
-          Verifica disponibilità
-        </a>
-      ) : (() => {
+      {(() => {
         const cells: React.ReactNode[] = [];
         if (hasContact(phone)) {
           cells.push(
@@ -186,10 +229,11 @@ export function StickyMobileBar({ property, mode = "full" }: Props) {
     </div>
   );
 
+  // mode === "full" reaches here — render bar + modal.
   return createPortal(
     <>
       {bar}
-      {mode === "full" && modal}
+      {modal}
     </>,
     document.body,
   );
