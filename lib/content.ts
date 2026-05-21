@@ -228,8 +228,8 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
     presentation: {
       h2: "Un hotel a Milano con un carattere riconoscibile",
       intro: [
-        "Hotel RossoVino Milano è il punto di partenza ideale per scoprire la città. Un hotel pensato per chi vuole dormire in posizione strategica, in un ambiente caldo e personale — lontano dall'anonimato dei grandi alberghi urbani.",
-        "L'ospitalità italiana qui incontra il mondo del vino, l'identità che attraversa tutte le strutture RossoVino. Il risultato è un hotel a Milano dal carattere preciso: contemporaneo nello stile, autentico nello spirito, accessibile nella sostanza.",
+        "Hotel RossoVino Milano è il punto di partenza ideale per scoprire la città. Un hotel pensato per chi vuole dormire in posizione strategica, in un ambiente caldo e personale — lontani dai grandi riflettori degli alberghi urbani, offrendo un'accoglienza unica e famigliare.",
+        "L'ospitalità italiana qui incontra il mondo del vino, l'identità che attraversa tutte le strutture RossoVino. Il risultato è un hotel a Milano dal carattere preciso: autentico nello spirito e accessibile nella sostanza, dove modernità e tradizione si incontrano per creare un'esperienza unica.",
       ],
       sections: [
         {
@@ -252,7 +252,7 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
     },
     rooms: {
       intro:
-        "Pensate per il comfort contemporaneo, con un design che si ispira al mondo del vino italiano. Ogni dettaglio è scelto per rendere il soggiorno semplice, fluido e piacevole.",
+        "Pensate per il comfort di chi viaggia, con un design che si ispira al mondo del vino italiano. Ogni dettaglio è scelto per rendere il soggiorno semplice, fluido e piacevole.",
       comforts: [
         "Aria condizionata",
         "Wi-Fi gratuito ad alta velocità",
@@ -266,13 +266,11 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
     services: [
       "Parcheggio privato prenotabile (raro nel centro di Milano)",
       "Wi-Fi gratuito in tutta la struttura",
-      "Spazi relax e aree comuni curate",
-      "Bar con drink italiani e vini in vendita",
+      "Camere con terrazze su richiesta",
       "Deposito bagagli gratuito",
       "Pulizia giornaliera",
-      "Pet friendly — i tuoi animali sono benvenuti",
       "Videosorveglianza nelle aree comuni",
-      "Staff multilingua: italiano, inglese, tedesco, francese, spagnolo",
+      "Staff multilingua: italiano, inglese, arabo, francese, spagnolo, catalano, portoghese",
     ],
     position: {
       h2: "Una posizione strategica per vivere Milano",
@@ -284,16 +282,10 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
     sustainability: {
       intro:
         "Per noi sostenibilità significa fare scelte concrete senza rinunciare al comfort dei nostri ospiti. Lo facciamo tutti i giorni, in tutte le strutture RossoVino.",
+      // Nota: il gruppo "Energia" (LED, sensori, climatizzazione intelligente)
+      // è stato rimosso da Milano perché la villetta non è stata ristrutturata
+      // — sarebbero claim non veritieri. Resta su Boutique perché ristrutturato.
       groups: [
-        {
-          title: "Energia",
-          items: [
-            "Illuminazione LED a basso consumo",
-            "Sensori di presenza nelle aree comuni",
-            "Climatizzazione intelligente",
-            "Monitoraggio costante dei consumi",
-          ],
-        },
         {
           title: "Plastica e prodotti",
           items: [
@@ -327,19 +319,15 @@ export const CONTENT: Record<PropertySlug, PropertyContent> = {
       },
       {
         q: "C'è il parcheggio in hotel?",
-        a: "Sì, parcheggio privato prenotabile per i nostri ospiti — un servizio raro nel centro di Milano e per noi un valore aggiunto importante.",
-      },
-      {
-        q: "Accettate animali domestici?",
-        a: "Sì, siamo pet friendly. I tuoi animali sono benvenuti.",
+        a: "Disponiamo di un parcheggio privato interno su richiesta — un servizio raro a Milano. Contattaci prima dell'arrivo per verificare la disponibilità.",
       },
       {
         q: "Il check-in è automatizzato? Posso arrivare tardi?",
-        a: "La struttura dispone di un sistema automatizzato per l'accesso alle camere. (Da confermare orari di check-in flessibile o late check-in.)",
+        a: "Il check-in è disponibile dalle 14:00. La struttura dispone di un sistema automatizzato per l'accesso alle camere, utile anche per arrivi serali — contattaci in anticipo per organizzare al meglio il tuo arrivo.",
       },
       {
         q: "Si parlano lingue straniere alla reception?",
-        a: "Il nostro staff parla italiano, inglese, tedesco, francese e spagnolo.",
+        a: "Il nostro staff parla italiano, inglese, arabo, francese, spagnolo, catalano e portoghese.",
       },
       {
         q: "Le camere hanno l'aria condizionata e il Wi-Fi?",

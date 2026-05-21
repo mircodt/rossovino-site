@@ -32,15 +32,15 @@ const HOW_TO_REACH: Record<PropertySlug, { mode: string; body: string }[]> = {
   milano: [
     {
       mode: "In auto",
-      body: "Parcheggio privato gratuito per i nostri ospiti.",
+      body: "Parcheggio privato interno su richiesta — un servizio raro a Milano.",
     },
     {
       mode: "In treno",
-      body: "Stazione Centrale ben collegata, in pochi minuti di metro o taxi sei in hotel.",
+      body: "Stazione Centrale ben collegata: in 15–20 minuti di metro o taxi sei in hotel.",
     },
     {
       mode: "In aereo",
-      body: "Linate per voli nazionali, Malpensa per i lunghi raggi. Bergamo Orio al Serio per i low-cost.",
+      body: "Linate (8–10 min in taxi) per voli nazionali, Malpensa per i lunghi raggi, Bergamo Orio al Serio per i low-cost.",
     },
   ],
   como: [

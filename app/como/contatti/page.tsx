@@ -32,8 +32,8 @@ export default function Page() {
           <SubPageHero
             slug={SLUG}
             eyebrow="Contatti"
-            title="Come raggiungerci"
-            description="Indirizzo, telefono, WhatsApp ed email diretti della struttura — più la mappa e le indicazioni per arrivare in auto, treno o aereo."
+            title="Parla direttamente con la struttura"
+            description="Indirizzo, telefono, WhatsApp ed email diretti della struttura. Trovi anche la mappa e le indicazioni per arrivare in auto, treno o aereo."
           />
           <PropertyContactsPageContent slug={SLUG} />
         </main>

@@ -93,7 +93,7 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     geo: { latitude: "45.4642", longitude: "9.1900" }, // REPLACE: coordinate reali
     priceRange: "€€€",
     totalRooms: "12", // REPLACE: numero reale di camere
-    checkIn: "15:00", // REPLACE: orario reale
+    checkIn: "14:00", // Allineato con Hotel Milano** su richiesta cliente
     checkOut: "11:00", // REPLACE: orario reale
     heroImage: "images/boutique/hero.jpg",
     heroSlides: [
@@ -224,7 +224,7 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     roomExample: {
       name: "Nebbiolo", // REPLACE: confermare nome con il cliente
       description:
-        "Una camera tipo dell'Hotel RossoVino Milano — design contemporaneo, materiali curati, comfort essenziale per chi visita la città.",
+        "Una camera tipo dell'Hotel RossoVino Milano — materiali curati e comfort essenziale per chi visita la città.",
       photos: [
         "/images/milano/room-example/1.jpg",
         "/images/milano/room-example/2.jpg",

@@ -10,7 +10,7 @@ import { StarIcon } from "./icons";
  *  only this component uses. */
 const TAGLINE: Record<string, string> = {
   "milano-boutique": "Boutique · Villa storica · Milano",
-  milano: "2 stelle · Centro città · Milano",
+  milano: "2 stelle · Ottimo rapporto qualità-prezzo · Milano",
   como: "3 stelle · Immerso nel verde · Como",
 };
 
@@ -34,8 +34,9 @@ export function DestinationPicker() {
             Dove vuoi soggiornare?
           </h2>
           <p className="text-[var(--color-ink-soft)] text-lg leading-relaxed">
-            Tre proprietà, tre città italiane, tre identità. Tocca la card
-            della struttura che fa per te e scopri la sua storia.
+            Tre proprietà, tre identità diverse, raggruppate in due delle
+            città più rappresentative della Lombardia. Tocca la card della
+            struttura che fa per te e scopri la sua storia.
           </p>
         </div>
 
