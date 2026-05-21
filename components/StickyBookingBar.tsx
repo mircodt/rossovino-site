@@ -53,7 +53,7 @@ export function StickyBookingBar({ property }: Props) {
 
   const bar = (
     <div
-      className={`hidden lg:block fixed top-[80px] inset-x-0 z-30 transition-transform duration-300 ease-out ${
+      className={`hidden lg:block fixed top-[96px] inset-x-0 z-30 transition-transform duration-300 ease-out ${
         show ? "translate-y-0" : "-translate-y-[calc(100%+2px)] pointer-events-none"
       }`}
       aria-hidden={!show}

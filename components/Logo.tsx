@@ -18,8 +18,9 @@ interface Props {
 
 const sizeClass: Record<"sm" | "md" | "lg", string> = {
   sm: "h-6 md:h-7",
-  md: "h-7 md:h-9",
-  // kept for historical callers; in practice property pages now use md
+  // Header default — bumps to 48px on desktop (lg+) so the brand is the
+  // dominant element of the cleaner header.
+  md: "h-7 md:h-9 lg:h-12",
   lg: "h-8 md:h-11",
 };
 

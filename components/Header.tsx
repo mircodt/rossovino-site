@@ -59,24 +59,31 @@ export function Header({ property }: HeaderProps) {
         </div>
       )}
 
-      <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8 h-16 md:h-20 grid grid-cols-[auto_1fr_auto] items-center gap-4 lg:gap-6">
+      <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8 h-16 md:h-20 lg:h-24 grid grid-cols-[auto_1fr_auto] items-center gap-4 lg:gap-6">
         {/* Logo — always links to group home */}
         <Logo property={property} size="md" />
 
-        {/* Desktop nav — group or property depending on context */}
-        <nav className="hidden lg:flex items-center justify-center gap-7 text-sm">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="hover:text-vinaccia transition-colors"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        {/* Mobile spacer — keeps the 3-col grid stable when nav hides */}
-        <span className="lg:hidden" aria-hidden />
+        {/* Desktop nav — rendered ONLY on property pages so the user can
+            jump between Hotel / Camere & Suite / Servizi / Contatti.
+            On the homepage we keep the header pure (logo + lang +
+            contacts) — the destination choice is the hero job. */}
+        {p ? (
+          <nav className="hidden lg:flex items-center justify-center gap-7 text-sm">
+            {nav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="hover:text-vinaccia transition-colors"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        ) : (
+          <span aria-hidden />
+        )}
+        {/* Mobile spacer kept commented for clarity — the 1fr column above
+            already absorbs the empty slot on mobile. */}
 
         {/* Right-side actions, guarded against placeholder values */}
         <div className="hidden lg:flex items-center gap-3">
