@@ -58,7 +58,7 @@ export interface PropertyConfig {
   /** Room types offered by this property. Wine names are illustrative —
    *  client will provide the real assignment of wine names to typologies. */
   roomTypes: {
-    type: "matrimoniale" | "matrimoniale-superior" | "twin" | "tripla" | "suite";
+    type: "matrimoniale" | "matrimoniale-economy" | "matrimoniale-superior" | "twin" | "tripla" | "suite";
     wineName: string;
     capacity: number;
     /** Square meters (number — render as `${size} m²`). */
@@ -143,32 +143,52 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
         "/images/boutique/room-example/7.jpg",
       ],
     },
-    // REPLACE: i nomi-vino e i metri quadri sono placeholder, il cliente
-    // fornirà la lista definitiva (3 tipologie per Boutique).
+    // 3 tipologie corrispondenti alle 3 sottocartelle di
+    // websizephotos/STANZE/FOTO STANZE MILANO BOUTIQUE/.
+    // Nomi-vino e mq: il cliente confermerà la mappatura definitiva
+    // (qui assegnati per restare nel mood RossoVino).
     roomTypes: [
       {
-        type: "matrimoniale",
-        wineName: "Cabernet Sauvignon",
+        type: "matrimoniale-superior",
+        wineName: "Barbaresco",
         capacity: 2,
-        size: 20,
-        amenities: ["Letto matrimoniale", "Bagno privato", "Wi-Fi gratuito", "Smart TV"],
-        photos: ["/images/boutique/room-example/1.jpg"],
+        size: 22,
+        amenities: ["Letto matrimoniale", "Parete d'accento vinaccia", "Wi-Fi gratuito", "Smart TV"],
+        photos: [
+          "/images/boutique/rooms/matrimoniale-superior/01.jpg",
+          "/images/boutique/rooms/matrimoniale-superior/02.jpg",
+          "/images/boutique/rooms/matrimoniale-superior/03.jpg",
+          "/images/boutique/rooms/matrimoniale-superior/04.jpg",
+          "/images/boutique/rooms/matrimoniale-superior/05.jpg",
+        ],
       },
       {
         type: "twin",
         wineName: "Nebbiolo",
         capacity: 2,
-        size: 18,
-        amenities: ["Due letti singoli", "Bagno privato", "Wi-Fi gratuito", "Frigobar"],
-        photos: ["/images/boutique/rooms/02.jpg"],
+        size: 20,
+        amenities: ["Due letti singoli", "Parquet a spina di pesce", "Wi-Fi gratuito", "Smart TV"],
+        photos: [
+          "/images/boutique/rooms/twin-superior/01.png",
+          "/images/boutique/rooms/twin-superior/02.jpg",
+          "/images/boutique/rooms/twin-superior/03.jpg",
+          "/images/boutique/rooms/twin-superior/04.jpg",
+          "/images/boutique/rooms/twin-superior/05.jpg",
+        ],
       },
       {
-        type: "tripla",
-        wineName: "Barolo",
-        capacity: 3,
-        size: 24,
-        amenities: ["Letto matrimoniale + singolo", "Bagno privato", "Wi-Fi gratuito", "Smart TV"],
-        photos: ["/images/boutique/rooms/03.jpg"],
+        type: "suite",
+        wineName: "Brunello di Montalcino",
+        capacity: 2,
+        size: 30,
+        amenities: ["Vasca freestanding", "Travi a vista", "Wi-Fi gratuito", "Smart TV"],
+        photos: [
+          "/images/boutique/rooms/suite-vasca/01.jpg",
+          "/images/boutique/rooms/suite-vasca/02.jpg",
+          "/images/boutique/rooms/suite-vasca/03.jpg",
+          "/images/boutique/rooms/suite-vasca/04.jpg",
+          "/images/boutique/rooms/suite-vasca/05.jpg",
+        ],
       },
     ],
     pageBg: "#F4ECEE",
@@ -244,31 +264,60 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
         "/images/milano/room-example/7.jpg",
       ],
     },
-    // REPLACE: nomi-vino e mq da confermare con il cliente (3 tipologie)
+    // 4 tipologie corrispondenti alle 4 sottocartelle di
+    // websizephotos/STANZE/Milano/. Milano distingue tra matrimoniale
+    // con bagno in comune (economy, prezzo più accessibile) e bagno
+    // privato — il "matrimoniale-economy" è un nuovo type aggiunto al
+    // union in PropertyConfig per supportare questa distinzione.
     roomTypes: [
       {
+        type: "matrimoniale-economy",
+        wineName: "Lambrusco",
+        capacity: 2,
+        size: 14,
+        amenities: ["Letto matrimoniale", "Bagno in comune", "Wi-Fi gratuito", "Smart TV"],
+        photos: [
+          "/images/milano/rooms/matrimoniale-economy/01.jpg",
+          "/images/milano/rooms/matrimoniale-economy/02.jpg",
+          "/images/milano/rooms/matrimoniale-economy/03.jpg",
+          "/images/milano/rooms/matrimoniale-economy/04.jpg",
+        ],
+      },
+      {
         type: "matrimoniale",
-        wineName: "Nebbiolo",
+        wineName: "Sangiovese",
         capacity: 2,
         size: 16,
         amenities: ["Letto matrimoniale", "Bagno privato", "Wi-Fi gratuito", "Smart TV"],
-        photos: ["/images/milano/room-example/1.jpg"],
+        photos: [
+          "/images/milano/rooms/matrimoniale-privato/01.jpg",
+          "/images/milano/rooms/matrimoniale-privato/02.jpg",
+          "/images/milano/rooms/matrimoniale-privato/03.jpg",
+          "/images/milano/rooms/matrimoniale-privato/04.jpg",
+          "/images/milano/rooms/matrimoniale-privato/05.jpg",
+        ],
       },
       {
         type: "twin",
-        wineName: "Chianti",
+        wineName: "Pinot Grigio",
         capacity: 2,
         size: 16,
-        amenities: ["Due letti singoli", "Bagno privato", "Wi-Fi gratuito", "Frigobar"],
-        photos: ["/images/milano/rooms/02.jpg"],
+        amenities: ["Due letti singoli", "Bagno privato", "Wi-Fi gratuito", "Smart TV"],
+        photos: [
+          "/images/milano/rooms/twin/01.png",
+          "/images/milano/rooms/twin/02.jpg",
+        ],
       },
       {
         type: "tripla",
-        wineName: "Sangiovese",
+        wineName: "Barbera",
         capacity: 3,
         size: 22,
         amenities: ["Letto matrimoniale + singolo", "Bagno privato", "Wi-Fi gratuito", "Smart TV"],
-        photos: ["/images/milano/rooms/03.jpg"],
+        photos: [
+          "/images/milano/rooms/tripla/01.jpg",
+          "/images/milano/rooms/tripla/02.jpg",
+        ],
       },
     ],
     // Blu coordinated with the property accent. Saturated enough to read

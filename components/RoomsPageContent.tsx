@@ -18,6 +18,7 @@ export function RoomsPageContent({ slug }: { slug: PropertySlug }) {
   // Map the internal type key to a human label for the badge.
   const TYPE_LABEL: Record<string, string> = {
     matrimoniale: "Matrimoniale",
+    "matrimoniale-economy": "Matrimoniale Economy",
     "matrimoniale-superior": "Matrimoniale Superior",
     twin: "Twin",
     tripla: "Tripla",
