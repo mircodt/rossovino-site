@@ -507,11 +507,13 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
         ],
       },
       {
-        type: "twin",
+        // Tripla — configurazione con letto matrimoniale + singolo per
+        // ospitare fino a 3 persone (era erroneamente "twin"/capacity 2).
+        type: "tripla",
         wineName: "Pinot Grigio",
-        capacity: 2,
-        size: 20,
-        amenities: ["Due letti singoli", "Bagno privato", "Wi-Fi gratuito", "Vista giardino"],
+        capacity: 3,
+        size: 22,
+        amenities: ["Letto matrimoniale + singolo", "Bagno privato", "Wi-Fi gratuito", "Vista giardino"],
         photos: [
           "/images/como/rooms/twin/01.jpg",
           "/images/como/rooms/twin/02.jpg",
