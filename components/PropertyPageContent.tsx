@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { PROPERTIES, type PropertySlug } from "@/lib/config";
 import { assetSrc } from "@/lib/asset";
 import { accentBgClass } from "@/lib/accent";
@@ -72,42 +73,34 @@ export function PropertyPageContent({ slug }: { slug: PropertySlug }) {
         </Container>
       </section>
 
-      {/* Rooms + Services */}
+      {/* Rooms comfort highlights (full services list now lives on /<slug>/servizi
+          to avoid duplication between the landing and the dedicated sub-page). */}
       <section className="bg-[var(--color-bg)] py-16 md:py-24">
         <Container>
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
-            <div>
-              <SectionHeading eyebrow="Le camere">Comfort e dettaglio</SectionHeading>
-              <p className="mt-4 text-[var(--color-ink-soft)] text-lg leading-relaxed">
-                {c.rooms.intro}
-              </p>
-              <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {c.rooms.comforts.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-2.5 text-[var(--color-ink)]"
-                  >
-                    <CheckIcon className="w-5 h-5 text-vinaccia flex-shrink-0 mt-0.5" aria-hidden />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="max-w-3xl">
+            <SectionHeading eyebrow="Le camere">Comfort e dettaglio</SectionHeading>
+            <p className="mt-4 text-[var(--color-ink-soft)] text-lg leading-relaxed">
+              {c.rooms.intro}
+            </p>
+            <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {c.rooms.comforts.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-2.5 text-[var(--color-ink)]"
+                >
+                  <CheckIcon className="w-5 h-5 text-vinaccia flex-shrink-0 mt-0.5" aria-hidden />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
 
-            <div>
-              <SectionHeading eyebrow="Servizi in struttura">Tutto ciò che serve</SectionHeading>
-              <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {c.services.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-2.5 text-[var(--color-ink)]"
-                  >
-                    <CheckIcon className="w-5 h-5 text-vinaccia flex-shrink-0 mt-0.5" aria-hidden />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <Link
+              href={`/${slug}/servizi`}
+              className="inline-flex items-center gap-1.5 mt-10 text-vinaccia font-medium uppercase text-sm tracking-wide hover:gap-2.5 transition-all"
+            >
+              Scopri tutti i servizi inclusi nel soggiorno
+              <span aria-hidden>→</span>
+            </Link>
           </div>
         </Container>
       </section>

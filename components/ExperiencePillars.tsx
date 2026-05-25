@@ -5,24 +5,24 @@ import { assetSrc } from "@/lib/asset";
 import { HOME_CONTENT } from "@/lib/content";
 
 /**
- * "L'esperienza RossoVino" section — 3 brand pillars, the first two each
- * illustrated with a photo right below the body text:
+ * "L'esperienza RossoVino" section — 3 brand pillars, each illustrated with
+ * a photo right below the body text:
  *   - Brindisi di benvenuto → wine glass + bottles still life
  *   - Camere come grandi vini → "309 Cabernet Sauvignon" room plaque
- *   - Consigli di chi vive il territorio → no photo (kept as text-only for
- *     parity with the other pillars when the client provides a 3rd image).
+ *   - Consigli di chi vive il territorio → receptionist Como al telefono
+ *     (foto fornita dal cliente — incarna lo staff vero che parla con gli ospiti).
  */
 
 const PILLAR_IMAGE: (string | null)[] = [
   "/images/boutique/atmosfera-2.jpg", // calice + bottiglie su parete in pietra
   "/images/boutique/room-example/1.jpg", // plaque "309 — Cabernet Sauvignon"
-  null,
+  "/images/como/reception-staff.jpg", // receptionist Como al telefono
 ];
 
 const PILLAR_ALT: string[] = [
   "Brindisi di benvenuto: calice di vino e bottiglie su parete in pietra",
   "Camera 309 — Cabernet Sauvignon: la targhetta all'ingresso della camera",
-  "",
+  "Lo staff RossoVino Como alla reception: consigli reali per gli ospiti",
 ];
 
 export function ExperiencePillars() {

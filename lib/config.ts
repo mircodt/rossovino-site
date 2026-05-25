@@ -12,9 +12,9 @@ export const SITE = {
   legalName: "Gruppo Hotel RossoVino",
   defaultLocale: "it-IT",
   /** Generic group-level contacts used on homepage and as fallback. */
-  groupPhone: "+39 02 000 0000", // REPLACE: inserire dato reale del cliente
-  groupWhatsapp: "+39 02 000 0000", // REPLACE: inserire dato reale del cliente
-  groupEmail: "info@hotelrossovino.it", // REPLACE: inserire dato reale del cliente
+  groupPhone: "+39 02 8724 2410",
+  groupWhatsapp: "+39 02 8724 2410",
+  groupEmail: "info@hotelrossovino.it",
 } as const;
 
 export type PropertySlug = "milano" | "milano-boutique" | "como";
@@ -80,17 +80,18 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     fullName: "Boutique RossoVino Milano",
     accent: "vinaccia",
     accentHex: "#8B5963",
-    phone: "+39 02 000 0001", // REPLACE: inserire dato reale del cliente
-    whatsapp: "+39 02 000 0001", // REPLACE: inserire dato reale del cliente
-    email: "boutique@hotelrossovino.it", // REPLACE: inserire dato reale del cliente
+    phone: "+39 02 8724 2410",
+    whatsapp: "+39 02 8724 2410",
+    email: "info@hotelrossovino.it",
     address: {
-      streetAddress: "Via della Villa, 1", // REPLACE: inserire dato reale del cliente
+      streetAddress: "Via Privata Francesco Bartolozzi, 13",
       addressLocality: "Milano",
-      postalCode: "20100", // REPLACE: CAP reale
+      postalCode: "20131",
       addressRegion: "MI",
       addressCountry: "IT",
     },
-    geo: { latitude: "45.4642", longitude: "9.1900" }, // REPLACE: coordinate reali
+    // Coordinate ottenute dal link Google Maps fornito dal cliente.
+    geo: { latitude: "45.4619979", longitude: "9.2268211" },
     priceRange: "€€€",
     totalRooms: "12", // REPLACE: numero reale di camere
     checkIn: "14:00", // Allineato con Hotel Milano** su richiesta cliente
@@ -178,17 +179,19 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     stars: 2,
     accent: "blu",
     accentHex: "#9BAEBA",
-    phone: "+39 02 000 0002", // REPLACE: inserire dato reale del cliente
-    whatsapp: "+39 02 000 0002", // REPLACE: inserire dato reale del cliente
-    email: "milano@hotelrossovino.it", // REPLACE: inserire dato reale del cliente
+    // Centralino condiviso con il Boutique (stesso isolato, stesso staff).
+    phone: "+39 02 8724 2410",
+    whatsapp: "+39 02 8724 2410",
+    email: "info@hotelrossovino.it",
     address: {
-      streetAddress: "Via Milano, 1", // REPLACE: inserire dato reale del cliente
+      streetAddress: "Via Privata Francesco Bartolozzi, 9",
       addressLocality: "Milano",
-      postalCode: "20100", // REPLACE: CAP reale
+      postalCode: "20131",
       addressRegion: "MI",
       addressCountry: "IT",
     },
-    geo: { latitude: "45.4642", longitude: "9.1900" }, // REPLACE: coordinate reali
+    // Coordinate ottenute dal link Google Maps fornito dal cliente.
+    geo: { latitude: "45.4613086", longitude: "9.2268479" },
     priceRange: "€€",
     totalRooms: "20", // REPLACE: numero reale di camere
     checkIn: "14:00", // REPLACE: orario reale
@@ -279,8 +282,8 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     accent: "verde",
     accentHex: "#A4B59B",
     phone: "+39 031 4143949",
-    whatsapp: "+39 031 4143949", // REPLACE se serve numero WhatsApp dedicato
-    email: "como@hotelrossovino.it", // REPLACE: confermare email reale col cliente
+    whatsapp: "+39 031 4143949",
+    email: "como@hotelrossovino.it",
     address: {
       streetAddress: "Viale Risorgimento 18/A",
       addressLocality: "Como",
@@ -288,7 +291,10 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       addressRegion: "CO",
       addressCountry: "IT",
     },
-    geo: { latitude: "45.8081", longitude: "9.0852" }, // REPLACE: coordinate esatte di Viale Risorgimento 18/A
+    // Coordinate approssimate del centro Como — la mappa embed usa
+    // l'indirizzo testuale come query (vedi PropertyContactsPageContent),
+    // quindi anche se le coordinate non sono esatte la mappa è accurata.
+    geo: { latitude: "45.8081", longitude: "9.0852" },
     priceRange: "€€",
     totalRooms: "35", // REPLACE: numero reale di camere
     checkIn: "14:00", // REPLACE: orario reale

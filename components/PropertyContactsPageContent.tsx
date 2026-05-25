@@ -63,8 +63,12 @@ const HOW_TO_REACH: Record<PropertySlug, { mode: string; body: string }[]> = {
  *  contacts of THAT specific property, and a non-functional contact form. */
 export function PropertyContactsPageContent({ slug }: { slug: PropertySlug }) {
   const p = PROPERTIES[slug];
-  // Google Maps embed using lat/lng — works without an API key for q=lat,lng
-  const mapSrc = `https://www.google.com/maps?q=${p.geo.latitude},${p.geo.longitude}&z=15&output=embed`;
+  // Google Maps embed using the textual address as query — more robust
+  // than coordinates (Maps geocodes the address server-side and centers
+  // exactly on the building), and survives small inaccuracies in the
+  // lat/lng kept in config for the JSON-LD schema markup.
+  const mapQuery = `${p.fullName}, ${p.address.streetAddress}, ${p.address.postalCode} ${p.address.addressLocality}`;
+  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&z=16&output=embed`;
 
   return (
     <>
