@@ -99,7 +99,7 @@ export function MobileMenu({ property }: Props) {
               <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-ink-soft)] mb-3">
                 {PROPERTIES[property].fullName}
               </p>
-              <ul className="space-y-1 mb-7">
+              <ul className="space-y-1 mb-5">
                 {[
                   { href: `/${property}`, label: "Hotel" },
                   { href: `/${property}/camere`, label: "Camere & Suite" },
@@ -117,6 +117,22 @@ export function MobileMenu({ property }: Props) {
                   </li>
                 ))}
               </ul>
+
+              {/* Reception hours for the current property */}
+              {PROPERTIES[property].receptionHours && (
+                <div className="mb-7 px-3 py-3 bg-sabbia-light/60 border border-sabbia rounded-[2px]">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-ink-soft)] mb-1">
+                    Reception
+                  </p>
+                  <div className="font-mono text-sm text-[var(--color-ink)] tabular-nums leading-snug">
+                    {PROPERTIES[property].receptionHours
+                      .split(" · ")
+                      .map((line) => (
+                        <p key={line}>{line}</p>
+                      ))}
+                  </div>
+                </div>
+              )}
             </>
           )}
 

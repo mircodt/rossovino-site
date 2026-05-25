@@ -41,6 +41,10 @@ export interface PropertyConfig {
   totalRooms: string;
   checkIn: string;
   checkOut: string;
+  /** Orari di apertura della reception. Mostrato accanto al pulsante
+   *  telefono nell'Header (desktop) e nel drawer mobile. Tieni la
+   *  stringa compatta — il "·" separa periodi/giorni. */
+  receptionHours: string;
   heroImage: string;
   heroSlides: string[];
   ogImage: string;
@@ -96,6 +100,7 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     totalRooms: "12", // REPLACE: numero reale di camere
     checkIn: "14:00", // Allineato con Hotel Milano** su richiesta cliente
     checkOut: "11:00", // REPLACE: orario reale
+    receptionHours: "Lun–Ven 9:00–23:00 · Sab–Dom 10:00–23:00",
     heroImage: "images/boutique/hero.jpg",
     heroSlides: [
       "/images/boutique/hero/1.jpg",
@@ -196,6 +201,7 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     totalRooms: "20", // REPLACE: numero reale di camere
     checkIn: "14:00", // REPLACE: orario reale
     checkOut: "11:00", // REPLACE: orario reale
+    receptionHours: "Lun–Ven 9:00–23:00 · Sab–Dom 10:00–23:00",
     heroImage: "images/milano/hero.jpg",
     heroSlides: [
       "/images/milano/hero/1.jpg",
@@ -299,6 +305,7 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     totalRooms: "35", // REPLACE: numero reale di camere
     checkIn: "14:00", // REPLACE: orario reale
     checkOut: "11:00", // REPLACE: orario reale
+    receptionHours: "Lun–Dom 8:00–24:00",
     heroImage: "images/como/hero.jpg",
     heroSlides: [
       "/images/como/hero/1.jpg",

@@ -90,14 +90,40 @@ export function Header({ property }: HeaderProps) {
             <LangSwitcher />
             <span className="h-5 w-px bg-[color:var(--color-border)]" aria-hidden />
             {hasContact(phone) && (
-              <a
-                href={telHref(phone)}
-                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-sabbia hover:bg-sabbia-dark text-vinaccia transition-colors"
-                aria-label={`Chiama ${p ? p.shortName : "RossoVino"}`}
-                title={phone}
-              >
-                <PhoneIcon className="w-4 h-4" aria-hidden />
-              </a>
+              <div className="flex items-center gap-2">
+                {/* Reception hours — only on property pages where we
+                    know which structure the visitor is looking at.
+                    Hidden below xl: to avoid pushing the rest of the
+                    cluster off-screen on narrow desktops. */}
+                {p?.receptionHours && (
+                  <div className="hidden xl:flex flex-col items-end leading-tight">
+                    <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-[var(--color-ink-soft)]">
+                      Reception
+                    </span>
+                    <span className="font-mono text-[11px] text-[var(--color-ink)] tabular-nums text-right">
+                      {p.receptionHours.split(" · ").map((line) => (
+                        <span key={line} className="block">
+                          {line}
+                        </span>
+                      ))}
+                    </span>
+                  </div>
+                )}
+                <a
+                  href={telHref(phone)}
+                  className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-sabbia hover:bg-sabbia-dark text-vinaccia transition-colors"
+                  aria-label={`Chiama ${p ? p.shortName : "RossoVino"}${
+                    p?.receptionHours ? ` — reception ${p.receptionHours}` : ""
+                  }`}
+                  title={
+                    p?.receptionHours
+                      ? `${phone} — Reception ${p.receptionHours}`
+                      : phone
+                  }
+                >
+                  <PhoneIcon className="w-4 h-4" aria-hidden />
+                </a>
+              </div>
             )}
             {hasContact(whatsapp) && (
               <a

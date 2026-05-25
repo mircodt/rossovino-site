@@ -136,13 +136,27 @@ export function PropertyContactsPageContent({ slug }: { slug: PropertySlug }) {
                 )}
               </ul>
 
-              <div className="mt-8 pt-6 border-t border-[color:var(--color-border)]">
-                <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-ink-soft)] mb-2">
-                  Orari
-                </p>
-                <p className="text-[var(--color-ink)]">
-                  Check-in dalle <strong className="font-mono tabular-nums">{p.checkIn}</strong> · Check-out entro <strong className="font-mono tabular-nums">{p.checkOut}</strong>
-                </p>
+              <div className="mt-8 pt-6 border-t border-[color:var(--color-border)] space-y-4">
+                <div>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-ink-soft)] mb-2">
+                    Check-in / Check-out
+                  </p>
+                  <p className="text-[var(--color-ink)]">
+                    Check-in dalle <strong className="font-mono tabular-nums">{p.checkIn}</strong> · Check-out entro <strong className="font-mono tabular-nums">{p.checkOut}</strong>
+                  </p>
+                </div>
+                {p.receptionHours && (
+                  <div>
+                    <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-ink-soft)] mb-2">
+                      Reception
+                    </p>
+                    <div className="text-[var(--color-ink)] font-mono tabular-nums">
+                      {p.receptionHours.split(" · ").map((line) => (
+                        <p key={line}>{line}</p>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
