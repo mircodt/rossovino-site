@@ -343,39 +343,83 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
         "/images/como/room-example/7.jpg",
       ],
     },
-    // REPLACE: 4 tipologie da confermare con il cliente
+    // 5 tipologie corrispondenti alle 5 sottocartelle di
+    // websizephotos/STANZE/FOTO STANZA SITO COMO/.
+    // Nomi-vino: "Primitivo di Manduria" sulla Tripla è esplicito dal
+    // cliente (nome cartella); per gli altri ho assegnato vini italiani
+    // che restano nel mood RossoVino — il cliente può raffinarli quando
+    // fornirà la mappatura definitiva camera-vino.
+    // Foto: la prima di ogni array è la thumbnail della card su /como/camere;
+    // /public/images/como/rooms/<tipologia>/ contiene 4-5 foto per tipologia.
     roomTypes: [
       {
-        type: "matrimoniale-superior",
+        type: "matrimoniale",
         wineName: "Chianti",
         capacity: 2,
+        size: 18,
+        amenities: ["Letto matrimoniale", "Bagno privato", "Wi-Fi gratuito", "Smart TV"],
+        photos: [
+          "/images/como/rooms/matrimoniale/01.jpg",
+          "/images/como/rooms/matrimoniale/02.jpg",
+          "/images/como/rooms/matrimoniale/03.jpg",
+          "/images/como/rooms/matrimoniale/04.jpg",
+          "/images/como/rooms/matrimoniale/05.jpg",
+        ],
+      },
+      {
+        type: "matrimoniale-superior",
+        wineName: "Brunello",
+        capacity: 2,
         size: 22,
-        amenities: ["Letto matrimoniale", "Vista giardino", "Wi-Fi gratuito", "Smart TV"],
-        photos: ["/images/como/room-example/1.jpg"],
+        amenities: ["Letto matrimoniale", "Pannelli decorativi 3D", "Wi-Fi gratuito", "Smart TV"],
+        photos: [
+          "/images/como/rooms/superior/01.jpg",
+          "/images/como/rooms/superior/02.jpg",
+          "/images/como/rooms/superior/03.jpg",
+          "/images/como/rooms/superior/04.jpg",
+          "/images/como/rooms/superior/05.jpg",
+        ],
       },
       {
         type: "twin",
-        wineName: "Brunello",
+        wineName: "Pinot Grigio",
         capacity: 2,
-        size: 18,
-        amenities: ["Due letti singoli", "Bagno privato", "Wi-Fi gratuito", "Frigobar"],
-        photos: ["/images/como/rooms/02.jpg"],
+        size: 20,
+        amenities: ["Due letti singoli", "Bagno privato", "Wi-Fi gratuito", "Vista giardino"],
+        photos: [
+          "/images/como/rooms/twin/01.jpg",
+          "/images/como/rooms/twin/02.jpg",
+          "/images/como/rooms/twin/03.jpg",
+          "/images/como/rooms/twin/04.jpg",
+        ],
       },
       {
         type: "tripla",
-        wineName: "Amarone",
+        wineName: "Primitivo di Manduria",
         capacity: 3,
         size: 26,
-        amenities: ["Letto matrimoniale + singolo", "Bagno privato", "Wi-Fi gratuito", "Smart TV"],
-        photos: ["/images/como/rooms/03.jpg"],
+        amenities: ["Letto matrimoniale + singolo", "Terrazza privata", "Wi-Fi gratuito", "Smart TV"],
+        photos: [
+          "/images/como/rooms/tripla/01.jpg",
+          "/images/como/rooms/tripla/02.jpg",
+          "/images/como/rooms/tripla/03.jpg",
+          "/images/como/rooms/tripla/04.jpg",
+          "/images/como/rooms/tripla/05.jpg",
+        ],
       },
       {
         type: "suite",
         wineName: "Barolo Riserva",
         capacity: 4,
         size: 36,
-        amenities: ["Letto matrimoniale + sofà letto", "Salotto privato", "Wi-Fi gratuito", "Vista giardino"],
-        photos: ["/images/como/rooms/05.jpg"],
+        amenities: ["Letto matrimoniale + zona giorno", "Scrittoio dedicato", "Wi-Fi gratuito", "Vista giardino"],
+        photos: [
+          "/images/como/rooms/suite/01.jpg",
+          "/images/como/rooms/suite/02.jpg",
+          "/images/como/rooms/suite/03.jpg",
+          "/images/como/rooms/suite/04.jpg",
+          "/images/como/rooms/suite/05.jpg",
+        ],
       },
     ],
     // Verde coordinated with the property accent. Same saturation logic as
