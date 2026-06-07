@@ -33,6 +33,15 @@ import {
 
 const SLUG = "como" as const;
 
+/** Foto hero della prova — 3 immagini scelte dal cliente:
+ *  1) balcone con vista sul verde, 2) suite (parete blu, testata rossa),
+ *  3) corridoio con i poster "pasta e vino". Cross-fade via HeroSlideshow. */
+const HERO_SLIDES = [
+  "/images/como/hero-preview/1.jpg",
+  "/images/como/hero-preview/2.jpg",
+  "/images/como/hero-preview/3.jpg",
+];
+
 /** Badge di fiducia sotto la booking bar (5 voci come nel mockup). */
 const TRUST_BADGES = [
   { Icon: ClockIcon, title: "Reception", detail: "8:00 – 24:00" },
@@ -81,20 +90,23 @@ export function ComoLandingPreview() {
       {/* 1 · HERO — foto a tutta larghezza, nome città grande a sinistra */}
       <section className="relative">
         <div className="relative h-[82svh] min-h-[560px] max-h-[860px] overflow-hidden">
-          <HeroSlideshow slides={p.heroSlides} alt={`${p.fullName} — vista principale`} />
-          {/* Sfumatura scura a sinistra per leggibilità del testo */}
+          <HeroSlideshow slides={HERO_SLIDES} alt={`${p.fullName} — vista principale`} />
+          {/* Scrim globale + sfumatura più scura a sinistra: le 3 foto sono
+              molto chiare (verde, parete blu, corridoio), quindi serve un
+              velo deciso perché "Como" in bianco resti ben leggibile. */}
+          <div className="absolute inset-0 bg-black/30" aria-hidden />
           <div
             className="absolute inset-0"
             aria-hidden
             style={{
               background:
-                "linear-gradient(90deg, rgba(20,15,18,0.72) 0%, rgba(20,15,18,0.45) 38%, rgba(20,15,18,0.12) 70%, rgba(20,15,18,0) 100%)",
+                "linear-gradient(90deg, rgba(15,12,14,0.85) 0%, rgba(15,12,14,0.6) 40%, rgba(15,12,14,0.2) 72%, rgba(15,12,14,0) 100%)",
             }}
           />
 
           <div className="relative z-10 h-full mx-auto w-full max-w-[1200px] px-5 md:px-8 flex flex-col justify-center pb-28 md:pb-32">
-            <div className="max-w-xl text-white" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>
-              <h1 className="font-display font-bold leading-[0.95] text-6xl md:text-7xl lg:text-8xl mb-5">
+            <div className="max-w-xl text-white" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.85), 0 1px 4px rgba(0,0,0,0.9)" }}>
+              <h1 className="font-display font-bold leading-[0.95] text-6xl md:text-7xl lg:text-8xl mb-5 text-white">
                 Como
               </h1>
               <p className="text-lg md:text-xl text-white/95 leading-relaxed max-w-md mb-8">
