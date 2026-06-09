@@ -139,27 +139,28 @@ export function ComoLandingPreview() {
       </section>
 
       {/* 3 · TRUST BADGES — UNICA fascia verde (1 di 2). Reception = solo orari.
-            Allineamento a sinistra: le icone si incolonnano in modo pulito,
-            sia su mobile (2 col) sia su desktop (5 col). */}
-      <section style={{ backgroundColor: GREEN_BAND }} className="py-5 md:py-6">
-        <div className="mx-auto w-full max-w-[1120px] px-5 md:px-8">
-          {/* Mobile: colonne dimensionate al contenuto + w-fit/mx-auto così
-              l'intero gruppo di badge è centrato (non spostato a sinistra),
-              mantenendo le icone incolonnate. Da sm in poi torna grid pieno. */}
-          <ul className="grid grid-cols-[auto_auto] w-fit mx-auto gap-x-8 gap-y-4 sm:w-full sm:mx-0 sm:grid-cols-3 lg:grid-cols-5">
-            {TRUST_BADGES.map(({ Icon, title, detail }) => (
-              <li key={title} className="flex items-center gap-2.5">
-                <Icon className="w-5 h-5 text-verde-dark flex-shrink-0" aria-hidden />
-                <div className="leading-tight min-w-0">
-                  <p className="font-medium text-sm text-[var(--color-ink)] tabular-nums">
-                    {title}
+            Badge verticali centrati (icona sopra, testo sotto): celle
+            simmetriche, allineamento pulito a ogni breakpoint. In mobile
+            (2 col) l'ultimo badge si centra su tutta la larghezza. */}
+      <section style={{ backgroundColor: GREEN_BAND }} className="py-7 md:py-8">
+        <div className="mx-auto w-full max-w-[1080px] px-5 md:px-8">
+          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-y-7 gap-x-4 md:gap-x-6">
+            {TRUST_BADGES.map(({ Icon, title, detail }, i) => (
+              <li
+                key={title}
+                className={`flex flex-col items-center text-center gap-1.5 ${
+                  i === TRUST_BADGES.length - 1 ? "col-span-2 sm:col-span-1" : ""
+                }`}
+              >
+                <Icon className="w-6 h-6 text-verde-dark mb-1" aria-hidden />
+                <p className="font-medium text-sm text-[var(--color-ink)] tabular-nums leading-tight">
+                  {title}
+                </p>
+                {detail && (
+                  <p className="font-mono text-[11px] uppercase tracking-wide text-[var(--color-ink)]/65 leading-tight">
+                    {detail}
                   </p>
-                  {detail && (
-                    <p className="font-mono text-[11px] text-[var(--color-ink)]/70">
-                      {detail}
-                    </p>
-                  )}
-                </div>
+                )}
               </li>
             ))}
           </ul>
