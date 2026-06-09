@@ -138,17 +138,16 @@ export function ComoLandingPreview() {
         </div>
       </section>
 
-      {/* 3 · TRUST BADGES — UNICA fascia verde (1 di 2). Reception = solo orari */}
-      <section style={{ backgroundColor: GREEN_BAND }} className="py-4 md:py-5">
-        <div className="mx-auto w-full max-w-[1280px] px-5 md:px-8">
-          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-black/10">
+      {/* 3 · TRUST BADGES — UNICA fascia verde (1 di 2). Reception = solo orari.
+            Allineamento a sinistra: le icone si incolonnano in modo pulito,
+            sia su mobile (2 col) sia su desktop (5 col). */}
+      <section style={{ backgroundColor: GREEN_BAND }} className="py-5 md:py-6">
+        <div className="mx-auto w-full max-w-[1120px] px-5 md:px-8">
+          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-4">
             {TRUST_BADGES.map(({ Icon, title, detail }) => (
-              <li
-                key={title}
-                className="flex items-center justify-center gap-2.5 px-3 py-3 sm:py-2"
-              >
+              <li key={title} className="flex items-center gap-2.5">
                 <Icon className="w-5 h-5 text-verde-dark flex-shrink-0" aria-hidden />
-                <div className="leading-tight">
+                <div className="leading-tight min-w-0">
                   <p className="font-medium text-sm text-[var(--color-ink)] tabular-nums">
                     {title}
                   </p>
