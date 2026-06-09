@@ -31,11 +31,15 @@ export default function ComoPage() {
         ])}
       />
 
+      {/* Prova di design: fondo base NEUTRO (cream). Il verde compare solo
+          nelle due fasce dentro ComoLandingPreview (servizi + perché
+          scegliere). Header allargato (wide) per allinearsi alla booking
+          bar a 1280px. */}
       <div
-        style={{ "--color-bg": p.pageBg } as React.CSSProperties}
+        style={{ "--color-bg": "#F6F3EC" } as React.CSSProperties}
         className="bg-[var(--color-bg)] flex-grow flex flex-col"
       >
-        <Header property={SLUG} />
+        <Header property={SLUG} wide />
         <main id="contenuto" className="flex-grow">
           <ComoLandingPreview />
         </main>

@@ -5,7 +5,6 @@ import { assetSrc } from "@/lib/asset";
 import { Container } from "./Container";
 import { BookingWidget } from "./BookingWidget";
 import { Button } from "./Button";
-import { HeroSlideshow } from "./HeroSlideshow";
 import {
   ClockIcon,
   ParkingIcon,
@@ -16,36 +15,40 @@ import {
   LeafIcon,
   SunIcon,
   ChevronIcon,
+  BedIcon,
 } from "./icons";
 
 /**
  * PROVA DI DESIGN — pagina /como ridisegnata per imitare la struttura del
- * mockup inviato dal cliente (hero città + booking bar, badge fiducia,
- * sezione "oasi", carosello camere, sezione terrazza, "perché scegliere").
+ * mockup inviato dal cliente. Isolata: usata SOLO da app/como/page.tsx.
+ * Boutique e Milano continuano a usare PropertyPageContent.
  *
- * Isolata: usata SOLO da app/como/page.tsx. Boutique e Milano continuano a
- * usare il componente condiviso PropertyPageContent.
+ * Revisione 2 (feedback cliente):
+ *  - Hero come IMMAGINE FISSA (solo la foto del verde sul retro), più alta.
+ *  - Booking bar più lunga (1280) + più sottile + sovrapposta all'hero.
+ *  - "Reception" rimosso dai badge: restano solo gli orari.
+ *  - Verde SOLO nelle due fasce: servizi e "Perché scegliere Como".
+ *  - Verde leggermente più saturo (GREEN_BAND) per togliere l'effetto sbiadito.
+ *  - Parte finale rifatta: terrazza più presente + CTA di chiusura.
  *
- * Nota di onestà: il mockup parlava di "vista lago / sul lago di Como", ma
- * l'hotel è a Como NON sul lago. Tutti i riferimenti al lago sono stati
- * adattati a "verde / montagne comasche" per non creare false aspettative.
+ * Nota di onestà: il mockup parlava di "lago"; l'hotel è a Como NON sul lago,
+ * quindi i riferimenti sono adattati a "verde / montagne comasche".
  */
 
 const SLUG = "como" as const;
 
-/** Foto hero della prova — 3 immagini scelte dal cliente:
- *  1) balcone con vista sul verde, 2) suite (parete blu, testata rossa),
- *  3) corridoio con i poster "pasta e vino". Cross-fade via HeroSlideshow. */
-const HERO_SLIDES = [
-  "/images/como/hero-preview/1.jpg",
-  "/images/como/hero-preview/2.jpg",
-  "/images/como/hero-preview/3.jpg",
-];
+/** Verde leggermente più saturo del page-bg standard (#D9E3CF), usato SOLO
+ *  nelle due fasce richieste (servizi + "perché scegliere"). */
+const GREEN_BAND = "#C2D5AC";
 
-/** Badge di fiducia sotto la booking bar (5 voci come nel mockup). */
+/** Hero come immagine fissa: la foto del verde scattata sul retro dell'hotel. */
+const HERO_IMG = "/images/como/hero-preview/1.jpg";
+
+/** Badge di fiducia sotto la booking bar. La reception mostra SOLO gli orari
+ *  (senza la parola "Reception"), come da feedback. */
 const TRUST_BADGES = [
-  { Icon: ClockIcon, title: "Reception", detail: "8:00 – 24:00" },
-  { Icon: ParkingIcon, title: "Parcheggio", detail: "privato disponibile" },
+  { Icon: ClockIcon, title: "8:00 – 24:00", detail: "" },
+  { Icon: ParkingIcon, title: "Parcheggio", detail: "privato" },
   { Icon: WifiIcon, title: "Wi-Fi", detail: "gratuito" },
   { Icon: PriceTagIcon, title: "Miglior tariffa", detail: "garantita" },
   { Icon: ShieldCheckIcon, title: "Cancellazione", detail: "flessibile" },
@@ -57,19 +60,19 @@ const FEATURED_ROOMS = [
   {
     name: "Camera Matrimoniale",
     subtitle: "Vista verde",
-    priceFrom: "—", // REPLACE: prezzo reale "da € XX"
+    priceFrom: "—",
     photo: "/images/como/rooms/matrimoniale/01.jpg",
   },
   {
     name: "Camera Superior",
     subtitle: "Vista montagne",
-    priceFrom: "—", // REPLACE: prezzo reale "da € XX"
+    priceFrom: "—",
     photo: "/images/como/rooms/superior/01.jpg",
   },
   {
     name: "Suite",
     subtitle: "con zona giorno",
-    priceFrom: "—", // REPLACE: prezzo reale "da € XX"
+    priceFrom: "—",
     photo: "/images/como/rooms/suite/02.jpg",
   },
 ];
@@ -87,13 +90,18 @@ export function ComoLandingPreview() {
 
   return (
     <>
-      {/* 1 · HERO — foto a tutta larghezza, nome città grande a sinistra */}
+      {/* 1 · HERO — immagine fissa (verde sul retro), più alta per dare impatto */}
       <section className="relative">
-        <div className="relative h-[82svh] min-h-[560px] max-h-[860px] overflow-hidden">
-          <HeroSlideshow slides={HERO_SLIDES} alt={`${p.fullName} — vista principale`} />
-          {/* Scrim globale + sfumatura più scura a sinistra: le 3 foto sono
-              molto chiare (verde, parete blu, corridoio), quindi serve un
-              velo deciso perché "Como" in bianco resti ben leggibile. */}
+        <div className="relative h-[88svh] min-h-[620px] max-h-[940px] overflow-hidden">
+          <Image
+            src={assetSrc(HERO_IMG)}
+            alt={`${p.fullName} — vista sul verde dal retro dell'hotel`}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          {/* Velo deciso: la foto è chiara, così "Como" in bianco resta leggibile */}
           <div className="absolute inset-0 bg-black/30" aria-hidden />
           <div
             className="absolute inset-0"
@@ -104,8 +112,11 @@ export function ComoLandingPreview() {
             }}
           />
 
-          <div className="relative z-10 h-full mx-auto w-full max-w-[1200px] px-5 md:px-8 flex flex-col justify-center pb-28 md:pb-32">
-            <div className="max-w-xl text-white" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.85), 0 1px 4px rgba(0,0,0,0.9)" }}>
+          <div className="relative z-10 h-full mx-auto w-full max-w-[1280px] px-5 md:px-8 flex flex-col justify-center pb-32 md:pb-36">
+            <div
+              className="max-w-xl text-white"
+              style={{ textShadow: "0 2px 20px rgba(0,0,0,0.85), 0 1px 4px rgba(0,0,0,0.9)" }}
+            >
               <h1 className="font-display font-bold leading-[0.95] text-6xl md:text-7xl lg:text-8xl mb-5 text-white">
                 Como
               </h1>
@@ -119,40 +130,49 @@ export function ComoLandingPreview() {
           </div>
         </div>
 
-        {/* 2 · BOOKING BAR — card bianca che si sovrappone al fondo dell'hero */}
-        <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8">
-          <BookingWidget property={SLUG} variant="hero" />
+        {/* 2 · BOOKING BAR — più lunga (1280), più sottile, sovrapposta all'hero */}
+        <div className="mx-auto w-full max-w-[1280px] px-5 md:px-8">
+          <div className="relative z-20 -mt-12 md:-mt-16 bg-white rounded-[2px] shadow-xl border border-sabbia px-5 md:px-8 py-3 md:py-3.5">
+            <BookingWidget property={SLUG} variant="compact" />
+          </div>
         </div>
       </section>
 
-      {/* 3 · TRUST BADGES — riga di 5 icone */}
-      <section className="bg-[var(--color-bg)] pt-8 pb-4 md:pt-10 md:pb-6">
-        <Container>
-          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-px bg-sabbia border border-sabbia rounded-[2px] overflow-hidden">
+      {/* 3 · TRUST BADGES — UNICA fascia verde (1 di 2). Reception = solo orari */}
+      <section style={{ backgroundColor: GREEN_BAND }} className="py-4 md:py-5">
+        <div className="mx-auto w-full max-w-[1280px] px-5 md:px-8">
+          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-black/10">
             {TRUST_BADGES.map(({ Icon, title, detail }) => (
               <li
                 key={title}
-                className="flex items-center gap-3 bg-[var(--color-bg)] px-4 py-4 md:py-5"
+                className="flex items-center justify-center gap-2.5 px-3 py-3 sm:py-2"
               >
-                <Icon className="w-6 h-6 text-verde-dark flex-shrink-0" aria-hidden />
+                <Icon className="w-5 h-5 text-verde-dark flex-shrink-0" aria-hidden />
                 <div className="leading-tight">
-                  <p className="font-medium text-sm text-[var(--color-ink)]">{title}</p>
-                  <p className="font-mono text-[11px] text-[var(--color-ink-soft)] tabular-nums">
-                    {detail}
+                  <p className="font-medium text-sm text-[var(--color-ink)] tabular-nums">
+                    {title}
                   </p>
+                  {detail && (
+                    <p className="font-mono text-[11px] text-[var(--color-ink)]/70">
+                      {detail}
+                    </p>
+                  )}
                 </div>
               </li>
             ))}
           </ul>
-        </Container>
+        </div>
       </section>
 
-      {/* 4 · OASI — testo a sinistra + foto a destra */}
-      <section id="oasi" className="bg-[var(--color-bg)] py-14 md:py-20">
+      {/* 4 · OASI — testo a sinistra + foto a destra (fondo neutro) */}
+      <section id="oasi" className="bg-white py-16 md:py-24">
         <Container>
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
-              <h2 className="font-display text-3xl md:text-[40px] leading-tight text-vinaccia mb-5 [text-wrap:balance]">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-verde-dark mb-4">
+                Hotel RossoVino Como
+              </p>
+              <h2 className="font-display text-3xl md:text-[42px] leading-tight text-vinaccia mb-5 [text-wrap:balance]">
                 La tua oasi immersa nel verde
               </h2>
               <p className="text-[var(--color-ink-soft)] text-lg leading-relaxed mb-4">
@@ -169,7 +189,7 @@ export function ComoLandingPreview() {
                 Scopri le camere
               </Button>
             </div>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[2px] shadow-md">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[3px] shadow-lg">
               <Image
                 src={assetSrc("/images/como/rooms/suite/01.jpg")}
                 alt="Una camera dell'Hotel RossoVino Como"
@@ -182,30 +202,32 @@ export function ComoLandingPreview() {
         </Container>
       </section>
 
-      {/* 5 · LE NOSTRE CAMERE — 3 card + link "Vedi tutte" */}
-      <section className="bg-white py-14 md:py-20">
+      {/* 5 · LE NOSTRE CAMERE — 3 card + link "Vedi tutte" (fondo neutro) */}
+      <section className="bg-[var(--color-bg)] py-16 md:py-24">
         <Container>
-          <div className="flex items-end justify-between gap-4 mb-8">
-            <h2 className="font-display text-3xl md:text-[36px] text-vinaccia [text-wrap:balance]">
-              Le nostre camere
-            </h2>
+          <div className="flex items-end justify-between gap-4 mb-10">
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-verde-dark mb-3">
+                Soggiorna con noi
+              </p>
+              <h2 className="font-display text-3xl md:text-[40px] text-vinaccia leading-tight [text-wrap:balance]">
+                Le nostre camere
+              </h2>
+            </div>
             <Link
               href={`/${SLUG}/camere`}
-              className="inline-flex items-center gap-1.5 text-sm font-medium uppercase tracking-wide text-vinaccia hover:gap-2.5 transition-all flex-shrink-0"
+              className="inline-flex items-center gap-1.5 text-sm font-medium uppercase tracking-wide text-vinaccia hover:gap-2.5 transition-all flex-shrink-0 pb-1"
             >
               Vedi tutte
               <ChevronIcon className="w-4 h-4 -rotate-90" aria-hidden />
             </Link>
           </div>
 
-          <ul className="grid gap-5 md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {FEATURED_ROOMS.map((room) => (
-              <li
-                key={room.name}
-                className="group bg-white border border-sabbia rounded-[2px] overflow-hidden flex flex-col"
-              >
+              <li key={room.name} className="group">
                 <Link href={`/${SLUG}/camere`} className="block">
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-[3px] shadow-md">
                     <Image
                       src={assetSrc(room.photo)}
                       alt={room.name}
@@ -214,14 +236,14 @@ export function ComoLandingPreview() {
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>
-                  <div className="p-5 text-center">
+                  <div className="pt-4 text-center">
                     <h3 className="font-display text-xl text-[var(--color-ink)] leading-tight">
                       {room.name}
                     </h3>
                     <p className="text-sm text-[var(--color-ink-soft)] mt-1">
                       {room.subtitle}
                     </p>
-                    <p className="mt-3 font-mono text-sm text-vinaccia uppercase tracking-wider">
+                    <p className="mt-2 font-mono text-sm text-vinaccia uppercase tracking-wider">
                       da € {room.priceFrom}
                     </p>
                   </div>
@@ -232,21 +254,24 @@ export function ComoLandingPreview() {
         </Container>
       </section>
 
-      {/* 6 · TERRAZZE — foto a sinistra + testo a destra */}
-      <section className="bg-[var(--color-bg)] py-14 md:py-20">
+      {/* 6 · TERRAZZE — foto grande a sinistra + testo a destra (fondo neutro) */}
+      <section className="bg-white py-16 md:py-24">
         <Container>
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[2px] shadow-md order-1 lg:order-none">
+          <div className="grid lg:grid-cols-[1.15fr_1fr] gap-10 lg:gap-16 items-center">
+            <div className="relative aspect-[16/11] overflow-hidden rounded-[3px] shadow-lg order-1 lg:order-none">
               <Image
                 src={assetSrc("/images/como/terrazza.jpg")}
                 alt="Le terrazze esterne dell'Hotel RossoVino Como, immerse nel verde"
                 fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                sizes="(max-width: 1024px) 100vw, 55vw"
                 className="object-cover"
               />
             </div>
             <div>
-              <h2 className="font-display text-3xl md:text-[40px] leading-tight text-vinaccia mb-5 [text-wrap:balance]">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-verde-dark mb-4">
+                Colazione &amp; relax
+              </p>
+              <h2 className="font-display text-3xl md:text-[42px] leading-tight text-vinaccia mb-5 [text-wrap:balance]">
                 Le nostre terrazze nel verde
               </h2>
               <p className="text-[var(--color-ink-soft)] text-lg leading-relaxed mb-8">
@@ -262,17 +287,22 @@ export function ComoLandingPreview() {
         </Container>
       </section>
 
-      {/* 7 · PERCHÉ SCEGLIERE COMO — 4 colonne con icona */}
-      <section className="bg-white py-14 md:py-20 border-t border-sabbia">
+      {/* 7 · PERCHÉ SCEGLIERE COMO — UNICA fascia verde (2 di 2) */}
+      <section style={{ backgroundColor: GREEN_BAND }} className="py-16 md:py-24">
         <Container>
-          <h2 className="font-display text-3xl md:text-[36px] text-vinaccia text-center mb-12 [text-wrap:balance]">
-            Perché scegliere Como
-          </h2>
-          <ul className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+          <div className="text-center max-w-2xl mx-auto mb-12 md:mb-14">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-verde-dark mb-3">
+              La tua scelta
+            </p>
+            <h2 className="font-display text-3xl md:text-[40px] text-vinaccia leading-tight [text-wrap:balance]">
+              Perché scegliere Como
+            </h2>
+          </div>
+          <ul className="grid grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12">
             {WHY_CHOOSE.map(({ Icon, label }) => (
               <li key={label} className="flex flex-col items-center text-center gap-4">
-                <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-verde-light/50 text-verde-dark">
-                  <Icon className="w-7 h-7" aria-hidden />
+                <span className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/70 text-verde-dark shadow-sm">
+                  <Icon className="w-8 h-8" aria-hidden />
                 </span>
                 <p className="text-[var(--color-ink)] leading-snug max-w-[180px]">
                   {label}
@@ -281,6 +311,41 @@ export function ComoLandingPreview() {
             ))}
           </ul>
         </Container>
+      </section>
+
+      {/* 8 · CTA FINALE — fascia immagine con overlay, chiusura forte */}
+      <section className="relative overflow-hidden">
+        <div className="relative h-[46svh] min-h-[360px] max-h-[520px]">
+          <Image
+            src={assetSrc(HERO_IMG)}
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/55" aria-hidden />
+          <div className="relative z-10 h-full mx-auto w-full max-w-[1280px] px-5 md:px-8 flex flex-col items-center justify-center text-center text-white">
+            <h2
+              className="font-display text-white text-3xl md:text-[44px] leading-tight mb-4 [text-wrap:balance]"
+              style={{ textShadow: "0 2px 16px rgba(0,0,0,0.6)" }}
+            >
+              Pronto a vivere Como con noi?
+            </h2>
+            <p className="text-white/90 text-lg max-w-xl mb-8 leading-relaxed">
+              Verifica la disponibilità in tempo reale, oppure contattaci
+              direttamente — siamo a un click di distanza.
+            </p>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <Button href="#prenota" variant="primary">
+                <BedIcon className="w-5 h-5" aria-hidden />
+                Verifica disponibilità
+              </Button>
+              <Button href={`/${SLUG}/contatti`} variant="outline-on-dark">
+                Contattaci
+              </Button>
+            </div>
+          </div>
+        </div>
       </section>
     </>
   );

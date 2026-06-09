@@ -16,6 +16,10 @@ import { MobileMenu } from "./MobileMenu";
 interface HeaderProps {
   /** When set, header shows the property-specific nav + contacts. */
   property?: PropertySlug;
+  /** Widens the header content to 1280px (instead of 1200px) so the logo
+   *  sits a touch further left and aligns with a wider page layout. Used by
+   *  the Como landing design test. Default keeps the standard 1200px. */
+  wide?: boolean;
 }
 
 /** Group-level nav links shown on the homepage and on /contatti. */
@@ -37,18 +41,19 @@ function propertyNav(slug: PropertySlug) {
   ];
 }
 
-export function Header({ property }: HeaderProps) {
+export function Header({ property, wide = false }: HeaderProps) {
   const p = property ? PROPERTIES[property] : null;
   const phone = p?.phone ?? SITE.groupPhone;
   const whatsapp = p?.whatsapp ?? SITE.groupWhatsapp;
   const nav = p ? propertyNav(p.slug) : groupNav;
+  const maxW = wide ? "max-w-[1280px]" : "max-w-[1200px]";
 
   return (
     <header className="sticky top-0 z-40 bg-[var(--color-bg)]/95 backdrop-blur-sm border-b border-[color:var(--color-border)]">
       {/* Tiny "back to group" strip when on a property page */}
       {p && (
         <div className="border-b border-[color:var(--color-border)]/60 bg-white/40">
-          <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8 py-1.5">
+          <div className={`mx-auto w-full ${maxW} px-5 md:px-8 py-1.5`}>
             <Link
               href="/"
               className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--color-ink-soft)] hover:text-vinaccia transition-colors inline-flex items-center gap-1"
@@ -64,7 +69,7 @@ export function Header({ property }: HeaderProps) {
           push the hamburger toward the center. Logo on the left,
           optional centered nav, then the right cluster (which always
           ends with the mobile hamburger). */}
-      <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8 h-16 md:h-20 lg:h-24 flex items-center justify-between gap-4 lg:gap-6">
+      <div className={`mx-auto w-full ${maxW} px-5 md:px-8 h-16 md:h-20 lg:h-24 flex items-center justify-between gap-4 lg:gap-6`}>
         <Logo property={property} size="md" />
 
         {/* Desktop nav — only when on a property page */}
