@@ -143,7 +143,10 @@ export function ComoLandingPreview() {
             sia su mobile (2 col) sia su desktop (5 col). */}
       <section style={{ backgroundColor: GREEN_BAND }} className="py-5 md:py-6">
         <div className="mx-auto w-full max-w-[1120px] px-5 md:px-8">
-          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-4">
+          {/* Mobile: colonne dimensionate al contenuto + w-fit/mx-auto così
+              l'intero gruppo di badge è centrato (non spostato a sinistra),
+              mantenendo le icone incolonnate. Da sm in poi torna grid pieno. */}
+          <ul className="grid grid-cols-[auto_auto] w-fit mx-auto gap-x-8 gap-y-4 sm:w-full sm:mx-0 sm:grid-cols-3 lg:grid-cols-5">
             {TRUST_BADGES.map(({ Icon, title, detail }) => (
               <li key={title} className="flex items-center gap-2.5">
                 <Icon className="w-5 h-5 text-verde-dark flex-shrink-0" aria-hidden />
