@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { ComoHeaderPreview } from "@/components/ComoHeaderPreview";
 import { ComoLandingPreview } from "@/components/ComoLandingPreview";
 import { JsonLd } from "@/components/JsonLd";
 import { PROPERTIES, SITE } from "@/lib/config";
+import { COMO_THEME } from "@/lib/como-theme";
 import {
   breadcrumbSchema,
   hotelSchema,
@@ -14,10 +15,6 @@ const SLUG = "como" as const;
 
 export const metadata: Metadata = propertyMetadata(SLUG);
 
-// PROVA DI DESIGN: la pagina /como usa ora ComoLandingPreview (struttura
-// del mockup cliente) invece del componente condiviso PropertyPageContent.
-// Boutique e Milano restano su PropertyPageContent.
-// faqSchema rimosso perché la FAQ non è più renderizzata in pagina.
 export default function ComoPage() {
   const p = PROPERTIES[SLUG];
 
@@ -31,19 +28,22 @@ export default function ComoPage() {
         ])}
       />
 
-      {/* Prova di design: fondo base NEUTRO (cream). Il verde compare solo
-          nelle due fasce dentro ComoLandingPreview (servizi + perché
-          scegliere). Header allargato (wide) per allinearsi alla booking
-          bar a 1280px. */}
+      {/* PROVA DI DESIGN — tema "verde foresta + crema" del mockup cliente,
+          limitato alla landing /como (vedi lib/como-theme.ts). Boutique e
+          Milano restano su PropertyPageContent con la palette standard. */}
+      {/* [&>footer]:mt-0! annulla il mt-24 del Footer condiviso: nel mockup
+          il footer segue subito l'ultima sezione. */}
       <div
-        style={{ "--color-bg": "#F6F3EC" } as React.CSSProperties}
-        className="bg-[var(--color-bg)] flex-grow flex flex-col"
+        style={COMO_THEME}
+        className="bg-[var(--color-bg)] flex-grow flex flex-col [&>footer]:mt-0!"
       >
-        <Header property={SLUG} wide />
+        <ComoHeaderPreview />
         <main id="contenuto" className="flex-grow">
           <ComoLandingPreview />
         </main>
-        <Footer property={SLUG} />
+        {/* Footer senza `property`: mostra le tre strutture su tre colonne,
+            come nel mockup (Como, Milano Boutique, Milano Hotel). */}
+        <Footer />
       </div>
     </>
   );
