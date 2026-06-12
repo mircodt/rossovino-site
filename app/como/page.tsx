@@ -41,9 +41,7 @@ export default function ComoPage() {
         <main id="contenuto" className="flex-grow">
           <ComoLandingPreview />
         </main>
-        {/* Footer senza `property`: mostra le tre strutture su tre colonne,
-            come nel mockup (Como, Milano Boutique, Milano Hotel). */}
-        <Footer />
+        <Footer property={SLUG} />
       </div>
     </>
   );
