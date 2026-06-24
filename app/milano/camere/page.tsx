@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Header } from "@/components/Header";
+import { PropertyHeaderPreview } from "@/components/PropertyHeaderPreview";
 import { Footer } from "@/components/Footer";
 import { SubPageHero } from "@/components/SubPageHero";
 import { RoomsPageContent } from "@/components/RoomsPageContent";
 import { JsonLd } from "@/components/JsonLd";
 import { PROPERTIES, SITE } from "@/lib/config";
+import { propertyTheme } from "@/lib/property-theme";
 import { breadcrumbSchema, canonical, subPageMetadata } from "@/lib/seo";
 
 const SLUG = "milano" as const;
@@ -24,10 +25,10 @@ export default function Page() {
         ])}
       />
       <div
-        style={{ "--color-bg": p.pageBg } as React.CSSProperties}
+        style={propertyTheme(SLUG)}
         className="bg-[var(--color-bg)] flex-grow flex flex-col"
       >
-        <Header property={SLUG} />
+        <PropertyHeaderPreview slug={SLUG} />
         <main id="contenuto" className="flex-grow">
           <SubPageHero
             slug={SLUG}
@@ -37,7 +38,7 @@ export default function Page() {
           />
           <RoomsPageContent slug={SLUG} />
         </main>
-        <Footer property={SLUG} />
+        <Footer />
       </div>
     </>
   );

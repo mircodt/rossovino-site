@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { PropertyPageContent } from "@/components/PropertyPageContent";
+import { PropertyHeaderPreview } from "@/components/PropertyHeaderPreview";
+import { PropertyLandingPreview } from "@/components/PropertyLandingPreview";
 import { JsonLd } from "@/components/JsonLd";
 import { PROPERTIES, SITE } from "@/lib/config";
 import { CONTENT } from "@/lib/content";
+import { propertyTheme } from "@/lib/property-theme";
 import {
   breadcrumbSchema,
   faqSchema,
@@ -31,15 +32,13 @@ export default function MilanoPage() {
         ])}
       />
 
-      <div
-        style={{ "--color-bg": p.pageBg } as React.CSSProperties}
-        className="bg-[var(--color-bg)] flex-grow flex flex-col"
-      >
-        <Header property={SLUG} />
+      {/* PROVA DI DESIGN — tema "blu navy + grigio chiaro" del mockup cliente. */}
+      <div style={propertyTheme(SLUG)} className="bg-[var(--color-bg)] flex-grow flex flex-col">
+        <PropertyHeaderPreview slug={SLUG} />
         <main id="contenuto" className="flex-grow">
-          <PropertyPageContent slug={SLUG} />
+          <PropertyLandingPreview slug={SLUG} />
         </main>
-        <Footer property={SLUG} />
+        <Footer />
       </div>
     </>
   );

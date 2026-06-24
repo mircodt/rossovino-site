@@ -17,11 +17,11 @@ interface Props {
 }
 
 const sizeClass: Record<"sm" | "md" | "lg", string> = {
-  sm: "h-6 md:h-7",
-  // Header default — bumps to 48px on desktop (lg+) so the brand is the
-  // dominant element of the cleaner header.
-  md: "h-7 md:h-9 lg:h-12",
-  lg: "h-8 md:h-11",
+  // +~10% rispetto ai valori precedenti (richiesta riunione 24/06/2026).
+  sm: "h-[1.65rem] md:h-[1.95rem]",
+  // Header default — il brand è l'elemento dominante dell'header pulito.
+  md: "h-8 md:h-10 lg:h-[3.3rem]",
+  lg: "h-9 md:h-12",
 };
 
 /**

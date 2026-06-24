@@ -12,7 +12,7 @@ import {
 } from "@/lib/config";
 import { BedIcon, PhoneIcon, WhatsappIcon, XIcon } from "./icons";
 import { BookingWidget } from "./BookingWidget";
-import { COMO_THEME } from "@/lib/como-theme";
+import { propertyTheme } from "@/lib/property-theme";
 
 interface Props {
   /** When set, uses property-specific phone/whatsapp and pre-fills the
@@ -235,7 +235,7 @@ export function StickyMobileBar({ property, mode = "full" }: Props) {
   // riapplica le CSS vars del tema verde (non influisce sul layout dei
   // figli position:fixed).
   return createPortal(
-    <div style={property === "como" ? COMO_THEME : undefined}>
+    <div style={property ? propertyTheme(property) : undefined}>
       {bar}
       {modal}
     </div>,

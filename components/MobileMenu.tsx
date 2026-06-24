@@ -79,7 +79,8 @@ export function MobileMenu({ property }: Props) {
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <header className="flex items-center justify-between gap-4 px-5 h-16 border-b border-[color:var(--color-border)]">
+        {/* Logo centrato (richiesta riunione), X a destra in posizione assoluta. */}
+        <header className="relative flex items-center justify-center px-5 h-16 border-b border-[color:var(--color-border)]">
           <Link href="/" onClick={close} aria-label="Hotel RossoVino — homepage">
             <Logo asLink={false} size="sm" />
           </Link>
@@ -87,7 +88,7 @@ export function MobileMenu({ property }: Props) {
             type="button"
             onClick={close}
             aria-label="Chiudi menu"
-            className="inline-flex items-center justify-center w-11 h-11 rounded-[2px] text-[var(--color-ink)] hover:bg-sabbia-light transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-11 h-11 rounded-[2px] text-[var(--color-ink)] hover:bg-sabbia-light transition-colors"
           >
             <XIcon className="w-6 h-6" aria-hidden />
           </button>

@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/Footer";
-import { ComoHeaderPreview } from "@/components/ComoHeaderPreview";
-import { ComoLandingPreview } from "@/components/ComoLandingPreview";
+import { PropertyHeaderPreview } from "@/components/PropertyHeaderPreview";
+import { PropertyLandingPreview } from "@/components/PropertyLandingPreview";
 import { JsonLd } from "@/components/JsonLd";
 import { PROPERTIES, SITE } from "@/lib/config";
-import { COMO_THEME } from "@/lib/como-theme";
-import {
-  breadcrumbSchema,
-  hotelSchema,
-  propertyMetadata,
-} from "@/lib/seo";
+import { propertyTheme } from "@/lib/property-theme";
+import { breadcrumbSchema, hotelSchema, propertyMetadata } from "@/lib/seo";
 
 const SLUG = "como" as const;
 
@@ -28,21 +24,13 @@ export default function ComoPage() {
         ])}
       />
 
-      {/* PROVA DI DESIGN — tema "verde foresta + crema" del mockup cliente,
-          limitato alla landing /como (vedi lib/como-theme.ts). Boutique e
-          Milano restano su PropertyPageContent con la palette standard. */}
-      {/* [&>footer]:mt-0! annulla il mt-24 del Footer condiviso: nel mockup
-          il footer segue subito l'ultima sezione. */}
-      <div
-        style={COMO_THEME}
-        className="bg-[var(--color-bg)] flex-grow flex flex-col [&>footer]:mt-0!"
-      >
-        <ComoHeaderPreview />
+      {/* PROVA DI DESIGN — tema "verde foresta + crema" del mockup cliente
+          (vedi lib/property-theme.ts). */}
+      <div style={propertyTheme(SLUG)} className="bg-[var(--color-bg)] flex-grow flex flex-col">
+        <PropertyHeaderPreview slug={SLUG} />
         <main id="contenuto" className="flex-grow">
-          <ComoLandingPreview />
+          <PropertyLandingPreview slug={SLUG} />
         </main>
-        {/* Footer senza `property`: mostra le tre strutture su tre colonne
-            (Como, Milano Boutique, Milano Hotel). */}
         <Footer />
       </div>
     </>

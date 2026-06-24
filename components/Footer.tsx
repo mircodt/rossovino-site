@@ -10,60 +10,58 @@ import {
   whatsappHref,
 } from "@/lib/config";
 import { assetSrc } from "@/lib/asset";
+import { imageDir } from "@/lib/property-theme";
 
 interface Props {
-  /** When set, the footer shows ONLY this property's contacts (instead of
-   *  all three). Used on property landing pages and their sub-pages so a
-   *  visitor on /como sees Como's contacts, not Milano's or Boutique's. */
+  /** Mantenuto per compatibilità con le chiamate esistenti. Il footer
+   *  mostra comunque SEMPRE tutte e tre le strutture (richiesta cliente:
+   *  "immagini di tutte e tre le strutture"). */
   property?: PropertySlug;
 }
 
 export function Footer({ property }: Props) {
   const year = new Date().getFullYear();
-  // Property pages → single property in the contacts column. Group pages
-  // (homepage, /contatti) → all three.
-  const slugsToShow: PropertySlug[] = property ? [property] : PROPERTY_ORDER;
+  void property; // tutte le strutture, sempre
 
   return (
     <footer className="bg-vinaccia-dark text-white mt-24 pb-24 lg:pb-12">
       <div className="mx-auto w-full max-w-[1200px] px-5 md:px-8 py-14">
-        <div
-          className={`grid gap-10 ${
-            // 4 col when 3 properties shown, 2 col when only 1
-            property ? "md:grid-cols-2" : "md:grid-cols-4"
-          }`}
-        >
-          <div>
-            {/* Brand logo — recolored, here rendered against the dark vinaccia
-                footer bg so we invert/whitened via CSS for legibility. */}
-            <Image
-              src={assetSrc("/images/brand/logo-rossovino.png")}
-              alt="Hotel RossoVino"
-              width={220}
-              height={33}
-              className="w-44 h-auto mb-4"
-              style={{ filter: "brightness(0) invert(1)" }}
-            />
-            <p className="text-sm text-white/80 leading-relaxed max-w-xs">
-              {property
-                ? `Una delle tre proprietà del Gruppo RossoVino.`
-                : "Gruppo Hotel RossoVino — tre proprietà a Milano e Como, ispirate al mondo del vino italiano."}
-            </p>
-            {property && (
-              <Link
-                href="/"
-                className="mt-4 inline-flex items-center gap-1 text-sm text-white/80 hover:text-sabbia transition-colors"
-              >
-                <span aria-hidden>←</span> Tutte le strutture
-              </Link>
-            )}
-          </div>
+        {/* Brand */}
+        <div className="mb-12 max-w-md">
+          <Image
+            src={assetSrc("/images/brand/logo-rossovino.png")}
+            alt="Hotel RossoVino"
+            width={240}
+            height={36}
+            className="w-48 h-auto mb-4"
+            style={{ filter: "brightness(0) invert(1)" }}
+          />
+          <p className="text-sm text-white/80 leading-relaxed">
+            Tre strutture, una sola anima: il vino italiano. Ospitalità autentica
+            a Milano e Como.
+          </p>
+        </div>
 
-          {slugsToShow.map((slug) => {
+        {/* Le tre strutture — ognuna con la sua immagine + contatti */}
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {PROPERTY_ORDER.map((slug) => {
             const p = PROPERTIES[slug];
             return (
               <div key={slug}>
-                <div className="font-display text-lg mb-3">{p.fullName}</div>
+                <Link href={`/${slug}`} className="group block">
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-[3px] mb-4">
+                    <Image
+                      src={assetSrc(`/images/${imageDir(slug)}/preview.jpg`)}
+                      alt={p.fullName}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="font-display text-lg mb-3 group-hover:text-sabbia transition-colors">
+                    {p.fullName}
+                  </div>
+                </Link>
                 <ul className="space-y-2 text-sm text-white/85">
                   {hasContact(p.phone) && (
                     <li>
@@ -102,16 +100,6 @@ export function Footer({ property }: Props) {
                     <br />
                     {p.address.postalCode} {p.address.addressLocality} ({p.address.addressRegion})
                   </li>
-                  {!property && (
-                    <li>
-                      <Link
-                        href={`/${slug}`}
-                        className="hover:text-sabbia transition-colors underline-offset-2 hover:underline"
-                      >
-                        Scopri la struttura →
-                      </Link>
-                    </li>
-                  )}
                 </ul>
               </div>
             );
