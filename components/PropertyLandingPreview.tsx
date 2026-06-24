@@ -331,7 +331,6 @@ export function PropertyLandingPreview({ slug }: Props) {
                   <div className="py-5 px-4 text-center">
                     <h3 className="font-display text-xl text-[var(--color-ink)] leading-tight">{room.name}</h3>
                     <p className="text-sm text-[var(--color-ink-soft)] mt-1">{room.subtitle}</p>
-                    <p className="mt-2.5 text-sm font-medium text-vinaccia tracking-wide">da € —</p>
                   </div>
                 </Link>
               </li>
