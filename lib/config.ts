@@ -55,10 +55,21 @@ export interface PropertyConfig {
     description?: string;
     photos: string[];
   };
-  /** Room types offered by this property. Wine names are illustrative —
-   *  client will provide the real assignment of wine names to typologies. */
+  /** Room types offered by this property. Le camere sono nominate per
+   *  TIPOLOGIA (non per vino): ogni struttura ha 20+ camere, ognuna con un
+   *  vino diverso, quindi un vino non identifica una tipologia. `wineName`
+   *  è mantenuto come etichetta interna/esempio ma non è il titolo mostrato. */
   roomTypes: {
-    type: "matrimoniale" | "matrimoniale-economy" | "matrimoniale-superior" | "twin" | "tripla" | "suite";
+    type:
+      | "matrimoniale"
+      | "matrimoniale-economy"
+      | "matrimoniale-superior"
+      | "matrimoniale-deluxe-vasca"
+      | "twin"
+      | "twin-superior"
+      | "tripla"
+      | "tripla-superior"
+      | "suite";
     wineName: string;
     capacity: number;
     /** Square meters (number — render as `${size} m²`). */
@@ -142,9 +153,11 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       "/images/boutique/rooms/suite-vasca/05.jpg",
     ],
     roomExample: {
-      name: "Cabernet Sauvignon",
+      // Camera 309 = Tripla Superior (Cabernet Sauvignon). Mostrata come
+      // esempio del Boutique, specificando che è una TRIPLA.
+      name: "Tripla Superior",
       description:
-        "Camera 309 — soffitto a travi a vista, parete d'accento vinaccia, lucernario sul tetto della villa.",
+        "Camera 309 (Cabernet Sauvignon) — tripla superior con soffitto a travi a vista e lucernario sul tetto della villa.",
       photos: [
         "/images/boutique/room-example/1.jpg",
         "/images/boutique/room-example/2.jpg",
@@ -155,14 +168,12 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
         "/images/boutique/room-example/7.jpg",
       ],
     },
-    // 3 tipologie corrispondenti alle 3 sottocartelle di
-    // websizephotos/STANZE/FOTO STANZE MILANO BOUTIQUE/.
-    // Nomi-vino e mq: il cliente confermerà la mappatura definitiva
-    // (qui assegnati per restare nel mood RossoVino).
+    // 4 tipologie ufficiali del Boutique (no "Suite" — la suite è solo a Como).
+    // Le camere sono nominate per tipologia; i vini sono per singola camera.
     roomTypes: [
       {
         type: "matrimoniale-superior",
-        wineName: "Barbaresco",
+        wineName: "Matrimoniale Superior",
         capacity: 2,
         size: 22,
         amenities: ["Letto matrimoniale", "Parete d'accento vinaccia", "Wi-Fi gratuito", "Smart TV"],
@@ -175,8 +186,8 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
         ],
       },
       {
-        type: "twin",
-        wineName: "Nebbiolo",
+        type: "twin-superior",
+        wineName: "Twin Superior",
         capacity: 2,
         size: 20,
         amenities: ["Due letti singoli", "Parquet a spina di pesce", "Wi-Fi gratuito", "Smart TV"],
@@ -189,11 +200,26 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
         ],
       },
       {
-        type: "suite",
-        wineName: "Brunello di Montalcino",
+        // Camera 309 — tripla superior. Usa le foto della camera esempio (309).
+        type: "tripla-superior",
+        wineName: "Tripla Superior",
+        capacity: 3,
+        size: 26,
+        amenities: ["Due letti matrimoniali", "Travi a vista", "Wi-Fi gratuito", "Smart TV"],
+        photos: [
+          "/images/boutique/room-example/1.jpg",
+          "/images/boutique/room-example/2.jpg",
+          "/images/boutique/room-example/3.jpg",
+          "/images/boutique/room-example/4.jpg",
+          "/images/boutique/room-example/5.jpg",
+        ],
+      },
+      {
+        type: "matrimoniale-deluxe-vasca",
+        wineName: "Matrimoniale Deluxe con Vasca",
         capacity: 2,
         size: 30,
-        amenities: ["Vasca freestanding", "Travi a vista", "Wi-Fi gratuito", "Smart TV"],
+        amenities: ["Letto matrimoniale", "Vasca freestanding", "Travi a vista", "Wi-Fi gratuito"],
         photos: [
           "/images/boutique/rooms/suite-vasca/01.jpg",
           "/images/boutique/rooms/suite-vasca/02.jpg",
@@ -287,9 +313,11 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       "/images/milano/rooms/tripla/08.jpg",
     ],
     roomExample: {
-      name: "Nebbiolo", // REPLACE: confermare nome con il cliente
+      // L'esempio NON è più "Nebbiolo" (camera superior del Boutique).
+      // Hotel RossoVino mostra una camera matrimoniale standard.
+      name: "Matrimoniale Standard",
       description:
-        "Una camera tipo dell'Hotel RossoVino Milano — materiali curati e comfort essenziale per chi visita la città.",
+        "Una camera matrimoniale dell'Hotel RossoVino Milano — materiali curati e comfort essenziale per chi visita la città.",
       photos: [
         "/images/milano/room-example/1.jpg",
         "/images/milano/room-example/2.jpg",
@@ -308,7 +336,7 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     roomTypes: [
       {
         type: "matrimoniale-economy",
-        wineName: "Lambrusco",
+        wineName: "Matrimoniale Economy",
         capacity: 2,
         size: 14,
         amenities: ["Letto matrimoniale", "Bagno in comune", "Wi-Fi gratuito", "Smart TV"],
@@ -325,7 +353,7 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       },
       {
         type: "matrimoniale",
-        wineName: "Sangiovese",
+        wineName: "Matrimoniale Standard",
         capacity: 2,
         size: 16,
         amenities: ["Letto matrimoniale", "Bagno privato", "Wi-Fi gratuito", "Smart TV"],
@@ -338,11 +366,12 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
         ],
       },
       {
+        // "Doppia letti separati": un letto matrimoniale + un letto singolo.
         type: "twin",
-        wineName: "Pinot Grigio",
+        wineName: "Doppia Letti Separati",
         capacity: 2,
         size: 16,
-        amenities: ["Due letti singoli", "Bagno privato", "Wi-Fi gratuito", "Smart TV"],
+        amenities: ["Letto matrimoniale + letto singolo", "Bagno privato", "Wi-Fi gratuito", "Smart TV"],
         photos: [
           "/images/milano/rooms/twin/01.jpeg",
           "/images/milano/rooms/twin/02.jpeg",
@@ -353,11 +382,12 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
         ],
       },
       {
+        // "Tripla standard": due letti matrimoniali.
         type: "tripla",
-        wineName: "Barbera",
+        wineName: "Tripla Standard",
         capacity: 3,
         size: 22,
-        amenities: ["Letto matrimoniale + singolo", "Bagno privato", "Wi-Fi gratuito", "Smart TV"],
+        amenities: ["Due letti matrimoniali", "Bagno privato", "Wi-Fi gratuito", "Smart TV"],
         photos: [
           "/images/milano/rooms/tripla/01.jpeg",
           "/images/milano/rooms/tripla/02.jpeg",
@@ -456,9 +486,9 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       "/images/como/rooms/suite/05.jpg",
     ],
     roomExample: {
-      name: "Chianti", // REPLACE: confermare nome con il cliente
+      name: "Matrimoniale",
       description:
-        "Camera doppia comfort — parete d'accento verde-acqua, intestata in vinaccia, vista sul giardino di Villa Giovio.",
+        "Camera matrimoniale comfort — parete d'accento verde-acqua, intestata in vinaccia, vista sul giardino di Villa Giovio.",
       photos: [
         "/images/como/room-example/1.jpg",
         "/images/como/room-example/2.jpg",
@@ -480,7 +510,7 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
     roomTypes: [
       {
         type: "matrimoniale",
-        wineName: "Chianti",
+        wineName: "Matrimoniale",
         capacity: 2,
         size: 18,
         amenities: ["Letto matrimoniale", "Bagno privato", "Wi-Fi gratuito", "Smart TV"],
@@ -494,7 +524,7 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       },
       {
         type: "matrimoniale-superior",
-        wineName: "Brunello",
+        wineName: "Matrimoniale Superior",
         capacity: 2,
         size: 22,
         amenities: ["Letto matrimoniale", "Pannelli decorativi 3D", "Wi-Fi gratuito", "Smart TV"],
@@ -510,7 +540,7 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
         // Tripla — configurazione con letto matrimoniale + singolo per
         // ospitare fino a 3 persone (era erroneamente "twin"/capacity 2).
         type: "tripla",
-        wineName: "Pinot Grigio",
+        wineName: "Tripla",
         capacity: 3,
         size: 22,
         amenities: ["Letto matrimoniale + singolo", "Bagno privato", "Wi-Fi gratuito", "Vista giardino"],
@@ -523,7 +553,7 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       },
       {
         type: "tripla",
-        wineName: "Primitivo di Manduria",
+        wineName: "Tripla con Terrazza",
         capacity: 3,
         size: 26,
         amenities: ["Letto matrimoniale + singolo", "Terrazza privata", "Wi-Fi gratuito", "Smart TV"],
@@ -537,7 +567,7 @@ export const PROPERTIES: Record<PropertySlug, PropertyConfig> = {
       },
       {
         type: "suite",
-        wineName: "Barolo Riserva",
+        wineName: "Suite",
         capacity: 4,
         size: 36,
         amenities: ["Letto matrimoniale + zona giorno", "Scrittoio dedicato", "Wi-Fi gratuito", "Vista giardino"],

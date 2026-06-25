@@ -14,17 +14,6 @@ export function RoomsPageContent({ slug }: { slug: PropertySlug }) {
   const p = PROPERTIES[slug];
   const c = CONTENT[slug];
 
-  // roomTypes lives in PROPERTIES[slug].roomTypes — single source of truth.
-  // Map the internal type key to a human label for the badge.
-  const TYPE_LABEL: Record<string, string> = {
-    matrimoniale: "Matrimoniale",
-    "matrimoniale-economy": "Matrimoniale Economy",
-    "matrimoniale-superior": "Matrimoniale Superior",
-    twin: "Twin",
-    tripla: "Tripla",
-    suite: "Suite",
-  };
-
   return (
     <>
       {/* Intro + comforts grid */}
@@ -51,19 +40,19 @@ export function RoomsPageContent({ slug }: { slug: PropertySlug }) {
       <section className="bg-[var(--color-bg)] py-12 md:py-20">
         <Container>
           <SectionHeading eyebrow="Tipologie di camere">
-            Le camere come grandi vini
+            Le nostre tipologie di camera
           </SectionHeading>
           <p className="mt-4 text-[var(--color-ink-soft)] text-lg max-w-2xl leading-relaxed">
-            Ogni camera porta il nome di un vino italiano d&apos;autore. Stessa
-            anima, dettagli diversi.
+            Camere distinte per tipologia e comfort. Ogni camera della struttura
+            porta inoltre il nome di un vino italiano d&apos;autore.
           </p>
 
           <ul className="mt-8 grid gap-5 md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {p.roomTypes.map((room) => {
+            {p.roomTypes.map((room, i) => {
               const photo = room.photos[0] ?? p.heroImage;
               return (
                 <li
-                  key={room.wineName}
+                  key={`${room.type}-${i}`}
                   className="bg-white border border-sabbia rounded-[2px] overflow-hidden flex flex-col"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
@@ -74,9 +63,6 @@ export function RoomsPageContent({ slug }: { slug: PropertySlug }) {
                       sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover"
                     />
-                    <span className="absolute top-3 left-3 bg-white/95 text-[var(--color-ink)] font-mono text-[10px] uppercase tracking-wider px-2 py-1 rounded-[2px]">
-                      {TYPE_LABEL[room.type] ?? room.type}
-                    </span>
                   </div>
                   <div className="p-5 md:p-6 flex-1 flex flex-col">
                     <h3 className="font-display text-xl text-[var(--color-ink)] mb-2">
