@@ -101,43 +101,45 @@ export function PropertyHeaderPreview({ slug }: Props) {
         </nav>
 
         {/* Cluster destro */}
-        <div className="ml-auto flex items-center gap-2 md:gap-3">
-          {/* Desktop: telefono + Prenota ora */}
-          <div className="hidden lg:flex items-center gap-5">
-            {hasContact(phone) && (
-              <a
-                href={telHref(phone)}
-                className="inline-flex items-center gap-2 font-mono text-[12px] tabular-nums text-white/85 hover:text-white transition-colors"
-                title={
-                  p.receptionHours
-                    ? `${phone} — Reception ${p.receptionHours}`
-                    : phone
-                }
-              >
-                <PhoneIcon className="w-3.5 h-3.5" aria-hidden />
-                {phone}
-              </a>
-            )}
+        <div className="ml-auto flex items-center gap-3 md:gap-4">
+          {/* Telefono (solo desktop) */}
+          {hasContact(phone) && (
             <a
-              href="#prenota"
-              className="inline-flex items-center justify-center min-h-10 px-5 border border-white/70 text-white font-medium text-[12px] uppercase tracking-[0.14em] rounded-[2px] hover:bg-white hover:text-[color:var(--c-vinaccia-dark)] transition-colors"
+              href={telHref(phone)}
+              className="hidden lg:inline-flex items-center gap-2 font-mono text-[12px] tabular-nums text-white/85 hover:text-white transition-colors"
+              title={
+                p.receptionHours
+                  ? `${phone} — Reception ${p.receptionHours}`
+                  : phone
+              }
             >
-              Prenota ora
+              <PhoneIcon className="w-3.5 h-3.5" aria-hidden />
+              {phone}
             </a>
-          </div>
+          )}
 
-          {/* Mobile: icona WhatsApp (reintrodotta) + hamburger */}
+          {/* WhatsApp — badge verde brand, sempre visibile (desktop + mobile),
+              ben leggibile su qualsiasi colore di header. */}
           {hasContact(whatsapp) && (
             <a
               href={whatsappHref(whatsapp)}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Apri WhatsApp"
-              className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/40 text-white hover:bg-white/10 transition-colors"
+              className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#25D366] text-white shadow-sm hover:bg-[#1da851] transition-colors"
             >
               <WhatsappIcon className="w-5 h-5" aria-hidden />
             </a>
           )}
+
+          {/* Prenota ora (solo desktop) */}
+          <a
+            href="#prenota"
+            className="hidden lg:inline-flex items-center justify-center min-h-10 px-5 border border-white/70 text-white font-medium text-[12px] uppercase tracking-[0.14em] rounded-[2px] hover:bg-white hover:text-[color:var(--c-vinaccia-dark)] transition-colors"
+          >
+            Prenota ora
+          </a>
+
           <MobileMenu property={slug} />
         </div>
       </div>

@@ -145,7 +145,7 @@ export function StickyMobileBar({ property, mode = "full" }: Props) {
               href={whatsappHref(whatsapp)}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center justify-center gap-1 py-3 min-h-14 text-verde-dark font-medium text-xs uppercase tracking-wide hover:bg-sabbia-light transition-colors"
+              className="flex flex-col items-center justify-center gap-1 py-3 min-h-14 text-[#25D366] font-medium text-xs uppercase tracking-wide hover:bg-sabbia-light transition-colors"
               aria-label="Apri WhatsApp"
             >
               <WhatsappIcon className="w-5 h-5" aria-hidden />
