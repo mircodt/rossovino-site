@@ -135,7 +135,7 @@ export function Header({ property, wide = false }: HeaderProps) {
                 href={whatsappHref(whatsapp)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#25D366] hover:bg-[#1da851] text-white transition-colors"
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-verde-dark hover:bg-verde-hover text-white transition-colors"
                 aria-label="Apri WhatsApp"
               >
                 <WhatsappIcon className="w-5 h-5" aria-hidden />

@@ -118,15 +118,15 @@ export function PropertyHeaderPreview({ slug }: Props) {
             </a>
           )}
 
-          {/* WhatsApp — badge verde brand, sempre visibile (desktop + mobile),
-              ben leggibile su qualsiasi colore di header. */}
+          {/* WhatsApp — sempre visibile (desktop + mobile), in tono con
+              l'header (cerchio con bordo bianco, icona bianca). */}
           {hasContact(whatsapp) && (
             <a
               href={whatsappHref(whatsapp)}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Apri WhatsApp"
-              className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#25D366] text-white shadow-sm hover:bg-[#1da851] transition-colors"
+              className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/40 text-white hover:bg-white/10 transition-colors"
             >
               <WhatsappIcon className="w-5 h-5" aria-hidden />
             </a>
